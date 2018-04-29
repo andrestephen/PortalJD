@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.Description = "Acompanhamento das informações principais de " + @DateTime.Now.Year.ToString();
+}
+@section breadcrumb
+{
+    <ol class="breadcrumb">
+        <li class="active"><i class="fa fa-pie-chart"></i> Dashboard</li>
+    </ol>
+}
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="ion ion-ios-heart"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Atendimentos em andamento</span>
+                <span class="info-box-number">4</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-cutlery"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Cestas básicas no mês</span>
+                <span class="info-box-number">40 de 55</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-thumbs-up"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Projetos Ativos</span>
+                <span class="info-box-number">7</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-dollar"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Recursos utilizados</span>
+                <span class="info-box-number">R$ 41.410,00</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 70%; background: #337ab7;"></div>
+                    @{
+                        //TODO: remover esse background daqui e colocar um um css do app}
+                    }
+                </div>
+                <span class="progress-description">
+                    70% de R$ 50.000,00
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Próximo plantão (DD/MM/YYYY)</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-condensed">
+                    <tbody>
+                        <tr>
+                            <th style="width: 10px"></th>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th style="width: 40px">Atribuição</th>
+                        </tr>
+                        <tr>
+                            <td>1.</td>
+                            <td>André Stephen</td>
+                            <td>(61) 99999-9999</td>
+                            <td><span class="label label-success">Encarregado</span></td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>André Stephen</td>
+                            <td>(61) 99999-9999</td>
+                            <td><span class="label label-primary">Escalado</span></td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>André Stephen</td>
+                            <td>(61) 99999-9999</td>
+                            <td><span class="label label-primary">Escalado</span></td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>André Stephen</td>
+                            <td>(61) 99999-9999</td>
+                            <td><span class="label label-warning">Santa Ceia</span></td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>André Stephen</td>
+                            <td>(61) 99999-9999</td>
+                            <td><span class="label label-primary">Escalado</span></td>
+                        </tr>
+                        <tr>
+                            <td>6.</td>
+                            <td>André Stephen</td>
+                            <td>(61) 99999-9999</td>
+                            <td><span class="label label-warning">Santa Ceia</span></td>
+                        </tr>
+                        <tr>
+                            <td>7.</td>
+                            <td>André Stephen</td>
+                            <td>(61) 99999-9999</td>
+                            <td><span class="label label-primary">Escalado</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+

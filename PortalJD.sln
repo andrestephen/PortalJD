@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2011
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JD.Portal.Web", "JD.Portal.Web\JD.Portal.Web.csproj", "{01CE7F8F-7A07-42E6-9F15-8D04789C5E57}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01CE7F8F-7A07-42E6-9F15-8D04789C5E57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01CE7F8F-7A07-42E6-9F15-8D04789C5E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01CE7F8F-7A07-42E6-9F15-8D04789C5E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01CE7F8F-7A07-42E6-9F15-8D04789C5E57}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E8110AF-F567-4D8F-8029-FA00CF376A7F}
+	EndGlobalSection
+EndGlobal

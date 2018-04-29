@@ -1,0 +1,47 @@
+﻿@using WebHelpers.Mvc5
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="~/Content/img/user.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>André Stephen</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        @* BEGIN Menu *@
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="@Url.IsLinkActive("Index", "Home")">
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-pie-chart"></i> <span>Início</span></a>
+            </li>
+            <li class="header">Serviços</li>
+            <li class="@Url.IsLinkActive("Index", "Atendimentos")">
+                <a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> <span>Atendimentos</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "CestasBasicas")">
+                <a href="@Url.Action("Index", "CestasBasicas")"><i class="fa fa-cutlery"></i> <span>Cestas Básicas</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Projetos")">
+                <a href="@Url.Action("Index", "Projetos")"><i class="fa fa-thumbs-up"></i> <span>Projetos</span></a>
+            </li>
+            <li class="header">Administração da JD</li>
+            <li class="@Url.IsLinkActive("Index", "Escala")">
+                <a href="@Url.Action("Index", "Escala")"><i class="fa fa-calendar"></i> <span>Escala</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Reunioes")">
+                <a href="@Url.Action("Index", "Reunioes")"><i class="fa fa-users"></i> <span>Reuniões</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Tesouraria")">
+                <a href="@Url.Action("Index", "Tesouraria")"><i class="fa fa-dollar"></i> <span>Tesouraria</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Documentos")">
+                <a href="@Url.Action("Index", "Documentos")"><i class="fa fa-book"></i> <span>Documentos</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Diaconos")">
+                <a href="@Url.Action("Index", "Diaconos")"><i class="fa fa-user"></i> <span>Diáconos</span></a>
+            </li>
+        </ul>
+        @* END Menu *@
+    </section>
+</aside>
