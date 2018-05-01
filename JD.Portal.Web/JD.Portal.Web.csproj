@@ -109,9 +109,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\dataTables.bootstrap.css" />
+    <Content Include="Content\css\dataTables.bootstrap.min.css" />
     <Content Include="Content\css\ionicons.css" />
     <Content Include="Content\css\ionicons.min.css" />
+    <Content Include="Content\css\responsive.dataTables.min.css" />
     <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\js\plugins\datatables.net-bs\dataTables.bootstrap.js" />
+    <Content Include="Content\js\plugins\datatables.net-bs\dataTables.bootstrap.min.js" />
+    <Content Include="Content\js\plugins\datatables.net-rs\dataTables.responsive.min.js" />
+    <Content Include="Content\js\plugins\datatables.net\jquery.dataTables.js" />
+    <Content Include="Content\js\plugins\datatables.net\jquery.dataTables.min.js" />
     <Content Include="Global.asax" />
     <Content Include="favicon.ico" />
     <Content Include="Web.config">

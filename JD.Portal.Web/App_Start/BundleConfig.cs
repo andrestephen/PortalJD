@@ -31,6 +31,15 @@ namespace JD.Portal.Web.App_Start
                 .Include("~/Content/js/adminlte.js")
                 .Include("~/Content/js/init.js"));
 
+            bundles.Add(new StyleBundle("~/Bundles/datatablecss")
+                .Include("~/Content/css/dataTables.bootstrap.min.css")
+                .Include("~/Content/css/responsive.dataTables.min.css"));
+
+            bundles.Add(new ScriptBundle("~/Bundles/datatablejs")
+               .Include("~/Content/js/plugins/datatables.net/jquery.dataTables.min.js")
+               .Include("~/Content/js/plugins/datatables.net-bs/dataTables.bootstrap.min.js")
+               .Include("~/Content/js/plugins/datatables.net-rs/dataTables.responsive.min.js"));
+
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #else
