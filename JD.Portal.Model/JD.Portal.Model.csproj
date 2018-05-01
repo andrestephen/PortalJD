@@ -47,9 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atendimento.cs" />
+    <Compile Include="Diacono.cs" />
     <Compile Include="Migrations\201804292327358_PrimeiraTabela.cs" />
     <Compile Include="Migrations\201804292327358_PrimeiraTabela.Designer.cs">
       <DependentUpon>201804292327358_PrimeiraTabela.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805010132336_Criação_do_Atendimento_e_Diacono.cs" />
+    <Compile Include="Migrations\201805010132336_Criação_do_Atendimento_e_Diacono.Designer.cs">
+      <DependentUpon>201805010132336_Criação_do_Atendimento_e_Diacono.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pessoa.cs" />
@@ -63,6 +69,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804292327358_PrimeiraTabela.resx">
       <DependentUpon>201804292327358_PrimeiraTabela.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805010132336_Criação_do_Atendimento_e_Diacono.resx">
+      <DependentUpon>201805010132336_Criação_do_Atendimento_e_Diacono.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
