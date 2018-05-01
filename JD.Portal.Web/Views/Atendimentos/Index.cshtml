@@ -7,6 +7,17 @@
 @section ViewSpecificStyleSheet
 {
     @Styles.Render("~/Bundles/datatablecss")
+
+    <style>
+        .dataTables_filter {
+            display: none;
+        }
+
+        .grupo_busca {
+            margin-top: 15px;
+            margin-bottom: -15px;
+        }
+    </style>
 }
 
 @section breadcrumb
@@ -18,186 +29,190 @@
 
 <!-- Main content -->
 @*<section class="content">*@
-<div class="row">
-    <div class="col-xs-12">
-        <!-- /.box -->
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Lista de atendimentos realizados</h3>
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Lista de atendimentos realizados</h3>
+                    <div class="input-group grupo_busca">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input id="txt_busca" type="text" class="form-control" placeholder="Procurar">                        
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example1" class="table table-condensed nowrap" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Atualização</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    Armindo Marrero
+                                </td>
+                                <td>41579614809</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    Asi Lopes
+                                </td>
+                                <td>73696773204</td>
+                                <td>10/10/2001</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    Belchior Rosário
+                                </td>
+                                <td>48842264881</td>
+                                <td>10/10/2005</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>
+                                    Carlota Capistrano
+                                </td>
+                                <td>31836649339</td>
+                                <td>10/10/2012</td>
+                                <td><span class="label label-success">Encerrado</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>
+                                    Caubi Thamily
+                                </td>
+                                <td>63496354429</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>
+                                    Davide Flores
+                                </td>
+                                <td>-</td>
+                                <td>10/10/2003</td>
+                                <td><span class="label label-success">Encerrado</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>
+                                    Gertrudes Cavadas
+                                </td>
+                                <td>17093123511</td>
+                                <td>10/10/2004</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>
+                                    Gilberto Imbassaí
+                                </td>
+                                <td>-</td>
+                                <td>10/10/2018</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>
+                                    Matias Amorín
+                                </td>
+                                <td>-</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-success">Encerrado</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>
+                                    Mónica Leiria
+                                </td>
+                                <td>41193430062</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-success">Encerrado</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>
+                                    Neuza Vilar
+                                </td>
+                                <td>-</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>
+                                    Olavo Festas
+                                </td>
+                                <td>-</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-success">Encerrado</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>
+                                    Ramiro Jaguariúna
+                                </td>
+                                <td>-</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-danger">Aberto</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>
+                                    Vlademiro Noronha
+                                </td>
+                                <td>84773351411</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-success">Encerrado</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>
+                                    Victor Castello Branco
+                                </td>
+                                <td>-</td>
+                                <td>10/10/2000</td>
+                                <td><span class="label label-success">Encerrado</span></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table id="example1" class="table table-condensed nowrap" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Nº</th>
-                            <th>Nome</th>
-                            <th>CPF</th>
-                            <th>Atualização</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2001</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2005</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2012</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2003</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2004</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2018</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>999</td>
-                            <td>
-                                André Stephen Ribeiro dos Anjos
-                            </td>
-                            <td>99999999999</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.box-body -->
+            <!-- /.box -->
         </div>
-        <!-- /.box -->
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
-</div>
 <!-- /.row -->
 @*</section>*@
 <!-- /.content -->
@@ -208,7 +223,7 @@
 
     <script>
         $(function () {
-            $('#example1').DataTable({
+            var tabela = $('#example1').DataTable({
                 responsive: {
                     details: {
                         //display: $.fn.dataTable.Responsive.display.childRowImmediate,
@@ -236,7 +251,11 @@
                         "previous": "Anterior"
                     },
                 }
-            })
+            });
+
+            $('#txt_busca').on('keyup keypress change', function () {
+                tabela.search(this.value).draw();
+            });
             //$('#example2').DataTable({
             //  'paging'      : true,
             //  'lengthChange': false,
@@ -245,7 +264,8 @@
             //  'info'        : true,
             //  'autoWidth'   : false
             //})
-        })</script>
+        });
+    </script>
 
 }
 
