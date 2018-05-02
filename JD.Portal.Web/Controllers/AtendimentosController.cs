@@ -13,5 +13,11 @@ namespace JD.Portal.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult NovoAtendimento()
+        {
+            return View();
+        }
+
     }
 }

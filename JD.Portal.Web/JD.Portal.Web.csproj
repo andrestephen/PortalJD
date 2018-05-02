@@ -138,6 +138,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Escala\Index.cshtml" />
     <None Include="Properties\PublishProfiles\portaljd-hml - Web Deploy.pubxml" />
+    <Content Include="Views\Atendimentos\NovoAtendimento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
