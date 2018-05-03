@@ -1,0 +1,16 @@
+﻿body {
+}
+
+/*----------------Datatables-----------------------*/
+.dataTables_filter {
+    display: none;
+}
+
+.grupo_busca {
+    margin-top: 15px;
+    margin-bottom: -15px;
+}
+/*----------------Datatables-----------------------*/
+
+
+

@@ -16,7 +16,14 @@
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-pie-chart"></i> <span>Início</span></a>
             </li>
             <li class="header">Serviços</li>
-            <li class="@Url.IsLinkActive("Index", "Atendimentos")">
+            @{
+                string atendimentosAtivo = Url.IsLinkActive("Index", "Atendimentos");
+                if (string.IsNullOrEmpty(atendimentosAtivo))
+                {
+                    atendimentosAtivo = Url.IsLinkActive("NovoAtendimento", "Atendimentos");
+                }
+            }
+            <li class="@atendimentosAtivo">
                 <a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> <span>Atendimentos</span></a>
             </li>
             <li class="@Url.IsLinkActive("Index", "CestasBasicas")">

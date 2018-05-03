@@ -15,7 +15,8 @@ namespace JD.Portal.Web.App_Start
                 .Include("~/Content/css/icheck/blue.min.css", new CssRewriteUrlTransformAbsolute())
                 .Include("~/Content/css/AdminLTE.css", new CssRewriteUrlTransformAbsolute())
                 .Include("~/Content/css/skins/skin-blue.css")
-                .Include("~/Content/css/ionicons.min.css", new CssRewriteUrlTransformAbsolute()));
+                .Include("~/Content/css/ionicons.min.css", new CssRewriteUrlTransformAbsolute())
+                .Include("~/Content/css/sistema.css"));
 
             bundles.Add(new ScriptBundle("~/Bundles/js")
                 .Include("~/Content/js/plugins/jquery/jquery-3.3.1.js")

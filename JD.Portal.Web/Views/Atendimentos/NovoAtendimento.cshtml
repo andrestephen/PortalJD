@@ -1,7 +1,88 @@
 ﻿
+@using System.Web.Optimization
 @{
-    ViewBag.Title = "NovoAtendimento";
+    ViewBag.Title = "Novo atendimento";
+    ViewBag.Description = "Área para cadastro de novo atendimento";
 }
 
-<h2>NovoAtendimento</h2>
+@section ViewSpecificStyleSheet
+{
 
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb hidden-xs hidden-sm">
+        <li><a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> Atendimentos</a></li>
+        <li class="active">Novo atendimento</li>
+    </ol>
+}
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Dados do atendimento</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+                <div class="box-body">
+                    <div class="user-block " style="margin-bottom:15px; margin-top:15px">
+                        <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
+                        <span class="description">Responsável<small> (Clique para trocar)</small></span>
+                        <span class="username">
+                            <a href="#">Diác. André Stephen</a>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Pessoa_Nome">Nome</label>
+                        <input type="text" class="form-control" id="Pessoa_Nome" maxlength="100" placeholder="Digite o nome">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="Pessoa_CPF">CPF</label>
+                        <input type="text" class="form-control" id="Pessoa_CPF" maxlength="11" placeholder="Digite o CPF">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="Pessoa_RG">RG</label>
+                        <input type="text" class="form-control" id="Pessoa_RG" placeholder="Digite o RG">
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <label for="Pessoa_Endereco">Endereço</label>
+                        <input type="text" class="form-control" id="Pessoa_Endereco" placeholder="Digite o Endereço">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Pessoa_TelefonePrincipal">Telefone Principal</label>
+                        <input type="text" class="form-control" id="Pessoa_TelefonePrincipal" placeholder="Digite o telefone principal">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Pessoa_TelefoneSecundario">Telefone Secundário</label>
+                        <input type="text" class="form-control" id="Pessoa_TelefoneSecundário" placeholder="Digite o telefone secundário">
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <label>Descrição do atendimento</label>
+                        <textarea class="form-control" rows="10" placeholder="Descreva aqui a necessidade do solicitante e informações relvantes para o atendimento."></textarea>
+                    </div>
+                    @*<div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="exampleInputFile">
+
+                            <p class="help-block">Example block-level help text here.</p>
+                        </div>*@
+                    @*<div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Check me out
+                            </label>
+                        </div>*@
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2">Salvar atendimento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
