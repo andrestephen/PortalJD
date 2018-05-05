@@ -42,5 +42,5 @@ namespace JD.Portal.Model
                 db.SaveChanges();
             }
         }
-    }    
+    }
 }

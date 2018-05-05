@@ -17,16 +17,23 @@ namespace JD.Portal.Web.Controllers
 
         public ActionResult NovoAtendimento()
         {
-            return View();
+            return View(new Atendimento());
         }
 
         [HttpPost]
         public ActionResult NovoAtendimento(Model.Atendimento atendimento)
         {
-            BSAtendimento bsAtendimento = new BSAtendimento();
-            bsAtendimento.AdicionarAtendimento(atendimento);
+            try
+            {
+                BSAtendimento bsAtendimento = new BSAtendimento();
+                bsAtendimento.AdicionarAtendimento(atendimento);
 
-            return View();
+                return View(atendimento);
+            }
+            catch (Exception)
+            {
+                return View(atendimento);
+            }
         }
 
     }
