@@ -14,8 +14,8 @@ namespace JD.Portal.Model
 
         }
 
-        DbSet<Pessoa> Pessoa { get; set; }
-        DbSet<Diacono> Diacono { get; set; }
-        DbSet<Atendimento> Atendimento { get; set; }
+        public DbSet<Pessoa> Pessoa { get; set; }
+        public DbSet<Diacono> Diacono { get; set; }
+        public DbSet<Atendimento> Atendimento { get; set; }
     }
 }

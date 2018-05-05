@@ -38,42 +38,46 @@
                             <span class="username">
                                 <a href="#">Diác. André Stephen</a>
                             </span>
+                            <input type="hidden" name="DiaconoID" value="1" /> 
+                            @{ 
+                                //TODO: Carregar o diácono logado aqui 
+                            }
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="Pessoa_Nome">Nome</label>
-                            <input type="text" class="form-control" id="Pessoa_Nome" maxlength="100" placeholder="Digite o nome">
+                            <input type="text" class="form-control" id="Pessoa_Nome" name="Pessoa.Nome" maxlength="100" placeholder="Digite o nome">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="Pessoa_CPF">CPF</label>
-                            <input type="tel" class="form-control" id="Pessoa_CPF" placeholder="Digite o CPF" data-inputmask="'mask': '999.999.999-99'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
+                            <input type="tel" class="form-control" id="Pessoa_CPF" name="Pessoa.CPF" placeholder="Digite o CPF" data-inputmask="'mask': '999.999.999-99'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="Pessoa_RG">RG</label>
-                            <input type="text" class="form-control" id="Pessoa_RG" placeholder="Digite o RG">
+                            <input type="text" class="form-control" id="Pessoa_RG" name="Pessoa.RG" placeholder="Digite o RG">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12">
                             <label for="Pessoa_Endereco">Endereço</label>
-                            <input type="text" class="form-control" id="Pessoa_Endereco" placeholder="Digite o Endereço">
+                            <input type="text" class="form-control" id="Pessoa_Endereco" name="Pessoa.Endereco" placeholder="Digite o Endereço">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="Pessoa_TelefonePrincipal">Telefone Principal</label>
-                            <input type="tel" class="form-control" id="Pessoa_TelefonePrincipal" placeholder="Digite o telefone principal" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
+                            <input type="tel" class="form-control" id="Pessoa_TelefonePrincipal" name="Pessoa.TelefonePrincipal" placeholder="Digite o telefone principal" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Pessoa_TelefoneSecundario">Telefone Secundário</label>
-                            <input type="tel" class="form-control" id="Pessoa_TelefoneSecundário" placeholder="Digite o telefone secundário" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
+                            <input type="tel" class="form-control" id="Pessoa_TelefoneSecundário" name="Pessoa.TelefoneSecundario" placeholder="Digite o telefone secundário" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12">
                             <label>Descrição do atendimento</label>
-                            <textarea class="form-control" rows="10" placeholder="Descreva aqui a necessidade do solicitante e informações relvantes para o atendimento."></textarea>
+                            <textarea class="form-control" rows="10" id="Descricao" name="Descricao" placeholder="Descreva aqui a necessidade do solicitante e informações relvantes para o atendimento."></textarea>
                         </div>
                     </div>
                     @*<div class="form-group">

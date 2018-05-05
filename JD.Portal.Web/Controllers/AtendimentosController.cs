@@ -23,6 +23,9 @@ namespace JD.Portal.Web.Controllers
         [HttpPost]
         public ActionResult NovoAtendimento(Model.Atendimento atendimento)
         {
+            BSAtendimento bsAtendimento = new BSAtendimento();
+            bsAtendimento.AdicionarAtendimento(atendimento);
+
             return View();
         }
 
