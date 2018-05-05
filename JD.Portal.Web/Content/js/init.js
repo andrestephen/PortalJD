@@ -12,3 +12,9 @@
     $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
     $("[data-mask]").inputmask();
 });
+
+//$(document).ready(function () {
+//    $(":input").inputmask();
+//    or
+//    Inputmask().mask(document.querySelectorAll("input"));
+//});

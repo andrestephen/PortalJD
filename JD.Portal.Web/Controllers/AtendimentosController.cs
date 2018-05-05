@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using JD.Portal.Model;
 
 namespace JD.Portal.Web.Controllers
 {
@@ -15,6 +16,12 @@ namespace JD.Portal.Web.Controllers
         }
 
         public ActionResult NovoAtendimento()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NovoAtendimento(Model.Atendimento atendimento)
         {
             return View();
         }
