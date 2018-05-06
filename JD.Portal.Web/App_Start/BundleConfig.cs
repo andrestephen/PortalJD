@@ -41,6 +41,9 @@ namespace JD.Portal.Web.App_Start
                .Include("~/Content/js/plugins/datatables.net-bs/dataTables.bootstrap.min.js")
                .Include("~/Content/js/plugins/datatables.net-rs/dataTables.responsive.min.js"));
 
+            bundles.Add(new ScriptBundle("~/Bundles/angular")
+                .Include("~/Content/js/plugins/angular/angular.min.js"));
+
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #else

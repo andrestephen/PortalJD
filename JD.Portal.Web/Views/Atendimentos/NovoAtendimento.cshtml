@@ -19,7 +19,7 @@
     </ol>
 }
 
-@{ 
+@{
     string nome = Model.Pessoa != null ? Model.Pessoa.Nome : "";
     string telefonePrincipal = Model.Pessoa != null ? Model.Pessoa.TelefonePrincipal : "";
     string telefoneSecundario = Model.Pessoa != null ? Model.Pessoa.TelefoneSecundario : "";
@@ -37,7 +37,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="@Url.Action("NovoAtendimento", "Atendimentos")" method="post">
+            <form role="form" action="@Url.Action("NovoAtendimento", "Atendimentos")" method="post" name="frmNovoAtendimento" ng-app="">
                 <div class="box-body">
                     <div class="row">
                         <div class="user-block col-xs-12" style="margin-bottom:15px; margin-top:15px">
@@ -46,16 +46,16 @@
                             <span class="username">
                                 <a href="#">Diác. André Stephen</a>
                             </span>
-                            <input type="hidden" name="DiaconoID" value="1" /> 
-                            @{ 
-//TODO: Carregar o diácono logado aqui 
+                            <input type="hidden" name="DiaconoID" value="1" />
+                            @{
+                                //TODO: Carregar o diácono logado aqui
                             }
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="Pessoa_Nome">Nome</label>
-                            <input type="text" class="form-control" id="Pessoa_Nome" name="Pessoa.Nome" value="@nome" maxlength="100" placeholder="Digite o nome" >
+                            <label for="Pessoa_Nome">Nome <span>*</span></label>
+                            <input type="text" class="form-control" id="Pessoa_Nome" name="Pessoa.Nome" value="@nome" maxlength="100" placeholder="Digite o nome" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="Pessoa_CPF">CPF</label>
@@ -84,8 +84,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <label>Descrição do atendimento</label>
-                            <textarea class="form-control" rows="10" id="Descricao" name="Descricao" placeholder="Descreva aqui a necessidade do solicitante e informações relvantes para o atendimento.">@descricao</textarea>
+                            <label>Descrição do atendimento<span>*</span></label>
+                            <textarea class="form-control" rows="10" id="Descricao" name="Descricao" placeholder="Descreva aqui a necessidade do solicitante e informações relvantes para o atendimento." required>@descricao</textarea>
                         </div>
                     </div>
                     @*<div class="form-group">
@@ -109,3 +109,9 @@
         </div>
     </div>
 </div>
+
+
+@section  ViewSpecificJavascript
+{
+    @Scripts.Render("~/Bundles/angular")
+}

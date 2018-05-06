@@ -122,6 +122,8 @@
     <Content Include="Content\css\responsive.dataTables.min.css" />
     <Content Include="Content\css\sistema.css" />
     <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\js\plugins\angular\angular.js" />
+    <Content Include="Content\js\plugins\angular\angular.min.js" />
     <Content Include="Content\js\plugins\datatables.net-bs\dataTables.bootstrap.js" />
     <Content Include="Content\js\plugins\datatables.net-bs\dataTables.bootstrap.min.js" />
     <Content Include="Content\js\plugins\datatables.net-rs\dataTables.responsive.min.js" />
