@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="Pessoa_Nome">Nome <span>*</span></label>
-                            <input type="text" class="form-control" id="Pessoa_Nome" name="Pessoa.Nome" value="@nome" maxlength="100" placeholder="Digite o nome" ng-model="Pessoa_Nome" required>
+                            <input type="text" class="form-control" id="Pessoa_Nome" name="Pessoa.Nome" value="@nome" maxlength="100" placeholder="Digite o nome" ng-model="Pessoa_Nome" ng-init="Pessoa_Nome='@nome'" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="Pessoa_CPF">CPF</label>
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="form-group col-xs-12">
                             <label>Descrição do atendimento<span>*</span></label>
-                            <textarea class="form-control" rows="10" id="Descricao" name="Descricao" placeholder="Descreva aqui a necessidade do solicitante e informações relvantes para o atendimento."ng-model="Descricao"  required>@descricao</textarea>
+                            <textarea class="form-control" rows="10" id="Descricao" name="Descricao" placeholder="Descreva aqui a necessidade do solicitante e informações relvantes para o atendimento."ng-model="Descricao" ng-init="Descricao='@descricao'" required>@descricao</textarea>
                         </div>
                     </div>
                     @*<div class="form-group">
