@@ -12,5 +12,8 @@
 }
 /*----------------Datatables-----------------------*/
 
+/*-----------Validação Angular---------------------*/
 
-
+.form-control.ng-touched.ng-invalid {
+    border: solid 1px red;
+}
