@@ -28,7 +28,9 @@ namespace JD.Portal.Web.Controllers
                 BSAtendimento bsAtendimento = new BSAtendimento();
                 bsAtendimento.AdicionarAtendimento(atendimento);
 
-                return View(atendimento);
+                TempData["cadastroNovoAtendimentoSucesso"] = true;
+
+                return RedirectToAction("Index", "Atendimentos");
             }
             catch (Exception)
             {
