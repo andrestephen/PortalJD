@@ -12,7 +12,13 @@ namespace JD.Portal.Web.Controllers
         // GET: Atendimentos
         public ActionResult Index()
         {
-            return View();
+            BSAtendimento bsAtendimento = new BSAtendimento();
+            List<Model.Atendimento> atendimentos = bsAtendimento.ListarAtendimentos();
+
+            ViewBag.atendimentosAbertos = atendimentos.Count(x => x.Status == false);
+            ViewBag.atendimentosEncerrados = atendimentos.Count(x => x.Status == true);
+
+            return View(atendimentos);
         }
 
         public ActionResult NovoAtendimento()
@@ -28,7 +34,11 @@ namespace JD.Portal.Web.Controllers
                 BSAtendimento bsAtendimento = new BSAtendimento();
                 bsAtendimento.AdicionarAtendimento(atendimento);
 
-                TempData["cadastroNovoAtendimentoSucesso"] = true;
+                if (atendimento.ID > 0)
+                {
+                    TempData["cadastroNovoAtendimentoSucesso"] = true;
+                    TempData["idRecemAdicionado"] = atendimento.ID;
+                }
 
                 return RedirectToAction("Index", "Atendimentos");
             }
@@ -36,6 +46,11 @@ namespace JD.Portal.Web.Controllers
             {
                 return View(atendimento);
             }
+        }
+
+        public ActionResult Acompanhamento()
+        {
+            return View();
         }
 
     }

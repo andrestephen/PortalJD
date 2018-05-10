@@ -1,5 +1,7 @@
 ﻿
 @using System.Web.Optimization
+@model List<JD.Portal.Model.Atendimento>
+
 @{
     ViewBag.Title = "Atendimentos";
     ViewBag.Description = "Área de cadastro e consulta dos atendimentos.";
@@ -7,6 +9,23 @@
 @section ViewSpecificStyleSheet
 {
     @Styles.Render("~/Bundles/datatablecss")
+}
+
+@section mensagem
+{
+
+    @{
+        var cadastroNovoAtendimentoSucesso = TempData["cadastroNovoAtendimentoSucesso"];
+        if (cadastroNovoAtendimentoSucesso != null && (bool)cadastroNovoAtendimentoSucesso == true)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Sucesso!</h4>
+                Novo atendimento cadastrado com sucesso.
+            </div>
+        }
+    }
+
 }
 
 @section breadcrumb
@@ -22,7 +41,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>8</h3>
+                <h3>@ViewBag.atendimentosAbertos.ToString()</h3>
                 <p>Atendimentos em aberto</p>
             </div>
             <div class="icon">
@@ -34,7 +53,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>7</h3>
+                <h3>@ViewBag.atendimentosEncerrados.ToString()</h3>
                 <p>Atendimentos encerrados</p>
             </div>
             <div class="icon">
@@ -68,156 +87,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                Armindo Marrero
-                            </td>
-                            <td>41579614809</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                Asi Lopes
-                            </td>
-                            <td>73696773204</td>
-                            <td>10/10/2001</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>
-                                Belchior Rosário
-                            </td>
-                            <td>48842264881</td>
-                            <td>10/10/2005</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>
-                                Carlota Capistrano
-                            </td>
-                            <td>31836649339</td>
-                            <td>10/10/2012</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>
-                                Caubi Thamily
-                            </td>
-                            <td>63496354429</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>
-                                Davide Flores
-                            </td>
-                            <td>-</td>
-                            <td>10/10/2003</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>
-                                Gertrudes Cavadas
-                            </td>
-                            <td>17093123511</td>
-                            <td>10/10/2004</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>
-                                Gilberto Imbassaí
-                            </td>
-                            <td>-</td>
-                            <td>10/10/2018</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>
-                                Matias Amorín
-                            </td>
-                            <td>-</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>
-                                Mónica Leiria
-                            </td>
-                            <td>41193430062</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>
-                                Neuza Vilar
-                            </td>
-                            <td>-</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>
-                                Olavo Festas
-                            </td>
-                            <td>-</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td>
-                                Ramiro Jaguariúna
-                            </td>
-                            <td>-</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-danger">Em Aberto</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>
-                                Vlademiro Noronha
-                            </td>
-                            <td>84773351411</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td>
-                                Victor Castello Branco
-                            </td>
-                            <td>-</td>
-                            <td>10/10/2000</td>
-                            <td><span class="label label-success">Encerrado</span></td>
-                            <td></td>
-                        </tr>
+                        @foreach (JD.Portal.Model.Atendimento atendimento in Model)
+                        {
+                            string status = atendimento.Status == true ? "Encerrado" : "Em Aberto";
+                            string classeStatus = atendimento.Status ? "label-success" : "label-danger";
+                            var idRecemAdicionado = TempData["idRecemAdicionado"];
+                            string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == atendimento.ID ? "recemAdicionado" : ""; 
+
+                            <tr class="@classeRecemAdicionada">
+                                <td>@atendimento.ID.ToString()</td>
+                                <td>
+                                    <a href="@Url.Action("Acompanhamento", "Atendimentos")">@atendimento.Pessoa.Nome</a>
+                                </td>
+                                <td>@atendimento.Pessoa.CPF</td>
+                                <td>@atendimento.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td><span class="label @classeStatus">@status</span></td>
+                                <td></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -241,6 +128,8 @@
 
     <script>
         $(function () {
+            $.fn.dataTable.moment('DD/MM/YYYY HH:mm');//De acordo com a sintaxe do moment, essas letras devem ser em maiusculo mesmo.
+
             var tabela = $('#example1').DataTable({
                 responsive: {
                     details: {
@@ -253,11 +142,11 @@
                     className: 'control',
                     orderable: false,
                     targets: -1
-                    },
-                    { responsivePriority: 1, targets: 1 },
-                    { responsivePriority: 2, targets: 4 },
-                    { responsivePriority: 3, targets: 0 }],
-                order: [3, 'asc'],
+                },
+                { responsivePriority: 1, targets: 1 },
+                { responsivePriority: 2, targets: 4 },
+                { responsivePriority: 3, targets: 0 }],
+                order: [3, 'desc'],
                 'lengthChange': false,
                 "language": {
                     "zeroRecords": "Nenhum registro encontrado",

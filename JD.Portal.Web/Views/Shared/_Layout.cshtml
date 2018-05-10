@@ -28,6 +28,7 @@
         @Html.Partial("_Sidebar")
 
         <div class="content-wrapper">
+            @RenderSection("mensagem", required: false)
             <section class="content-header">
                 <h1>
                     @ViewBag.Title
@@ -35,9 +36,9 @@
                 </h1>
                 @RenderSection("breadcrumb", required: false)
                 @*<ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>*@
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>*@
             </section>
 
             <section class="content">

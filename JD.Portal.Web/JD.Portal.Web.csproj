@@ -126,6 +126,7 @@
     <Content Include="Content\js\plugins\angular\angular.min.js" />
     <Content Include="Content\js\plugins\datatables.net-bs\dataTables.bootstrap.js" />
     <Content Include="Content\js\plugins\datatables.net-bs\dataTables.bootstrap.min.js" />
+    <Content Include="Content\js\plugins\datatables.net-moment\datetime-moment.js" />
     <Content Include="Content\js\plugins\datatables.net-rs\dataTables.responsive.min.js" />
     <Content Include="Content\js\plugins\datatables.net\jquery.dataTables.js" />
     <Content Include="Content\js\plugins\datatables.net\jquery.dataTables.min.js" />
@@ -148,6 +149,7 @@
     <Content Include="Views\Escala\Index.cshtml" />
     <None Include="Properties\PublishProfiles\portaljd-hml - Web Deploy.pubxml" />
     <Content Include="Views\Atendimentos\NovoAtendimento.cshtml" />
+    <Content Include="Views\Atendimentos\Acompanhamento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

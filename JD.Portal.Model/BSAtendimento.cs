@@ -8,6 +8,19 @@ namespace JD.Portal.Model
 {
     public class BSAtendimento
     {
+        public List<Atendimento> ListarAtendimentos()
+        {
+            List<Atendimento> lstAtendimentos = new List<Atendimento>();
+
+            using (var db = new PortalJDContexto())
+            {
+                lstAtendimentos = (from a in db.Atendimento.Include("Pessoa").Include("Diacono")
+                                   select a).ToList();
+            }
+
+            return lstAtendimentos;
+        }
+
         public void AdicionarAtendimento(Atendimento atendimento)
         {
             atendimento.DataAtendimento = DateTime.Now;
