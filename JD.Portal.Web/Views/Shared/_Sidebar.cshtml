@@ -17,7 +17,7 @@
             </li>
             <li class="header">Serviços</li>
             @{
-                string atendimentosAtivo = Url.IsLinkActive("Index", "Atendimentos");
+                string atendimentosAtivo = Url.IsLinkActive("Index", "Atendimentos") + Url.IsLinkActive("Acompanhamento", "Atendimentos");
                 if (string.IsNullOrEmpty(atendimentosAtivo))
                 {
                     atendimentosAtivo = Url.IsLinkActive("NovoAtendimento", "Atendimentos");

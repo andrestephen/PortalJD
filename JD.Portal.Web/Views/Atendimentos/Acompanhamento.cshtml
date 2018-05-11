@@ -1,7 +1,136 @@
-﻿
+﻿@using System.Web.Optimization
 @{
-    ViewBag.Title = "Acompanhamento";
+    ViewBag.Title = "Atendimento";
+    ViewBag.Description = "Área de acompanhamento e atualização de informações do atendimento.";
 }
 
-<h2>Acompanhamento</h2>
+@section breadcrumb
+{
+    <ol class="breadcrumb hidden-xs hidden-sm">
+        <li><a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> Atendimentos</a></li>
+        <li class="active">Atendimento</li>
+    </ol>
+}
 
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+
+                <h3 class="box-title"><i class="fa fa-heart margin-r-5"></i>#13 - Antônio Rodrigues da Silva</h3>
+                <small class="pull-right">02/10/2018</small>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
+                        <span class="pull-right label label-danger hidden-md hidden-lg">Em Aberto</span>
+
+                        <p><strong><i class="fa fa-map-marker margin-r-5"></i>Endereço</strong></p>
+                        <span>Av.das Araucárias. Lt. 4155 Bloco A Ap. 607 </span>
+                    </div>
+                    <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
+
+                        <p><strong><i class="fa fa-phone margin-r-5"></i>Contato</strong></p>
+                        <span>Telefone Principal: (61) 99999-9999 </span><br />
+                        <span>Telefone Secundário: (61) 99999-9999 </span>
+                    </div>
+                    <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
+                        <span class="pull-right label label-danger hidden-xs hidden-sm hidden-lg">Em Aberto</span>
+
+                        <p><strong><i class="fa fa-id-card margin-r-5"></i>Documentos</strong></p>
+                        <span>CPF: 000.000.000-00</span><br />
+                        <span>RG: 000000000-0</span>
+                    </div>
+                    <div class="dados_atendimento responsavel user-block col-xs-12 col-md-12 col-lg-3">
+                        @*style="margin-bottom:15px; margin-top:15px"*@
+                        <span class="pull-right label label-danger hidden-xs hidden-sm hidden-md">Em Aberto</span>
+                        <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
+                        <span class="description">Responsável</span>
+                        <span class="username">
+                            <a href="#">Diác. André Stephen</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p><strong>Descrição do atendimento</strong></p>
+                        <p class="col-xs-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla posuere ex nec turpis semper, at feugiat enim interdum. Aliquam maximus justo quis urna rhoncus, in blandit diam accumsan. Mauris imperdiet tincidunt felis non pretium. Nulla facilisi. Vivamus arcu odio, imperdiet ac tristique nec, aliquam ut elit. Cras quis elit semper metus mollis faucibus nec quis lorem. Phasellus placerat, mauris nec hendrerit congue, quam orci posuere eros, vitae interdum nunc nulla vitae eros. Cras eleifend nibh non turpis dapibus mattis. Sed nec sem vehicula, molestie est in, maximus mauris. Aliquam feugiat tellus eget pulvinar aliquam. Etiam pulvinar efficitur quam. Nunc quis feugiat tellus, quis semper massa. Aliquam tincidunt, dolor nec condimentum fermentum, nunc urna pulvinar felis, nec vestibulum erat eros ac purus. Cras accumsan ante vitae sollicitudin volutpat. Ut eget orci id ipsum imperdiet sodales et at arcu. Vestibulum quis dolor nec sem dapibus egestas nec nec metus. Fusce porta tortor lectus, id convallis ex finibus eget. Pellentesque vulputate ipsum sit amet sodales consequat. Maecenas vulputate interdum hendrerit. Integer congue placerat purus non sodales. Donec consequat gravida congue. Maecenas gravida urna dignissim nisl malesuada dignissim. Cras at viverra felis. Quisque ut aliquam magna, et congue ex. Mauris iaculis magna ac posuere tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer iaculis, lectus at pellentesque condimentum, sapien nisl congue enim, eget fermentum urna nulla at arcu. Curabitur tincidunt elit turpis, et blandit nisl mollis et. Phasellus mollis dui non quam vestibulum, quis volutpat ante auctor. Aenean rhoncus tempor justo sed pellentesque.</p>
+                    </div>
+                </div>
+            </div> @*text-muted well well-sm no-shadow*@
+            <div class="box-footer box-comments">
+                <div class="box-comment">
+                    <!-- User image -->
+                    <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
+
+                    <div class="comment-text">
+                        <span class="username">
+                            Diác. André Stephen
+                            <span class="text-muted pull-right">10/10/2017 18:37</span>
+                        </span><!-- /.username -->
+                        It is a long established fact that a reader will be distracted
+                        by the readable content of a page when looking at its layout.
+                    </div>
+                    <!-- /.comment-text -->
+                </div>
+                <!-- /.box-comment -->
+                <div class="box-comment">
+                    <!-- User image -->
+                    <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
+
+                    <div class="comment-text">
+                        <span class="username">
+                            Diác. André Stephen
+                            <span class="text-muted pull-right">13/11/2017 09:12</span>
+                        </span><!-- /.username -->
+                        The point of using Lorem Ipsum is that it has a more-or-less
+                        normal distribution of letters, as opposed to using
+                        'Content here, content here', making it look like readable English.
+                    </div>
+                    <!-- /.comment-text -->
+                </div>
+                <!-- /.box-comment -->
+            </div>
+            <form action="#" method="post">
+                <div class="box-footer">
+                    <div>
+                        <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                            <textarea class="form-control" rows="3" id="Descricao" name="Descricao" placeholder="Escreva aqui informações adicionais ao atendimento."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 pull-right">Salvar informações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @*<div class="col-xs-12">
+            <h2 class="page-header">
+                <i class="fa fa-heart"></i> André Stephen
+                <small class="pull-right">Data do Atendimento: 02/10/2018</small>
+            </h2>
+        </div>*@
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h3 class="box-title">Encerrar atendimento</h3>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>Caso não existam mais pendências da Junta Diaconal para esse atendimento, o mesmo pode ser encerrado.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-success col-xs-12 col-sm-6 col-md-3 col-lg-2">Encerrar atendimento</button>
+            </div>
+        </div>
+    </div>
+</div>

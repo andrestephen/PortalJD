@@ -17,7 +17,15 @@
 /*----------------Datatables-----------------------*/
 
 /*-----------Validação Angular---------------------*/
-
 .form-control.ng-touched.ng-invalid {
     border: solid 1px red;
+}
+/*-----------Validação Angular---------------------*/
+
+/*----------Acompanhamento de atendimento----------*/
+.dados_atendimento{
+    margin-bottom: 15px;
+}
+.dados_atendimento.responsavel {
+    margin-top: 15px;
 }
