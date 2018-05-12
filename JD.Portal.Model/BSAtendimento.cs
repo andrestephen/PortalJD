@@ -55,5 +55,32 @@ namespace JD.Portal.Model
                 db.SaveChanges();
             }
         }
+
+        public Atendimento RecuperarAtendimento(int idAtendimento)
+        {
+            Atendimento atendimento = new Atendimento();
+
+            using (var db = new PortalJDContexto())
+            {
+                atendimento = (from a in db.Atendimento.Include("Pessoa").Include("Diacono")
+                               where a.ID == idAtendimento
+                               select a).FirstOrDefault();
+            }
+
+            return atendimento;
+        }
+
+        public void AtualizarStatusAtendimento(int idAtendimento, bool status)
+        {
+            Atendimento atendimento = new Atendimento();
+
+            using (var db = new PortalJDContexto())
+            {
+                atendimento = db.Atendimento.Where(x => x.ID == idAtendimento).FirstOrDefault();
+                atendimento.Status = status;
+
+                db.SaveChanges();
+            }
+        }
     }
 }

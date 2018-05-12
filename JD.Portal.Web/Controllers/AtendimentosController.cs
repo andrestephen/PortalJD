@@ -16,7 +16,7 @@ namespace JD.Portal.Web.Controllers
             List<Model.Atendimento> atendimentos = bsAtendimento.ListarAtendimentos();
 
             ViewBag.atendimentosAbertos = atendimentos.Count(x => x.Status == false);
-            ViewBag.atendimentosEncerrados = atendimentos.Count(x => x.Status == true);
+            ViewBag.atendimentosArquivados = atendimentos.Count(x => x.Status == true);
 
             return View(atendimentos);
         }
@@ -48,9 +48,37 @@ namespace JD.Portal.Web.Controllers
             }
         }
 
-        public ActionResult Acompanhamento()
+        public ActionResult Acompanhamento(int id)
         {
-            return View();
+            BSAtendimento bsAtendimento = new BSAtendimento();
+            Atendimento atendimento = bsAtendimento.RecuperarAtendimento(id);
+            return View(atendimento);
+        }
+
+        [HttpPost]
+        public ActionResult Acompanhamento(int idAtendimento, string acaoAcompanhamento)
+        {
+            BSAtendimento bsAtendimento = new BSAtendimento();
+
+            if (ModelState.IsValid && !String.IsNullOrWhiteSpace(acaoAcompanhamento))
+            {
+                switch (acaoAcompanhamento)
+                {
+                    case "salvarInformacoes":
+                        break;
+                    case "arquivar":
+                        bsAtendimento.AtualizarStatusAtendimento(idAtendimento, true);
+                        break;
+                    case "reabrir":
+                        bsAtendimento.AtualizarStatusAtendimento(idAtendimento, false);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            Atendimento atendimento = bsAtendimento.RecuperarAtendimento(idAtendimento);
+            return View(atendimento);
         }
 
     }

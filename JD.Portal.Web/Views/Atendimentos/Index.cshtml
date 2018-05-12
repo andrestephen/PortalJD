@@ -55,8 +55,8 @@
             <span class="info-box-icon bg-green"><i class="ion ion-ios-heart"></i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Encerrados</span>
-                <span class="info-box-number">@ViewBag.atendimentosEncerrados.ToString()</span>
+                <span class="info-box-text">Arquivados</span>
+                <span class="info-box-number">@ViewBag.atendimentosArquivados.ToString()</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -81,8 +81,8 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>@ViewBag.atendimentosEncerrados.ToString()</h3>
-                <p>Atendimentos encerrados</p>
+                <h3>@ViewBag.atendimentosArquivados.ToString()</h3>
+                <p>Atendimentos arquivados</p>
             </div>
             <div class="icon">
                 <i class="ion ion-checkmark"></i>
@@ -117,7 +117,7 @@
                     <tbody>
                         @foreach (JD.Portal.Model.Atendimento atendimento in Model)
                         {
-                            string status = atendimento.Status == true ? "Encerrado" : "Em Aberto";
+                            string status = atendimento.Status == true ? "Arquivado" : "Em Aberto";
                             string classeStatus = atendimento.Status ? "label-success" : "label-danger";
                             var idRecemAdicionado = TempData["idRecemAdicionado"];
                             string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == atendimento.ID ? "recemAdicionado" : "";
@@ -125,7 +125,7 @@
                             <tr class="@classeRecemAdicionada">
                                 <td>@atendimento.ID.ToString()</td>
                                 <td>
-                                    <a href="@Url.Action("Acompanhamento", "Atendimentos")">@atendimento.Pessoa.Nome</a>
+                                    <a href="@Url.Action("Acompanhamento", "Atendimentos", new { id = atendimento.ID })">@atendimento.Pessoa.Nome</a>
                                 </td>
                                 <td>@atendimento.Pessoa.CPF</td>
                                 <td>@atendimento.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</td>
