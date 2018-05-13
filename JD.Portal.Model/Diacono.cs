@@ -19,5 +19,7 @@ namespace JD.Portal.Model
         [MaxLength(100)]
         [Required(ErrorMessage = "O e-mail do Diácono é obrigatório.")]
         public string Email { get; set; }
+
+        public virtual List<AtualizacaoAtendimento> AtualizacoesAtendimento { get; set; }
     }
 }

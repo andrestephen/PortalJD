@@ -17,5 +17,19 @@ namespace JD.Portal.Model
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Diacono> Diacono { get; set; }
         public DbSet<Atendimento> Atendimento { get; set; }
+        public DbSet<AtualizacaoAtendimento> AtualizacaoAtendimento { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Diacono>()
+                .HasMany(d => d.AtualizacoesAtendimento)
+                .WithRequired(a => a.Diacono)
+                //.Map(m => {
+                //    m.ToTable("UsersRoles");
+                //    m.MapLeftKey("UserId");
+                //    m.MapRightKey("RoleId");
+                //})
+                .WillCascadeOnDelete(false);
+        }
     }
 }

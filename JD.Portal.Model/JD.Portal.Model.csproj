@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atendimento.cs" />
+    <Compile Include="AtualizacaoAtendimento.cs" />
     <Compile Include="BSAtendimento.cs" />
     <Compile Include="Diacono.cs" />
     <Compile Include="Migrations\201804292327358_PrimeiraTabela.cs" />
@@ -57,6 +58,10 @@
     <Compile Include="Migrations\201805010132336_Criação_do_Atendimento_e_Diacono.cs" />
     <Compile Include="Migrations\201805010132336_Criação_do_Atendimento_e_Diacono.Designer.cs">
       <DependentUpon>201805010132336_Criação_do_Atendimento_e_Diacono.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805130147048_Criacao_Atualizacao_Atendimento.cs" />
+    <Compile Include="Migrations\201805130147048_Criacao_Atualizacao_Atendimento.Designer.cs">
+      <DependentUpon>201805130147048_Criacao_Atualizacao_Atendimento.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pessoa.cs" />
@@ -73,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805010132336_Criação_do_Atendimento_e_Diacono.resx">
       <DependentUpon>201805010132336_Criação_do_Atendimento_e_Diacono.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805130147048_Criacao_Atualizacao_Atendimento.resx">
+      <DependentUpon>201805130147048_Criacao_Atualizacao_Atendimento.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

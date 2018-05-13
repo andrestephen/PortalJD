@@ -56,7 +56,7 @@ namespace JD.Portal.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Acompanhamento(int idAtendimento, string acaoAcompanhamento)
+        public ActionResult Acompanhamento(int idAtendimento, string acaoAcompanhamento, int idDiacono, string descricaoAtualizacao)
         {
             BSAtendimento bsAtendimento = new BSAtendimento();
 
@@ -65,6 +65,7 @@ namespace JD.Portal.Web.Controllers
                 switch (acaoAcompanhamento)
                 {
                     case "salvarInformacoes":
+                        bsAtendimento.AtualizarInformacaoAtendimento(idAtendimento, idDiacono, descricaoAtualizacao);
                         break;
                     case "arquivar":
                         bsAtendimento.AtualizarStatusAtendimento(idAtendimento, true);

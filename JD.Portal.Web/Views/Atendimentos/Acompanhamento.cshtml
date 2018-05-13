@@ -57,6 +57,7 @@
                             <span class="username">
                                 <a href="#">Diác. André Stephen</a>
                             </span>
+                            <input type="hidden" name="idDiacono" value="1" />
                         </div>
                     </div>
                     <div class="row">
@@ -66,40 +67,27 @@
                         </div>
                     </div>
                 </div> @*text-muted well well-sm no-shadow*@
-                <div class="box-footer box-comments">
-                    <div class="box-comment">
-                        <!-- User image -->
-                        <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
-
-                        <div class="comment-text">
-                            <span class="username">
-                                Diác. André Stephen
-                                <span class="text-muted pull-right">10/10/2017 18:37</span>
-                            </span><!-- /.username -->
-                            It is a long established fact that a reader will be distracted
-                            by the readable content of a page when looking at its layout.
-                        </div>
-                        <!-- /.comment-text -->
+                @if (Model.AtualizacoesAtendimentos != null && Model.AtualizacoesAtendimentos.Count() > 0)
+                {
+                    <div class="box-footer box-comments">
+                        @foreach (JD.Portal.Model.AtualizacaoAtendimento atualizacaoAtendimento in Model.AtualizacoesAtendimentos)
+                        {
+                            <div class="box-comment">
+                                <!-- User image -->
+                                <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
+                                <div class="comment-text">
+                                    <span class="username">
+                                        @atualizacaoAtendimento.Diacono.Nome
+                                        <span class="text-muted pull-right">@atualizacaoAtendimento.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</span>
+                                    </span><!-- /.username -->
+                                    @atualizacaoAtendimento.DescricaoAtualizacao
+                                </div>
+                                <!-- /.comment-text -->
+                            </div>
+                            <!-- /.box-comment -->
+                        }
                     </div>
-                    <!-- /.box-comment -->
-                    <div class="box-comment">
-                        <!-- User image -->
-                        <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
-
-                        <div class="comment-text">
-                            <span class="username">
-                                Diác. André Stephen
-                                <span class="text-muted pull-right">13/11/2017 09:12</span>
-                            </span><!-- /.username -->
-                            The point of using Lorem Ipsum is that it has a more-or-less
-                            normal distribution of letters, as opposed to using
-                            'Content here, content here', making it look like readable English.
-                        </div>
-                        <!-- /.comment-text -->
-                    </div>
-                    <!-- /.box-comment -->
-                </div>
-
+                }
                 @if (Model.Status == false)
                 {
                     <div class="box-footer">
@@ -107,7 +95,7 @@
                             <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
                             <!-- .img-push is used to add margin to elements next to floating images -->
                             <div class="img-push">
-                                <textarea class="form-control" rows="3" id="Descricao" name="Descricao" placeholder="Escreva aqui informações adicionais ao atendimento."></textarea>
+                                <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao atendimento."></textarea>
                             </div>
                         </div>
                     </div>

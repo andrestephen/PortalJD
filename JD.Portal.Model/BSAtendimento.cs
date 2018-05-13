@@ -62,7 +62,7 @@ namespace JD.Portal.Model
 
             using (var db = new PortalJDContexto())
             {
-                atendimento = (from a in db.Atendimento.Include("Pessoa").Include("Diacono")
+                atendimento = (from a in db.Atendimento.Include("Pessoa").Include("Diacono").Include("AtualizacoesAtendimentos").Include("AtualizacoesAtendimentos.Diacono")
                                where a.ID == idAtendimento
                                select a).FirstOrDefault();
             }
@@ -78,6 +78,27 @@ namespace JD.Portal.Model
             {
                 atendimento = db.Atendimento.Where(x => x.ID == idAtendimento).FirstOrDefault();
                 atendimento.Status = status;
+
+                db.SaveChanges();
+            }
+        }
+
+        public void AtualizarInformacaoAtendimento(int idAtendimento, int idDiacono, string descricaoAtualizacao)
+        {
+            using (var db = new PortalJDContexto())
+            {
+                DateTime dataAtualizacao = DateTime.Now;
+
+                AtualizacaoAtendimento atualizacaoAtendimento = new AtualizacaoAtendimento();
+                atualizacaoAtendimento.DataAtualizacao = dataAtualizacao;
+                atualizacaoAtendimento.DescricaoAtualizacao = descricaoAtualizacao;
+                atualizacaoAtendimento.DiaconoID = idDiacono;
+                atualizacaoAtendimento.AtendimentoID = idAtendimento;
+
+                db.AtualizacaoAtendimento.Add(atualizacaoAtendimento);
+
+                Atendimento atendimento = db.Atendimento.Where(x => x.ID == idAtendimento).First();
+                atendimento.DataAtualizacao = dataAtualizacao;
 
                 db.SaveChanges();
             }
