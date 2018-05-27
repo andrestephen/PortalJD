@@ -1,6 +1,23 @@
 ﻿body {
 }
 
+.buttonlink {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font: inherit;
+    /*border is optional*/
+    cursor: pointer;
+    color: #337ab7;
+}
+
+    .buttonlink:hover {
+        color: #72afd2;
+    }
+
+    .buttonlink.margem-acompanhamento{
+        margin-top: 5px;
+    }
 /*----------------Datatables-----------------------*/
 .dataTables_filter {
     display: none;
@@ -23,9 +40,10 @@
 /*-----------Validação Angular---------------------*/
 
 /*----------Acompanhamento de atendimento----------*/
-.dados_atendimento{
+.dados_atendimento {
     margin-bottom: 15px;
 }
-.dados_atendimento.responsavel {
-    margin-top: 15px;
-}
+
+    .dados_atendimento.responsavel {
+        margin-top: 15px;
+    }

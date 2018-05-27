@@ -100,7 +100,14 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 pull-right">Salvar informações</button>
+                        <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
+                        <button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="box-footer">
+                        <button type="submit" name="acaoAcompanhamento" value="reabrir" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-open margin-r-5"></i>Reabrir atendimento</button>
                     </div>
                 }
             </div>
@@ -113,9 +120,7 @@
             </div>*@
     </div>
 
-    @if (Model.Status == false)
-    {
-        <div class="row">
+    @*<div class="row">
             <div class="col-xs-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
@@ -129,14 +134,12 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <button type="submit" name="acaoAcompanhamento" value="arquivar" class="btn btn-success col-xs-12 col-sm-6 col-md-3 col-lg-2">Arquivar</button>
+                        <button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink col-xs-12 col-sm-6 col-md-3 col-lg-2">Arquivar</button>
                     </div>
                 </div>
             </div>
         </div>
-    }
-    else
-    {
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-default">
@@ -155,6 +158,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        </div>*@
+
 </form>
