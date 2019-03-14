@@ -26,12 +26,15 @@
             <li class="@atendimentosAtivo">
                 <a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> <span>Atendimentos</span></a>
             </li>
-            <li class="@Url.IsLinkActive("Index", "CestasBasicas")">
-                <a href="@Url.Action("Index", "CestasBasicas")"><i class="fa fa-cutlery"></i> <span>Cestas Básicas</span></a>
-            </li>
+
             <li class="@Url.IsLinkActive("Index", "Projetos")">
                 <a href="@Url.Action("Index", "Projetos")"><i class="fa fa-thumbs-up"></i> <span>Projetos</span></a>
             </li>
+
+            <li class="@Url.IsLinkActive("Index", "CestasBasicas")">
+                <a href="@Url.Action("Index", "CestasBasicas")"><i class="fa fa-cutlery"></i> <span>Cestas Básicas</span></a>
+            </li>
+            
             <li class="header">Administração da JD</li>
             <li class="@Url.IsLinkActive("Index", "Escala")">
                 <a href="@Url.Action("Index", "Escala")"><i class="fa fa-calendar"></i> <span>Escala</span></a>

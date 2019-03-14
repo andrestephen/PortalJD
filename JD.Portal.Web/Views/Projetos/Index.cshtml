@@ -1,8 +1,324 @@
 ﻿
+@using System.Web.Optimization
+@model List<JD.Portal.Model.Atendimento>
+
 @{
     ViewBag.Title = "Projetos";
     ViewBag.Description = "Acompanhamento do andamento dos projetos de " + @DateTime.Now.Year.ToString();
 }
+@section ViewSpecificStyleSheet
+{
+    @Styles.Render("~/Bundles/datatablecss")
+}
 
-<h4>Projeto</h4>
+@section mensagem
+{
 
+    @{
+        var cadastroNovoProjetoSucesso = TempData["cadastroNovoProjetoSucesso"];
+        if (cadastroNovoProjetoSucesso != null && (bool)cadastroNovoProjetoSucesso == true)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Sucesso!</h4>
+                Novo projeto cadastrado com sucesso.
+            </div>
+        }
+    }
+
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb hidden-xs hidden-sm">
+        <li class="active"><i class="fa fa-thumbs-up"></i> Projetos</li>
+    </ol>
+}
+
+<!-- Main content -->
+<div class="row">
+    <div class="col-lg-2 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>12</h3>
+                <p>Novos</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-inbox"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>34</h3>
+                <p>Em aprovação</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-question"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>5</h3>
+                <p>Aprovados</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-check"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>34</h3>
+                <p>Não aprovados</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-xs-12">
+        <!-- small box -->
+        <div class="small-box bg-blue">
+            <div class="inner">
+                <h3>34</h3>
+                <p>Concluidos</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-thumbs-up"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!-- /.box -->
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Projetos registrados</h3>
+                <div class="input-group grupo_busca">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input id="txt_busca" type="text" class="form-control" placeholder="Procurar">
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-condensed nowrap" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nº</th>
+                            <th>Nome</th>
+                            <th>Atualização</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @*<tbody>
+                            @foreach (JD.Portal.Model.Atendimento atendimento in Model)
+                            {
+                                string status = atendimento.Status == true ? "Arquivado" : "Em Aberto";
+                                string classeStatus = atendimento.Status ? "label-success" : "label-danger";
+                                var idRecemAdicionado = TempData["idRecemAdicionado"];
+                                string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == atendimento.ID ? "recemAdicionado" : "";
+
+                                <tr class="@classeRecemAdicionada">
+                                    <td>@atendimento.ID.ToString()</td>
+                                    <td>
+                                        <a href="@Url.Action("Acompanhamento", "Atendimentos", new { id = atendimento.ID })">@atendimento.Pessoa.Nome</a>
+                                    </td>
+                                    <td>@atendimento.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td><span class="label @classeStatus">@status</span></td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>*@
+                    <tbody>
+                        <tr class="">
+                            <td>1</td>
+                            <td>
+                                <a href="#">Projeto 1</a>
+                            </td>
+                            <td>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-danger">Não aprovado</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>2</td>
+                            <td>
+                                <a href="#">Projeto 2</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-success">Aprovado</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>3</td>
+                            <td>
+                                <a href="#">Projeto 3</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-warning">Novo</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>4</td>
+                            <td>
+                                <a href="#">Projeto 4</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-3).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-info">Em aprovação</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>5</td>
+                            <td>
+                                <a href="#">Projeto 5</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-4).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-primary">Concluido</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>6</td>
+                            <td>
+                                <a href="#">Projeto 6</a>
+                            </td>
+                            <td>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-danger">Não aprovado</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>7</td>
+                            <td>
+                                <a href="#">Projeto 7</a>
+                            </td>
+                            <td>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-danger">Não aprovado</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>8</td>
+                            <td>
+                                <a href="#">Projeto 8</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-success">Aprovado</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>9</td>
+                            <td>
+                                <a href="#">Projeto 9</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-success">Aprovado</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>10</td>
+                            <td>
+                                <a href="#">Projeto 10</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-warning">Novo</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>11</td>
+                            <td>
+                                <a href="#">Projeto 11</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-warning">Novo</span></td>
+                            <td></td>
+                        </tr>
+                        <tr class="">
+                            <td>12</td>
+                            <td>
+                                <a href="#">Projeto 12</a>
+                            </td>
+                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
+                            <td><span class="label label-warning">Novo</span></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="#" class="btn btn-primary btn-block">Cadastrar novo projeto</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- /.content -->
+
+@section  ViewSpecificJavascript
+{
+    @Scripts.Render("~/Bundles/datatablejs")
+
+    <script>
+        $(function () {
+            $.fn.dataTable.moment('DD/MM/YYYY HH:mm');//De acordo com a sintaxe do moment, essas letras devem ser em maiusculo mesmo.
+
+            var tabela = $('#example1').DataTable({
+                responsive: {
+                    details: {
+                        //display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                        type: 'column',
+                        target: -1
+                    }
+                },
+                columnDefs: [{
+                    className: 'control',
+                    orderable: false,
+                    targets: -1
+                },
+                { responsivePriority: 1, targets: 1 },
+                { responsivePriority: 2, targets: 3 },
+                { responsivePriority: 3, targets: 0 }],
+                order: [3, 'desc'],
+                'lengthChange': false,
+                "language": {
+                    "zeroRecords": "Nenhum registro encontrado",
+                    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros", //"Mostrando _PAGE_ de _PAGES_",
+                    "infoEmpty": "Mostrando 0 de 0",
+                    "infoFiltered": "",
+                    "search": "Procurar",
+                    "paginate": {
+                        "first": "Primeira",
+                        "last": "Última",
+                        "next": "Próxima",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            $('#txt_busca').on('keyup keypress change', function () {
+                tabela.search(this.value).draw();
+            });
+            //$('#example2').DataTable({
+            //  'paging'      : true,
+            //  'lengthChange': false,
+            //  'searching'   : false,
+            //  'ordering'    : true,
+            //  'info'        : true,
+            //  'autoWidth'   : false
+            //})
+        });
+    </script>
+
+}
