@@ -49,7 +49,9 @@
   <ItemGroup>
     <Compile Include="Atendimento.cs" />
     <Compile Include="AtualizacaoAtendimento.cs" />
+    <Compile Include="BeneficiarioProjeto.cs" />
     <Compile Include="BSAtendimento.cs" />
+    <Compile Include="BSProjeto.cs" />
     <Compile Include="Diacono.cs" />
     <Compile Include="Migrations\201804292327358_PrimeiraTabela.cs" />
     <Compile Include="Migrations\201804292327358_PrimeiraTabela.Designer.cs">
@@ -63,9 +65,14 @@
     <Compile Include="Migrations\201805130147048_Criacao_Atualizacao_Atendimento.Designer.cs">
       <DependentUpon>201805130147048_Criacao_Atualizacao_Atendimento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903180032244_Criação_de_Projeto.cs" />
+    <Compile Include="Migrations\201903180032244_Criação_de_Projeto.Designer.cs">
+      <DependentUpon>201903180032244_Criação_de_Projeto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="PortalJDContexto.cs" />
+    <Compile Include="Projeto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805130147048_Criacao_Atualizacao_Atendimento.resx">
       <DependentUpon>201805130147048_Criacao_Atualizacao_Atendimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903180032244_Criação_de_Projeto.resx">
+      <DependentUpon>201903180032244_Criação_de_Projeto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

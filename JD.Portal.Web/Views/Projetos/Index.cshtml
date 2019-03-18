@@ -1,6 +1,6 @@
 ﻿
 @using System.Web.Optimization
-@model List<JD.Portal.Model.Atendimento>
+@model List<JD.Portal.Model.Projeto>
 
 @{
     ViewBag.Title = "Projetos";
@@ -41,7 +41,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>12</h3>
+                <h3>@ViewBag.projetosNovos.ToString()</h3>
                 <p>Novos</p>
             </div>
             <div class="icon">
@@ -53,7 +53,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
             <div class="inner">
-                <h3>34</h3>
+                <h3>@ViewBag.projetosEmAprovacao.ToString()</h3>
                 <p>Em aprovação</p>
             </div>
             <div class="icon">
@@ -65,7 +65,7 @@
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>5</h3>
+                <h3>@ViewBag.projetosAprovados.ToString()</h3>
                 <p>Aprovados</p>
             </div>
             <div class="icon">
@@ -77,7 +77,7 @@
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>34</h3>
+                <h3>@ViewBag.projetosNaoAprovados.ToString()</h3>
                 <p>Não aprovados</p>
             </div>
             <div class="icon">
@@ -89,7 +89,7 @@
         <!-- small box -->
         <div class="small-box bg-blue">
             <div class="inner">
-                <h3>34</h3>
+                <h3>@ViewBag.projetosConcluidos.ToString()</h3>
                 <p>Concluidos</p>
             </div>
             <div class="icon">
@@ -121,134 +121,37 @@
                             <th></th>
                         </tr>
                     </thead>
-                    @*<tbody>
-                            @foreach (JD.Portal.Model.Atendimento atendimento in Model)
-                            {
-                                string status = atendimento.Status == true ? "Arquivado" : "Em Aberto";
-                                string classeStatus = atendimento.Status ? "label-success" : "label-danger";
-                                var idRecemAdicionado = TempData["idRecemAdicionado"];
-                                string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == atendimento.ID ? "recemAdicionado" : "";
-
-                                <tr class="@classeRecemAdicionada">
-                                    <td>@atendimento.ID.ToString()</td>
-                                    <td>
-                                        <a href="@Url.Action("Acompanhamento", "Atendimentos", new { id = atendimento.ID })">@atendimento.Pessoa.Nome</a>
-                                    </td>
-                                    <td>@atendimento.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</td>
-                                    <td><span class="label @classeStatus">@status</span></td>
-                                    <td></td>
-                                </tr>
-                            }
-                        </tbody>*@
                     <tbody>
-                        <tr class="">
-                            <td>1</td>
-                            <td>
-                                <a href="#">Projeto 1</a>
-                            </td>
-                            <td>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-danger">Não aprovado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>2</td>
-                            <td>
-                                <a href="#">Projeto 2</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-success">Aprovado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>3</td>
-                            <td>
-                                <a href="#">Projeto 3</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-warning">Novo</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>4</td>
-                            <td>
-                                <a href="#">Projeto 4</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-3).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-info">Em aprovação</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>5</td>
-                            <td>
-                                <a href="#">Projeto 5</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-4).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-primary">Concluido</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>6</td>
-                            <td>
-                                <a href="#">Projeto 6</a>
-                            </td>
-                            <td>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-danger">Não aprovado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>7</td>
-                            <td>
-                                <a href="#">Projeto 7</a>
-                            </td>
-                            <td>@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-danger">Não aprovado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>8</td>
-                            <td>
-                                <a href="#">Projeto 8</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-success">Aprovado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>9</td>
-                            <td>
-                                <a href="#">Projeto 9</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-success">Aprovado</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>10</td>
-                            <td>
-                                <a href="#">Projeto 10</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-warning">Novo</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>11</td>
-                            <td>
-                                <a href="#">Projeto 11</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-warning">Novo</span></td>
-                            <td></td>
-                        </tr>
-                        <tr class="">
-                            <td>12</td>
-                            <td>
-                                <a href="#">Projeto 12</a>
-                            </td>
-                            <td>@DateTime.Now.AddDays(-2).ToString("dd/MM/yyyy HH:mm")</td>
-                            <td><span class="label label-warning">Novo</span></td>
-                            <td></td>
-                        </tr>
+                        @foreach (JD.Portal.Model.Projeto projeto in Model)
+                        {
+                            string status = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "Novo" :
+                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "Em aprovação" :
+                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "Aprovado" :
+                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "Não aprovado" :
+                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "Concluido" : 
+                                            "";
+
+                            string classeStatus = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "label-warning" :
+                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "label-info" :
+                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "label-success" :
+                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "label-danger" :
+                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "label-primary" :
+                                                  "";
+
+                            var idRecemAdicionado = TempData["idRecemAdicionado"];
+                            string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == projeto.ID ? "recemAdicionado" : "";
+
+                            <tr class="@classeRecemAdicionada">
+                                <td>@projeto.ID.ToString()</td>
+                                <td>
+                                    @*<a href="@Url.Action("Acompanhamento", "Atendimentos", new { id = atendimento.ID })">@atendimento.Pessoa.Nome</a>*@
+                                    <a href="#">@projeto.Nome</a>
+                                </td>
+                                <td>@projeto.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td><span class="label @classeStatus">@status</span></td>
+                                <td></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -290,7 +193,7 @@
                 { responsivePriority: 1, targets: 1 },
                 { responsivePriority: 2, targets: 3 },
                 { responsivePriority: 3, targets: 0 }],
-                order: [3, 'desc'],
+                order: [2, 'desc'],
                 'lengthChange': false,
                 "language": {
                     "zeroRecords": "Nenhum registro encontrado",

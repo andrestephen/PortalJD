@@ -1,6 +1,6 @@
 ﻿@using System.Web.Optimization
 
-@*@model JD.Portal.Model.Atendimento*@
+@model JD.Portal.Model.Projeto
 @{
     ViewBag.Title = "Novo projeto";
     ViewBag.Description = "Área para cadastro de novo projeto";
@@ -21,17 +21,14 @@
 
 
 @{
-    string nomeProjeto = "";/*Model.Pessoa != null ? Model.Pessoa.Nome : "";*/
-    string nomeBeneficiario = "";
-    string nomeContato = "";
-    string emailContato = "";
-    string telefonePrincipal = "";//Model.Pessoa != null ? Model.Pessoa.TelefonePrincipal : "";
-    string telefoneSecundario = "";//Model.Pessoa != null ? Model.Pessoa.TelefoneSecundario : "";
-    //string rg = Model.Pessoa != null ? Model.Pessoa.RG : "";
-    //string cpf = Model.Pessoa != null ? Model.Pessoa.CPF : "";
-
-    string endereco = "";//Model.Pessoa != null ? Model.Pessoa.Endereco : "";
-    string descricao = "";//Model != null ? Model.Descricao : "";
+    string nome = Model != null ? Model.Nome : "";
+    string nomeBeneficiario = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.Nome : "";
+    string nomeContato = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.NomeContato : ""; ;
+    string emailContato = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.EmailContato : ""; ;
+    string telefonePrincipal = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.TelefonePrincipal : "";
+    string telefoneSecundario = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.TelefoneSecundario : "";
+    string endereco = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.Endereco : "";
+    string descricao = Model != null ? Model.Descricao : "";
 }
 
 
@@ -61,39 +58,39 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="Pessoa_Nome">Nome do projeto <span>*</span></label>
-                            <input type="text" class="form-control" id="Projeto_Nome" name="Projeto.Nome" value="@nomeProjeto" maxlength="100" placeholder="Digite o nome do projeto" ng-model="Projeto_Nome" ng-init="Projeto_Nome='@nomeProjeto'" required>
+                            <input type="text" class="form-control" id="Nome" name="Nome" value="@nome" maxlength="100" placeholder="Digite o nome do projeto" ng-model="Nome" ng-init="Nome='@nome'" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="Projeto_Beneficiario">Nome do Beneficiário (Instituição, igreja, pessoa, etc) <span>*</span></label>
-                            <input type="text" class="form-control" id="Projeto_Beneficiario" name="Projeto.Beneficiario" value="@nomeBeneficiario" maxlength="250" placeholder="Digite o nome do beneficiário" ng-model="Projeto_Nome" ng-init="Projeto_Nome='@nomeBeneficiario'" required>
+                            <input type="text" class="form-control" id="BeneficiarioProjeto_Nome" name="BeneficiarioProjeto.Nome" value="@nomeBeneficiario" maxlength="250" placeholder="Digite o nome do beneficiário" ng-model="BeneficiarioProjeto_Nome" ng-init="BeneficiarioProjeto_Nome='@nomeBeneficiario'" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Pessoa_Endereco">Endereço do beneficiário</label>
-                            <input type="text" class="form-control" id="Pessoa_Endereco" name="Pessoa.Endereco" value="@endereco" placeholder="Digite o Endereço do beneficiário">
+                            <input type="text" class="form-control" id="BeneficiarioProjeto_Endereco" name="BeneficiarioProjeto.Endereco" value="@endereco" placeholder="Digite o Endereço do beneficiário">
                         </div>
                     </div>
                     <div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="Projeto_NomeContato">Nome do contato</label>
-                                <input type="text" class="form-control" id="Projeto_NomeContato" name="Projeto.NomeContato" value="@nomeContato" placeholder="Digite o nome do contato">
+                                <input type="text" class="form-control" id="BeneficiarioProjeto_NomeContato" name="BeneficiarioProjeto.NomeContato" value="@nomeContato" placeholder="Digite o nome do contato">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Projeto_EmailContato">Email do contato</label>
-                                <input type="text" class="form-control" id="Projeto_EmailContato" name="Projeto.EmailContato" value="@emailContato" placeholder="Digite o e-mail do contato">
+                                <input type="text" class="form-control" id="BeneficiarioProjeto_EmailContato" name="BeneficiarioProjeto.EmailContato" value="@emailContato" placeholder="Digite o e-mail do contato">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="Projeto_TelefonePrincipal">Telefone Principal</label>
-                            <input type="tel" class="form-control" id="Projeto_TelefonePrincipal" name="Projeto.TelefonePrincipal" value="@telefonePrincipal" placeholder="Digite o telefone principal" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
+                            <input type="tel" class="form-control" id="BeneficiarioProjeto_TelefonePrincipal" name="BeneficiarioProjeto.TelefonePrincipal" value="@telefonePrincipal" placeholder="Digite o telefone principal" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="Projeto_TelefoneSecundario">Telefone Secundário</label>
-                            <input type="tel" class="form-control" id="Projeto_TelefoneSecundário" name="Projeto.TelefoneSecundario" value="@telefoneSecundario" placeholder="Digite o telefone secundário" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
+                            <input type="tel" class="form-control" id="BeneficiarioProjeto_TelefoneSecundário" name="BeneficiarioProjeto.TelefoneSecundario" value="@telefoneSecundario" placeholder="Digite o telefone secundário" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
                         </div>
                     </div>
                     <div class="row">

@@ -18,6 +18,7 @@ namespace JD.Portal.Model
         public DbSet<Diacono> Diacono { get; set; }
         public DbSet<Atendimento> Atendimento { get; set; }
         public DbSet<AtualizacaoAtendimento> AtualizacaoAtendimento { get; set; }
+        public DbSet<Projeto> Projeto { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
