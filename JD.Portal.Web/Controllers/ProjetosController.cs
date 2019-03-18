@@ -13,5 +13,16 @@ namespace JD.Portal.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult NovoProjeto()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NovoProjeto(string teste)
+        {
+            return View();
+        }
     }
 }

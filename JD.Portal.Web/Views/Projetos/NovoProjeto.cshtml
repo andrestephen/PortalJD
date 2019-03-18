@@ -1,0 +1,131 @@
+﻿@using System.Web.Optimization
+
+@*@model JD.Portal.Model.Atendimento*@
+@{
+    ViewBag.Title = "Novo projeto";
+    ViewBag.Description = "Área para cadastro de novo projeto";
+}
+
+@section ViewSpecificStyleSheet
+{
+
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb hidden-xs hidden-sm">
+        <li><a href="@Url.Action("Index", "Projetos")"><i class="fa fa-thumbs-up"></i> Projetos</a></li>
+        <li class="active">Novo projeto</li>
+    </ol>
+}
+
+
+@{
+    string nomeProjeto = "";/*Model.Pessoa != null ? Model.Pessoa.Nome : "";*/
+    string nomeBeneficiario = "";
+    string nomeContato = "";
+    string emailContato = "";
+    string telefonePrincipal = "";//Model.Pessoa != null ? Model.Pessoa.TelefonePrincipal : "";
+    string telefoneSecundario = "";//Model.Pessoa != null ? Model.Pessoa.TelefoneSecundario : "";
+    //string rg = Model.Pessoa != null ? Model.Pessoa.RG : "";
+    //string cpf = Model.Pessoa != null ? Model.Pessoa.CPF : "";
+
+    string endereco = "";//Model.Pessoa != null ? Model.Pessoa.Endereco : "";
+    string descricao = "";//Model != null ? Model.Descricao : "";
+}
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Dados do projeto</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="@Url.Action("NovoProjeto", "Projetos")" method="post" name="frmNovoProjeto" ng-app="">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="user-block col-xs-12" style="margin-bottom:15px; margin-top:15px">
+                            <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
+                            <span class="description">Responsável<small> (Clique para trocar)</small></span>
+                            <span class="username">
+                                <a href="#">Diác. André Stephen</a>
+                            </span>
+                            <input type="hidden" name="DiaconoID" value="1" />
+                            @{
+                                //TODO: Carregar o diácono logado aqui
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Pessoa_Nome">Nome do projeto <span>*</span></label>
+                            <input type="text" class="form-control" id="Projeto_Nome" name="Projeto.Nome" value="@nomeProjeto" maxlength="100" placeholder="Digite o nome do projeto" ng-model="Projeto_Nome" ng-init="Projeto_Nome='@nomeProjeto'" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Projeto_Beneficiario">Nome do Beneficiário (Instituição, igreja, pessoa, etc) <span>*</span></label>
+                            <input type="text" class="form-control" id="Projeto_Beneficiario" name="Projeto.Beneficiario" value="@nomeBeneficiario" maxlength="250" placeholder="Digite o nome do beneficiário" ng-model="Projeto_Nome" ng-init="Projeto_Nome='@nomeBeneficiario'" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Pessoa_Endereco">Endereço do beneficiário</label>
+                            <input type="text" class="form-control" id="Pessoa_Endereco" name="Pessoa.Endereco" value="@endereco" placeholder="Digite o Endereço do beneficiário">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="Projeto_NomeContato">Nome do contato</label>
+                                <input type="text" class="form-control" id="Projeto_NomeContato" name="Projeto.NomeContato" value="@nomeContato" placeholder="Digite o nome do contato">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Projeto_EmailContato">Email do contato</label>
+                                <input type="text" class="form-control" id="Projeto_EmailContato" name="Projeto.EmailContato" value="@emailContato" placeholder="Digite o e-mail do contato">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="Projeto_TelefonePrincipal">Telefone Principal</label>
+                            <input type="tel" class="form-control" id="Projeto_TelefonePrincipal" name="Projeto.TelefonePrincipal" value="@telefonePrincipal" placeholder="Digite o telefone principal" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="Projeto_TelefoneSecundario">Telefone Secundário</label>
+                            <input type="tel" class="form-control" id="Projeto_TelefoneSecundário" name="Projeto.TelefoneSecundario" value="@telefoneSecundario" placeholder="Digite o telefone secundário" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <label>Descrição do projeto<span>*</span></label>
+                            <textarea class="form-control" rows="10" id="Descricao" name="Descricao" placeholder="Descreva aqui qual é o objetivo do projeto." ng-model="Descricao" ng-init="Descricao='@descricao'" required>@descricao</textarea>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="exampleInputFile">
+
+                            <p class="help-block">Example block-level help text here.</p>
+                        </div>*@
+                    @*<div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Check me out
+                            </label>
+                        </div>*@
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2">Salvar projeto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section  ViewSpecificJavascript
+{
+    @Scripts.Render("~/Bundles/angular")
+}
