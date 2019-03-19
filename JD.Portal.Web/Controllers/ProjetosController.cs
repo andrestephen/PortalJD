@@ -50,5 +50,12 @@ namespace JD.Portal.Web.Controllers
                 return View(projeto);
             }
         }
+
+        public ActionResult Acompanhamento(int id)
+        {
+            BSProjeto bsProjeto = new BSProjeto();
+            Projeto projeto = bsProjeto.RecuperarProjeto(id);
+            return View(projeto);
+        }
     }
 }

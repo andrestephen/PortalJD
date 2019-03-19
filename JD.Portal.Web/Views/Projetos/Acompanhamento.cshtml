@@ -1,0 +1,149 @@
+﻿@using System.Web.Optimization
+@model JD.Portal.Model.Projeto
+@{
+    ViewBag.Title = "Projeto";
+    ViewBag.Description = "Área de acompanhamento e atualização de informações do projeto.";
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb hidden-xs hidden-sm">
+        <li><a href="@Url.Action("Index", "Projetos")"><i class="fa fa-thumbs-up"></i> Projetos</a></li>
+        <li class="active">Projeto</li>
+    </ol>
+}
+
+@{
+    string textoStatus = Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "Novo" :
+                                    Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "Em aprovação" :
+                                    Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "Aprovado" :
+                                    Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "Não aprovado" :
+                                    Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "Concluido" :
+                                    "";
+
+    string classeCor = Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "warning" :
+                          Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "info" :
+                          Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "success" :
+                          Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "danger" :
+                          Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "primary" :
+                          "";
+}
+
+<form action="#" method="post">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-@classeCor">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-thumbs-up margin-r-5"></i>#@Model.ID.ToString() - @Model.Nome</h3>
+                    <small class="pull-right">@Model.DataCriacao.ToString("dd/MM/yyyy")</small>
+                    <input type="hidden" name="idProjeto" value="@Model.ID" />
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
+                            <span class="pull-right label label-@classeCor hidden-md hidden-lg">@textoStatus</span>
+                            <p><strong><i class="fa fa-institution margin-r-5"></i>Nome do beneficiário</strong></p>
+                            <span>@Model.BeneficiarioProjeto.Nome</span>
+                        </div>
+                        <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
+
+                            <p><strong><i class="fa fa-map-marker margin-r-5"></i>Endereço</strong></p>
+                            <span>@Model.BeneficiarioProjeto.Endereco</span>
+                        </div>
+                        <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
+                            <span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-lg">@textoStatus</span>
+
+                            <p><strong><i class="fa fa-id-card margin-r-5"></i>Contato</strong></p>
+                            @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.NomeContato))
+                            {
+                                <span>@Model.BeneficiarioProjeto.NomeContato</span><br />
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.EmailContato))
+                            {
+                                <span>@Model.BeneficiarioProjeto.EmailContato</span><br />
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.TelefonePrincipal))
+                            {
+                                <span>Telefone Principal: @Model.BeneficiarioProjeto.TelefonePrincipal </span><br />
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.TelefoneSecundario))
+                            {
+                                <span>Telefone Secundário: @Model.BeneficiarioProjeto.TelefoneSecundario </span>
+                            }
+                        </div>
+                        @*// TODO: Ver o que fazer com essa classe dados_atendimento*@
+                        <div class="dados_atendimento responsavel user-block col-xs-12 col-md-12 col-lg-3">
+                            @*style="margin-bottom:15px; margin-top:15px"*@
+                            <span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-md">@textoStatus</span>
+                            <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
+                            <span class="description">Responsável</span>
+                            <span class="username">
+                                <a href="#">Diác. André Stephen</a>
+                            </span>
+                            <input type="hidden" name="idDiacono" value="1" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p><strong>Descrição do projeto</strong></p>
+                            <p class="col-xs-12">@Model.Descricao</p>
+                        </div>
+                    </div>
+                </div> @*text-muted well well-sm no-shadow*@
+
+                @*COLOCAR AQUI AS ATUALIZAÇÕES NO PROJETO*@
+
+                <div class="box-footer">
+                    @*<button type="submit" name="acaoAcompanhamento" value="reabrir" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-open margin-r-5"></i>Reabrir atendimento</button>*@
+                </div>
+
+            </div>
+            @*<div class="col-xs-12">
+                    <h2 class="page-header">
+                        <i class="fa fa-heart"></i> André Stephen
+                        <small class="pull-right">Data do Atendimento: 02/10/2018</small>
+                    </h2>
+                </div>*@
+        </div>
+
+        @*<div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-default">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p>Caso não existam mais pendências da Junta Diaconal para esse atendimento, o mesmo pode ser arquivado. Caso haja necessidade, um atendimento arquivado pode ser reaberto a qualquer momento.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink col-xs-12 col-sm-6 col-md-3 col-lg-2">Arquivar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box box-default">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="glyphicon glyphicon-open margin-r-5"></i>Reabrir atendimento</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p>Esse atendimento está arquivado. Caso haja necessidade de continuar o atendimento, ele pode ser reaberto.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" name="acaoAcompanhamento" value="reabrir" class="btn btn-danger col-xs-12 col-sm-6 col-md-3 col-lg-2">Reabrir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+</form>

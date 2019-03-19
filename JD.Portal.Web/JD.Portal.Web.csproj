@@ -151,6 +151,7 @@
     <Content Include="Views\Atendimentos\NovoAtendimento.cshtml" />
     <Content Include="Views\Atendimentos\Acompanhamento.cshtml" />
     <Content Include="Views\Projetos\NovoProjeto.cshtml" />
+    <Content Include="Views\Projetos\Acompanhamento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

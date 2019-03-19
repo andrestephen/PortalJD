@@ -64,5 +64,19 @@ namespace JD.Portal.Model
                 db.SaveChanges();
             }
         }
+
+        public Projeto RecuperarProjeto(int idProjeto)
+        {
+            Projeto projeto = new Projeto();
+
+            using (var db = new PortalJDContexto())
+            {
+                projeto = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono") //.Include("AtualizacoesAtendimentos").Include("AtualizacoesAtendimentos.Diacono")
+                               where a.ID == idProjeto
+                               select a).FirstOrDefault();
+            }
+
+            return projeto;
+        }
     }
 }
