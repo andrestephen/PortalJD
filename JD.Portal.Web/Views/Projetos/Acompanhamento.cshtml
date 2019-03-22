@@ -15,14 +15,12 @@
 
 @{
     string textoStatus = Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "Novo" :
-                                    Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "Em aprovação" :
                                     Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "Aprovado" :
                                     Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "Não aprovado" :
                                     Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "Concluido" :
                                     "";
 
     string classeCor = Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "warning" :
-                          Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "info" :
                           Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "success" :
                           Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "danger" :
                           Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "primary" :
@@ -35,13 +33,42 @@
             <div class="box box-@classeCor">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-thumbs-up margin-r-5"></i>#@Model.ID.ToString() - @Model.Nome</h3>
-                    <small class="pull-right">@Model.DataCriacao.ToString("dd/MM/yyyy")</small>
+
+                    <div class="pull-right btn-group">
+                        <button type="button" class="btn btn-@classeCor">@textoStatus</button>
+                        <button type="button" class="btn btn-@classeCor dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo)
+                            {
+                                <li><a href="#">Novo</a></li>
+                            }
+                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado)
+                            {
+                                <li><a href="#">Aprovar</a></li>
+                            }
+                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado)
+                            {
+                                <li><a href="#">Não aprovar</a></li>
+                            }
+                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo &&
+                                Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado &&
+                                Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido)
+                            {
+                                <li class="divider"></li>
+                                <li><a href="#">Concluir</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <small class=""> (@Model.DataCriacao.ToString("dd/MM/yyyy"))</small>
                     <input type="hidden" name="idProjeto" value="@Model.ID" />
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
-                            <span class="pull-right label label-@classeCor hidden-md hidden-lg">@textoStatus</span>
+                            @*<span class="pull-right label label-@classeCor hidden-md hidden-lg">@textoStatus</span>*@
                             <p><strong><i class="fa fa-institution margin-r-5"></i>Nome do beneficiário</strong></p>
                             <span>@Model.BeneficiarioProjeto.Nome</span>
                         </div>
@@ -51,7 +78,7 @@
                             <span>@Model.BeneficiarioProjeto.Endereco</span>
                         </div>
                         <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
-                            <span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-lg">@textoStatus</span>
+                            @*<span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-lg">@textoStatus</span>*@
 
                             <p><strong><i class="fa fa-id-card margin-r-5"></i>Contato</strong></p>
                             @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.NomeContato))
@@ -74,7 +101,7 @@
                         @*// TODO: Ver o que fazer com essa classe dados_atendimento*@
                         <div class="dados_atendimento responsavel user-block col-xs-12 col-md-12 col-lg-3">
                             @*style="margin-bottom:15px; margin-top:15px"*@
-                            <span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-md">@textoStatus</span>
+                            @*<span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-md">@textoStatus</span>*@
                             <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
                             <span class="description">Responsável</span>
                             <span class="username">
@@ -93,10 +120,43 @@
 
                 @*COLOCAR AQUI AS ATUALIZAÇÕES NO PROJETO*@
 
-                <div class="box-footer">
-                    @*<button type="submit" name="acaoAcompanhamento" value="reabrir" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-open margin-r-5"></i>Reabrir atendimento</button>*@
-                </div>
-
+                @if (Model.AtualizacoesProjetos != null && Model.AtualizacoesProjetos.Count() > 0)
+                {
+                    <div class="box-footer box-comments">
+                        @foreach (JD.Portal.Model.AtualizacaoProjeto atualizacaoProjeto in Model.AtualizacoesProjetos)
+                        {
+                            <div class="box-comment">
+                                <!-- User image -->
+                                <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
+                                <div class="comment-text">
+                                    <span class="username">
+                                        @atualizacaoProjeto.Diacono.Nome
+                                        <span class="text-muted pull-right">@atualizacaoProjeto.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</span>
+                                    </span><!-- /.username -->
+                                    @atualizacaoProjeto.DescricaoAtualizacao
+                                </div>
+                                <!-- /.comment-text -->
+                            </div>
+                            <!-- /.box-comment -->
+                        }
+                    </div>
+                }
+                @if (true@*Model.Status == false*@)
+{
+<div class="box-footer">
+    <div>
+        <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
+        <!-- .img-push is used to add margin to elements next to floating images -->
+        <div class="img-push">
+            <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao projeto."></textarea>
+        </div>
+    </div>
+</div>
+<div class="box-footer">
+    <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
+    @*<button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</button>*@
+</div>
+}
             </div>
             @*<div class="col-xs-12">
                     <h2 class="page-header">

@@ -11,10 +11,9 @@ namespace JD.Portal.Model
         public enum StatusProjeto
         {
             novo = 1,
-            em_aprovação = 2,
-            aprovado = 3,
-            nao_aprovado = 4,
-            concluido = 5
+            aprovado = 2,
+            nao_aprovado = 3,
+            concluido = 4
         }
 
         public List<Projeto> ListarProjetos()
@@ -71,12 +70,33 @@ namespace JD.Portal.Model
 
             using (var db = new PortalJDContexto())
             {
-                projeto = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono") //.Include("AtualizacoesAtendimentos").Include("AtualizacoesAtendimentos.Diacono")
+                projeto = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono").Include("AtualizacoesProjetos").Include("AtualizacoesProjetos.Diacono")
                                where a.ID == idProjeto
                                select a).FirstOrDefault();
             }
 
             return projeto;
+        }
+
+        public void AtualizarInformacaoProjeto(int idProjeto, int idDiacono, string descricaoAtualizacao)
+        {
+            using (var db = new PortalJDContexto())
+            {
+                DateTime dataAtualizacao = DateTime.Now;
+
+                AtualizacaoProjeto atualizacaoProjeto = new AtualizacaoProjeto();
+                atualizacaoProjeto.DataAtualizacao = dataAtualizacao;
+                atualizacaoProjeto.DescricaoAtualizacao = descricaoAtualizacao;
+                atualizacaoProjeto.DiaconoID = idDiacono;
+                atualizacaoProjeto.ProjetoID = idProjeto;
+
+                db.AtualizacaoProjeto.Add(atualizacaoProjeto);
+
+                Atendimento atendimento = db.Atendimento.Where(x => x.ID == idProjeto).First();
+                atendimento.DataAtualizacao = dataAtualizacao;
+
+                db.SaveChanges();
+            }
         }
     }
 }

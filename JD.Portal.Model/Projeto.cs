@@ -29,6 +29,6 @@ namespace JD.Portal.Model
         [ForeignKey("DiaconoID")]
         public virtual Diacono Diacono { get; set; }
 
-        //public virtual List<AtualizacaoAtendimento> AtualizacoesAtendimentos { get; set; }
+        public virtual List<AtualizacaoProjeto> AtualizacoesProjetos { get; set; }
     }
 }

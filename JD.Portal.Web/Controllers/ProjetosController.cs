@@ -16,7 +16,6 @@ namespace JD.Portal.Web.Controllers
             List<Model.Projeto> projetos = bsProjeto.ListarProjetos();
 
             ViewBag.projetosNovos = projetos.Count(x => x.Status == (int)BSProjeto.StatusProjeto.novo);
-            ViewBag.projetosEmAprovacao = projetos.Count(x => x.Status == (int)BSProjeto.StatusProjeto.em_aprovação);
             ViewBag.projetosAprovados = projetos.Count(x => x.Status == (int)BSProjeto.StatusProjeto.aprovado);
             ViewBag.projetosNaoAprovados = projetos.Count(x => x.Status == (int)BSProjeto.StatusProjeto.nao_aprovado);
             ViewBag.projetosConcluidos = projetos.Count(x => x.Status == (int)BSProjeto.StatusProjeto.concluido);
@@ -55,6 +54,33 @@ namespace JD.Portal.Web.Controllers
         {
             BSProjeto bsProjeto = new BSProjeto();
             Projeto projeto = bsProjeto.RecuperarProjeto(id);
+            return View(projeto);
+        }
+
+        [HttpPost]
+        public ActionResult Acompanhamento(int idProjeto, string acaoAcompanhamento, int idDiacono, string descricaoAtualizacao)
+        {
+            BSProjeto bsAtendimento = new BSProjeto();
+
+            if (ModelState.IsValid && !String.IsNullOrWhiteSpace(acaoAcompanhamento))
+            {
+                switch (acaoAcompanhamento)
+                {
+                    case "salvarInformacoes":
+                        bsAtendimento.AtualizarInformacaoProjeto(idProjeto, idDiacono, descricaoAtualizacao);
+                        break;
+                    //case "arquivar":
+                    //    bsAtendimento.AtualizarStatusAtendimento(idAtendimento, true);
+                    //    break;
+                    //case "reabrir":
+                    //    bsAtendimento.AtualizarStatusAtendimento(idAtendimento, false);
+                    //    break;
+                    default:
+                        break;
+                }
+            }
+
+            Projeto projeto = bsAtendimento.RecuperarProjeto(idProjeto);
             return View(projeto);
         }
     }

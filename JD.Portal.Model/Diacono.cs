@@ -21,5 +21,6 @@ namespace JD.Portal.Model
         public string Email { get; set; }
 
         public virtual List<AtualizacaoAtendimento> AtualizacoesAtendimento { get; set; }
+        public virtual List<AtualizacaoProjeto> AtualizacoesProjeto { get; set; }
     }
 }

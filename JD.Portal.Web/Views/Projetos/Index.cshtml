@@ -37,7 +37,7 @@
 
 <!-- Main content -->
 <div class="row">
-    <div class="col-lg-2 col-xs-6">
+    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
@@ -49,19 +49,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-aqua">
-            <div class="inner">
-                <h3>@ViewBag.projetosEmAprovacao.ToString()</h3>
-                <p>Em aprovação</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-question"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-2 col-xs-6">
+    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
@@ -73,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2 col-xs-6">
+    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-red">
             <div class="inner">
@@ -85,7 +73,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-2 col-xs-12">
+    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
         <!-- small box -->
         <div class="small-box bg-blue">
             <div class="inner">
@@ -125,14 +113,12 @@
                         @foreach (JD.Portal.Model.Projeto projeto in Model)
                         {
                             string status = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "Novo" :
-                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "Em aprovação" :
                                             projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "Aprovado" :
                                             projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "Não aprovado" :
                                             projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "Concluido" : 
                                             "";
 
                             string classeStatus = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "label-warning" :
-                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.em_aprovação ? "label-info" :
                                                   projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "label-success" :
                                                   projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "label-danger" :
                                                   projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "label-primary" :
