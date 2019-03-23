@@ -36,62 +36,118 @@
 }
 
 <!-- Main content -->
-<div class="row">
-    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h3>@ViewBag.projetosNovos.ToString()</h3>
-                <p>Novos</p>
+    <div class="row">
+
+        <div class="hidden-xs col-sm-6 col-md-3 col-lg-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-inbox"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Novos</span>
+                    <span class="info-box-number">@ViewBag.projetosNovos.ToString()</span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
-            <div class="icon">
-                <i class="fa fa-inbox"></i>
+            <!-- /.info-box -->
+        </div>
+        <div class="hidden-xs col-sm-6 col-md-3 col-lg-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Aprovados</span>
+                    <span class="info-box-number">@ViewBag.projetosAprovados.ToString()</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="hidden-xs col-sm-6 col-md-3 col-lg-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Náo aprovados</span>
+                    <span class="info-box-number">@ViewBag.projetosNaoAprovados.ToString()</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+
+        <div class="hidden-xs col-sm-6 col-md-3 col-lg-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-blue"><i class="fa fa-thumbs-up"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Concluidos</span>
+                    <span class="info-box-number">@ViewBag.projetosConcluidos.ToString()</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        @*<div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>@ViewBag.projetosNovos.ToString()</h3>
+                    <p>Novos</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-inbox"></i>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-                <h3>@ViewBag.projetosAprovados.ToString()</h3>
-                <p>Aprovados</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-check"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-red">
-            <div class="inner">
-                <h3>@ViewBag.projetosNaoAprovados.ToString()</h3>
-                <p>Não aprovados</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-times"></i>
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>@ViewBag.projetosAprovados.ToString()</h3>
+                    <p>Aprovados</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-check"></i>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-blue">
-            <div class="inner">
-                <h3>@ViewBag.projetosConcluidos.ToString()</h3>
-                <p>Concluidos</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-thumbs-up"></i>
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>@ViewBag.projetosNaoAprovados.ToString()</h3>
+                    <p>Não aprovados</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-times"></i>
+                </div>
             </div>
         </div>
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-blue">
+                <div class="inner">
+                    <h3>@ViewBag.projetosConcluidos.ToString()</h3>
+                    <p>Concluidos</p>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-thumbs-up"></i>
+                </div>
+            </div>
+        </div>*@
     </div>
-</div>
 <div class="row">
     <div class="col-xs-12">
         <!-- /.box -->
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Projetos registrados</h3>
+                <div class="totalizadores_mobile col-xs-12 hidden-sm hidden-md hidden-lg">
+                    <span class="label label-warning">@ViewBag.projetosNovos.ToString() Novos</span>
+                    <span class="label label-success">@ViewBag.projetosAprovados.ToString() Aprovados</span>
+                    <span class="label label-danger">@ViewBag.projetosNaoAprovados.ToString() Não aprovados</span>
+                    <span class="label label-primary">@ViewBag.projetosConcluidos.ToString() Concluidos</span>
+                </div>
                 <div class="input-group grupo_busca">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input id="txt_busca" type="text" class="form-control" placeholder="Procurar">
@@ -99,7 +155,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <table id="example1" class="table table-condensed nowrap" width="100%">
+                <table id="example1" class="table table-condensed" width="100%">
                     <thead>
                         <tr>
                             <th>Nº</th>
@@ -111,32 +167,32 @@
                     </thead>
                     <tbody>
                         @foreach (JD.Portal.Model.Projeto projeto in Model)
-                        {
-                            string status = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "Novo" :
-                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "Aprovado" :
-                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "Não aprovado" :
-                                            projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "Concluido" : 
-                                            "";
+            {
+                string status = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "Novo" :
+                                projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "Aprovado" :
+                                projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "Não aprovado" :
+                                projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "Concluido" :
+                                "";
 
-                            string classeStatus = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "label-warning" :
-                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "label-success" :
-                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "label-danger" :
-                                                  projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "label-primary" :
-                                                  "";
+                string classeStatus = projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "label-warning" :
+                                      projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "label-success" :
+                                      projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "label-danger" :
+                                      projeto.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "label-primary" :
+                                      "";
 
-                            var idRecemAdicionado = TempData["idRecemAdicionado"];
-                            string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == projeto.ID ? "recemAdicionado" : "";
+                var idRecemAdicionado = TempData["idRecemAdicionado"];
+                string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == projeto.ID ? "recemAdicionado" : "";
 
-                            <tr class="@classeRecemAdicionada">
-                                <td>@projeto.ID.ToString()</td>
-                                <td>
-                                    <a href="@Url.Action("Acompanhamento", "Projetos", new { id = projeto.ID })">@projeto.Nome</a>
-                                </td>
-                                <td>@projeto.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</td>
-                                <td><span class="label @classeStatus">@status</span></td>
-                                <td></td>
-                            </tr>
-                        }
+                <tr class="@classeRecemAdicionada">
+                    <td>@projeto.ID.ToString()</td>
+                    <td>
+                        <a href="@Url.Action("Acompanhamento", "Projetos", new { id = projeto.ID })">@projeto.Nome</a>
+                    </td>
+                    <td>@projeto.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td><span class="label @classeStatus">@status</span></td>
+                    <td></td>
+                </tr>
+}
                     </tbody>
                 </table>
             </div>

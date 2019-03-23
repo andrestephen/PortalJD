@@ -60,14 +60,14 @@ namespace JD.Portal.Web.Controllers
         [HttpPost]
         public ActionResult Acompanhamento(int idProjeto, string acaoAcompanhamento, int idDiacono, string descricaoAtualizacao)
         {
-            BSProjeto bsAtendimento = new BSProjeto();
+            BSProjeto bsProjeto = new BSProjeto();
 
             if (ModelState.IsValid && !String.IsNullOrWhiteSpace(acaoAcompanhamento))
             {
                 switch (acaoAcompanhamento)
                 {
                     case "salvarInformacoes":
-                        bsAtendimento.AtualizarInformacaoProjeto(idProjeto, idDiacono, descricaoAtualizacao);
+                        bsProjeto.AtualizarInformacaoProjeto(idProjeto, idDiacono, descricaoAtualizacao);
                         break;
                     //case "arquivar":
                     //    bsAtendimento.AtualizarStatusAtendimento(idAtendimento, true);
@@ -80,8 +80,26 @@ namespace JD.Portal.Web.Controllers
                 }
             }
 
-            Projeto projeto = bsAtendimento.RecuperarProjeto(idProjeto);
+            Projeto projeto = bsProjeto.RecuperarProjeto(idProjeto);
             return View(projeto);
+        }
+
+        public ActionResult AtualizarStatusProjeto(int idProjeto, int statusProjeto)
+        {
+            try
+            {
+                BSProjeto bsProjeto = new BSProjeto();
+
+                bsProjeto.AtualizarStatusProjeto(idProjeto, statusProjeto);
+
+                Projeto projeto = bsProjeto.RecuperarProjeto(idProjeto);
+                return View("Acompanhamento", projeto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
         }
     }
 }

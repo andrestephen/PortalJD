@@ -98,5 +98,18 @@ namespace JD.Portal.Model
                 db.SaveChanges();
             }
         }
+
+        public void AtualizarStatusProjeto(int idProjeto, int statusProjeto)
+        {
+            Projeto projeto = new Projeto();
+
+            using (var db = new PortalJDContexto())
+            {
+                projeto = db.Projeto.Where(x => x.ID == idProjeto).FirstOrDefault();
+                projeto.Status = statusProjeto;
+
+                db.SaveChanges();
+            }
+        }
     }
 }

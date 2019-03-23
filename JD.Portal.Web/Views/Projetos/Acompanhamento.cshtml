@@ -43,22 +43,22 @@
                         <ul class="dropdown-menu" role="menu">
                             @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo)
                             {
-                                <li><a href="#">Novo</a></li>
+                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo})">Novo</a></li>
                             }
                             @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado)
                             {
-                                <li><a href="#">Aprovar</a></li>
+                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado})">Aprovar</a></li>
                             }
                             @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado)
                             {
-                                <li><a href="#">Não aprovar</a></li>
+                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado})">Não aprovar</a></li>
                             }
                             @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo &&
                                 Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado &&
                                 Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido)
                             {
                                 <li class="divider"></li>
-                                <li><a href="#">Concluir</a></li>
+                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido})">Concluir</a></li>
                             }
                         </ul>
                     </div>
@@ -141,22 +141,22 @@
                         }
                     </div>
                 }
-                @if (true@*Model.Status == false*@)
-{
-<div class="box-footer">
-    <div>
-        <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
-        <!-- .img-push is used to add margin to elements next to floating images -->
-        <div class="img-push">
-            <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao projeto."></textarea>
-        </div>
-    </div>
-</div>
-<div class="box-footer">
-    <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
-    @*<button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</button>*@
-</div>
-}
+                @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido)
+                {
+                    <div class="box-footer">
+                        <div>
+                            <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
+                            <!-- .img-push is used to add margin to elements next to floating images -->
+                            <div class="img-push">
+                                <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao projeto."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
+                        @*<button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</button>*@
+                    </div>
+                }
             </div>
             @*<div class="col-xs-12">
                     <h2 class="page-header">

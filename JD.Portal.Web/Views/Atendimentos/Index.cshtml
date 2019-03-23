@@ -37,7 +37,7 @@
 
 <!-- Main content -->
 <div class="row">
-    <div class="col-xs-12 col-sm-6">
+    <div class="hidden-xs col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
             <span class="info-box-icon bg-red"><i class="ion ion-ios-heart"></i></span>
 
@@ -50,7 +50,7 @@
         <!-- /.info-box -->
     </div>
     <!-- /.col -->
-    <div class="col-xs-12 col-sm-6">
+    <div class="hidden-xs col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
             <span class="info-box-icon bg-green"><i class="ion ion-ios-heart"></i></span>
 
@@ -96,6 +96,10 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Atendimentos registrados</h3>
+                <div class="totalizadores_mobile col-xs-12 hidden-sm hidden-md hidden-lg">
+                    <span class="label label-danger">@ViewBag.atendimentosAbertos.ToString() Em aberto</span>
+                    <span class="label label-success">@ViewBag.atendimentosArquivados.ToString() Arquivados</span>
+                </div>
                 <div class="input-group grupo_busca">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input id="txt_busca" type="text" class="form-control" placeholder="Procurar">
@@ -103,7 +107,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <table id="example1" class="table table-condensed nowrap" width="100%">
+                <table id="example1" class="table table-condensed" width="100%">
                     <thead>
                         <tr>
                             <th>Nº</th>

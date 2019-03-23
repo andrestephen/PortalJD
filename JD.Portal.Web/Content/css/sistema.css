@@ -47,3 +47,14 @@
     .dados_atendimento.responsavel {
         margin-top: 15px;
     }
+
+.totalizadores_mobile{
+    margin-bottom:15px;
+    padding-left: 0px;
+    margin-top: 15px;
+}
+
+.totalizadores_mobile span {
+    margin-right: 5px;
+}
+
