@@ -27,7 +27,7 @@
                           "";
 }
 
-<form action="#" method="post">
+<form action="#" method="post" ng-app="appProjeto" ng-controller="controllerProjeto">
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-@classeCor">
@@ -41,6 +41,7 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
+                            @*CODIGO PARA FAZER O POST ASSINCRONAMENTE <li><a href="/jsondata" ng-click="atualizarStatusProjeto(@Model.ID, 2);$event.preventDefault()">Teste JSON</a></li>*@
                             @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo)
                             {
                                 <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo})">Novo</a></li>
@@ -205,5 +206,12 @@
                     </div>
                 </div>
             </div>*@
-
+    </div>
 </form>
+
+
+@section  ViewSpecificJavascript
+{
+    @Scripts.Render("~/Bundles/angular")
+    @Scripts.Render("~/Bundles/controllerprojetos")
+}

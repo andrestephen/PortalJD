@@ -45,6 +45,10 @@ namespace JD.Portal.Web.App_Start
             bundles.Add(new ScriptBundle("~/Bundles/angular")
                 .Include("~/Content/js/plugins/angular/angular.min.js"));
 
+
+            bundles.Add(new ScriptBundle("~/Bundles/controllerprojetos")
+                .Include("~/Content/js/controllers/projetos.js"));
+
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #else

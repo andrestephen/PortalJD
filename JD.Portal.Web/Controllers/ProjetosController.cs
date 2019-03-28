@@ -99,7 +99,25 @@ namespace JD.Portal.Web.Controllers
             {
                 throw ex;
             }
-           
+
         }
+
+        //METODOS PARA TESTAR POSTS E GET ASSINCRONOS
+        [HttpPost]
+        public ActionResult AtualizarStatusProjetoJSON(int idProjeto, int statusProjeto)
+        {
+            return Json(new { });
+        }
+
+        public ActionResult RetornaProjeto(int id)
+        {
+            Projeto projeto = new Projeto();
+            projeto.Descricao = "teste de json";
+            projeto.ID = 1;
+            projeto.Nome = "Nome do projeto";
+
+            return Json(new { projeto = projeto }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

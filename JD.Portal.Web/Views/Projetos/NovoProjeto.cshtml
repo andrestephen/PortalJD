@@ -40,7 +40,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="@Url.Action("NovoProjeto", "Projetos")" method="post" name="frmNovoProjeto" ng-app="">
+            <form role="form" action="@Url.Action("NovoProjeto", "Projetos")" method="post" name="frmNovoProjeto" ng-app="appProjeto" ng-controller="controllerProjeto">
                 <div class="box-body">
                     <div class="row">
                         <div class="user-block col-xs-12" style="margin-bottom:15px; margin-top:15px">
@@ -116,6 +116,15 @@
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2">Salvar projeto</button>
                 </div>
+
+                @*AREA PARA TESTER O GET ASSINCRONO
+                    <div>
+                        <h2>Retorna Projeto</h2>
+                        <a href="" ng-click="retornaProjeto()">Retorna Projeto</a>
+                        <p>Id: {{projeto.ID}}</p>
+                        <p>First Name: {{projeto.Nome}}</p>
+                        <p>Last Name: {{projeto.Descricao}}</p>
+                    </div>*@
             </form>
         </div>
     </div>
@@ -125,4 +134,5 @@
 @section  ViewSpecificJavascript
 {
     @Scripts.Render("~/Bundles/angular")
+    @Scripts.Render("~/Bundles/controllerprojetos")
 }
