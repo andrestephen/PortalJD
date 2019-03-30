@@ -84,40 +84,44 @@ namespace JD.Portal.Web.Controllers
             return View(projeto);
         }
 
+        //public ActionResult AtualizarStatusProjeto(int idProjeto, int statusProjeto)
+        //{
+        //    try
+        //    {
+        //        BSProjeto bsProjeto = new BSProjeto();
+
+        //        bsProjeto.AtualizarStatusProjeto(idProjeto, statusProjeto);
+
+        //        Projeto projeto = bsProjeto.RecuperarProjeto(idProjeto);
+        //        return View("Acompanhamento", projeto);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+
+        //}
+
+        [HttpPost]
         public ActionResult AtualizarStatusProjeto(int idProjeto, int statusProjeto)
         {
-            try
-            {
-                BSProjeto bsProjeto = new BSProjeto();
+            BSProjeto bsProjeto = new BSProjeto();
 
-                bsProjeto.AtualizarStatusProjeto(idProjeto, statusProjeto);
+            bsProjeto.AtualizarStatusProjeto(idProjeto, statusProjeto);
 
-                Projeto projeto = bsProjeto.RecuperarProjeto(idProjeto);
-                return View("Acompanhamento", projeto);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+            Projeto projeto = bsProjeto.RecuperarProjeto(idProjeto);
+            return Json(new { statusProjeto = statusProjeto });
         }
 
-        //METODOS PARA TESTAR POSTS E GET ASSINCRONOS
-        [HttpPost]
-        public ActionResult AtualizarStatusProjetoJSON(int idProjeto, int statusProjeto)
-        {
-            return Json(new { });
-        }
+        //public ActionResult RetornaProjeto(int id)
+        //{
+        //    Projeto projeto = new Projeto();
+        //    projeto.Descricao = "teste de json";
+        //    projeto.ID = 1;
+        //    projeto.Nome = "Nome do projeto";
 
-        public ActionResult RetornaProjeto(int id)
-        {
-            Projeto projeto = new Projeto();
-            projeto.Descricao = "teste de json";
-            projeto.ID = 1;
-            projeto.Nome = "Nome do projeto";
-
-            return Json(new { projeto = projeto }, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(new { projeto = projeto }, JsonRequestBehavior.AllowGet);
+        //}
 
     }
 }

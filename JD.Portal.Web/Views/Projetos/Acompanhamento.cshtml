@@ -27,40 +27,29 @@
                           "";
 }
 
-<form action="#" method="post" ng-app="appProjeto" ng-controller="controllerProjeto">
+<form action="#" method="post" ng-app="appProjeto" ng-init="classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerProjeto">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-@classeCor">
+            <div class="box" ng-class="classeCorBox">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-thumbs-up margin-r-5"></i>#@Model.ID.ToString() - @Model.Nome</h3>
 
                     <div class="pull-right btn-group">
-                        <button type="button" class="btn btn-@classeCor">@textoStatus</button>
-                        <button type="button" class="btn btn-@classeCor dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn" ng-class="classeCorDrop">{{textoStatusAngular}}</button>
+                        <button type="button" class="btn dropdown-toggle" ng-class="classeCorDrop" data-toggle="dropdown" aria-expanded="false">
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            @*CODIGO PARA FAZER O POST ASSINCRONAMENTE <li><a href="/jsondata" ng-click="atualizarStatusProjeto(@Model.ID, 2);$event.preventDefault()">Teste JSON</a></li>*@
-                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo)
-                            {
-                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo})">Novo</a></li>
-                            }
-                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado)
-                            {
-                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado})">Aprovar</a></li>
-                            }
-                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado)
-                            {
-                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado})">Não aprovar</a></li>
-                            }
-                            @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo &&
-                                Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado &&
-                                Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido)
-                            {
-                                <li class="divider"></li>
-                                <li><a href="@Url.Action("AtualizarStatusProjeto", "Projetos", new { idProjeto = Model.ID, statusProjeto = (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido})">Concluir</a></li>
-                            }
+                            @{ int statusNovo = (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo; }
+                            <li ng-show="textoStatusAngular != 'Novo'"><a href="/jsondata" ng-click="atualizarStatusProjeto(@Model.ID, @statusNovo);$event.preventDefault()">Novo</a></li>
+                            @{ int statusAprovado = (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado; }
+                            <li ng-show="textoStatusAngular != 'Aprovado'"><a href="/jsondata" ng-click="atualizarStatusProjeto(@Model.ID, @statusAprovado);$event.preventDefault()">Aprovado</a></li>
+                            @{ int statusNaoAprovado = (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado; }
+                            <li ng-show="textoStatusAngular != 'Não aprovado'"><a href="/jsondata" ng-click="atualizarStatusProjeto(@Model.ID, @statusNaoAprovado);$event.preventDefault()">Não Aprovado</a></li>
+                            <li class="divider" ng-show="textoStatusAngular != 'Concluido'"></li>
+                            @{ int statusConcluido = (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido; }
+                            <li ng-show="textoStatusAngular != 'Concluido'"><a href="/jsondata" ng-click="atualizarStatusProjeto(@Model.ID, @statusConcluido);$event.preventDefault()">Concluido</a></li>
                         </ul>
                     </div>
                     <small class=""> (@Model.DataCriacao.ToString("dd/MM/yyyy"))</small>
@@ -142,22 +131,20 @@
                         }
                     </div>
                 }
-                @if (Model.Status != (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido)
-                {
-                    <div class="box-footer">
-                        <div>
-                            <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
-                            <!-- .img-push is used to add margin to elements next to floating images -->
-                            <div class="img-push">
-                                <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao projeto."></textarea>
-                            </div>
+
+                <div ng-show="textoStatusAngular != 'Concluido'" class="box-footer">
+                    <div>
+                        <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                            <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao projeto."></textarea>
                         </div>
                     </div>
-                    <div class="box-footer">
-                        <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
-                        @*<button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</button>*@
-                    </div>
-                }
+                </div>
+                <div ng-show="textoStatusAngular != 'Concluido'" class="box-footer">
+                    <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
+                    @*<button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</button>*@
+                </div>
             </div>
             @*<div class="col-xs-12">
                     <h2 class="page-header">
