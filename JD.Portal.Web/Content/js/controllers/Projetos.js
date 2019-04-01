@@ -2,7 +2,8 @@
     var app = angular.module('appProjeto', []);
 
     app.controller('controllerProjeto', ['$scope', '$http', function ($scope, $http) {
-        $scope.projeto = {};
+        //$scope.projeto = {};
+        //$scope.diacono = {};
         //$scope.classeCorAngular = 'nome-da-classe';
 
         $scope.atualizarStatusProjeto = function (id, status) {
@@ -21,6 +22,30 @@
                     console.log('erro');
                 });
         };
+
+        $scope.atualizarInformacaoProjeto = function () {
+            
+            var params = {
+                idProjeto: $scope.projeto.idProjeto,
+                idDiacono: $scope.diacono.idDiacono,
+                descricaoAtualizacao: $scope.atualizacaoProjeto.descricao
+            };
+            console.log('Projeto: ' + params.idProjeto);
+            console.log('Diacono:' + params.idDiacono);
+            $http.post('/Projetos/AtualizarInformacaoProjeto', params).then(
+                function (successResponse) {
+                    //console.log(successResponse);
+                    $scope.listaAtualizacoes = successResponse.data.listaAtualizacoes;
+
+                    $scope.atualizacaoProjeto.descricao = '';
+                    $scope.frmAcompanhamento.$setUntouched();
+                    //console.log('sucesso?');
+                },
+                function (errorResponse) {
+                    console.log(errorResponse);
+                    console.log('erro');
+                });
+        }
 
 
         //FUNCAO DE TESTE

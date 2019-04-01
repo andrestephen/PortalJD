@@ -58,30 +58,24 @@ namespace JD.Portal.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Acompanhamento(int idProjeto, string acaoAcompanhamento, int idDiacono, string descricaoAtualizacao)
+        public ActionResult AtualizarInformacaoProjeto(int idProjeto, int idDiacono, string descricaoAtualizacao)
         {
             BSProjeto bsProjeto = new BSProjeto();
 
-            if (ModelState.IsValid && !String.IsNullOrWhiteSpace(acaoAcompanhamento))
-            {
-                switch (acaoAcompanhamento)
-                {
-                    case "salvarInformacoes":
-                        bsProjeto.AtualizarInformacaoProjeto(idProjeto, idDiacono, descricaoAtualizacao);
-                        break;
-                    //case "arquivar":
-                    //    bsAtendimento.AtualizarStatusAtendimento(idAtendimento, true);
-                    //    break;
-                    //case "reabrir":
-                    //    bsAtendimento.AtualizarStatusAtendimento(idAtendimento, false);
-                    //    break;
-                    default:
-                        break;
-                }
-            }
+            bsProjeto.AtualizarInformacaoProjeto(idProjeto, idDiacono, descricaoAtualizacao);
 
             Projeto projeto = bsProjeto.RecuperarProjeto(idProjeto);
-            return View(projeto);
+
+            var listaAtualizacoes = from a in projeto.AtualizacoesProjetos
+                                    select new
+                                    {
+                                        nomeDiacono = a.Diacono.Nome,
+                                        dataAtualizacao = a.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
+                                        descricaoAtualizacao = a.DescricaoAtualizacao
+                                    };
+
+
+            return Json(new { listaAtualizacoes });
         }
 
         //public ActionResult AtualizarStatusProjeto(int idProjeto, int statusProjeto)

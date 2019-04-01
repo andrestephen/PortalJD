@@ -25,9 +25,20 @@
                           Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "danger" :
                           Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.concluido ? "primary" :
                           "";
+
+    var listaAtualizacoes = from a in Model.AtualizacoesProjetos
+                            select new
+                            {
+                                nomeDiacono = a.Diacono.Nome,
+                                dataAtualizacao = a.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
+                                descricaoAtualizacao = a.DescricaoAtualizacao
+                            };
+
+
+    string jsonAtualizacoes = Newtonsoft.Json.JsonConvert.SerializeObject(listaAtualizacoes);
 }
 
-<form action="#" method="post" ng-app="appProjeto" ng-init="classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerProjeto">
+<form name="frmAcompanhamento" ng-app="appProjeto" ng-init="listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerProjeto" ng-submit="atualizarInformacaoProjeto()">
     <div class="row">
         <div class="col-xs-12">
             <div class="box" ng-class="classeCorBox">
@@ -53,7 +64,7 @@
                         </ul>
                     </div>
                     <small class=""> (@Model.DataCriacao.ToString("dd/MM/yyyy"))</small>
-                    <input type="hidden" name="idProjeto" value="@Model.ID" />
+                    <input type="hidden" name="idProjeto" ng-init="projeto.idProjeto=@Model.ID;" ng-value="projeto.idProjeto"/>
                 </div>
                 <div class="box-body">
                     <div class="row">
@@ -97,7 +108,7 @@
                             <span class="username">
                                 <a href="#">Diác. André Stephen</a>
                             </span>
-                            <input type="hidden" name="idDiacono" value="1" />
+                            <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
                         </div>
                     </div>
                     <div class="row">
@@ -110,34 +121,34 @@
 
                 @*COLOCAR AQUI AS ATUALIZAÇÕES NO PROJETO*@
 
-                @if (Model.AtualizacoesProjetos != null && Model.AtualizacoesProjetos.Count() > 0)
-                {
-                    <div class="box-footer box-comments">
-                        @foreach (JD.Portal.Model.AtualizacaoProjeto atualizacaoProjeto in Model.AtualizacoesProjetos)
-                        {
-                            <div class="box-comment">
-                                <!-- User image -->
-                                <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
-                                <div class="comment-text">
-                                    <span class="username">
-                                        @atualizacaoProjeto.Diacono.Nome
-                                        <span class="text-muted pull-right">@atualizacaoProjeto.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</span>
-                                    </span><!-- /.username -->
-                                    @atualizacaoProjeto.DescricaoAtualizacao
-                                </div>
-                                <!-- /.comment-text -->
-                            </div>
-                            <!-- /.box-comment -->
-                        }
+                @*@if (Model.AtualizacoesProjetos != null && Model.AtualizacoesProjetos.Count() > 0)
+                    {*@
+                <div ng-show="listaAtualizacoes.length" class="box-footer box-comments">
+                    @*@foreach (JD.Portal.Model.AtualizacaoProjeto atualizacaoProjeto in Model.AtualizacoesProjetos)
+                        {*@
+                    <div class="box-comment" ng-repeat="atualizacao in listaAtualizacoes">
+                        <!-- User image -->
+                        <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
+                        <div class="comment-text">
+                            <span class="username">
+                                {{atualizacao.nomeDiacono}}
+                                <span class="text-muted pull-right">{{atualizacao.dataAtualizacao}}</span>
+                            </span><!-- /.username -->
+                            {{atualizacao.descricaoAtualizacao}}
+                        </div>
+                        <!-- /.comment-text -->
                     </div>
-                }
+                    <!-- /.box-comment -->
+                    @*  }*@
+                </div>
+                @* } *@
 
                 <div ng-show="textoStatusAngular != 'Concluido'" class="box-footer">
                     <div>
                         <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
                         <!-- .img-push is used to add margin to elements next to floating images -->
                         <div class="img-push">
-                            <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao projeto."></textarea>
+                            <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao projeto." ng-model="atualizacaoProjeto.descricao" required></textarea>
                         </div>
                     </div>
                 </div>
