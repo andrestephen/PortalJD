@@ -18,21 +18,47 @@
     string textoStatus;
     classeCor = Model.Status == false ? "danger" : "success";
     textoStatus = Model.Status == false ? "Em Aberto" : "Arquivado";
+
+    var listaAtualizacoes = from a in Model.AtualizacoesAtendimentos
+                            select new
+                            {
+                                nomeDiacono = a.Diacono.Nome,
+                                dataAtualizacao = a.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
+                                descricaoAtualizacao = a.DescricaoAtualizacao
+                            };
+
+
+    string jsonAtualizacoes = Newtonsoft.Json.JsonConvert.SerializeObject(listaAtualizacoes);
 }
 
-<form action="#" method="post">
+<form name="frmAcompanhamento" ng-app="appAtendimento" ng-init="listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerAtendimento" ng-submit="atualizarInformacaoAtendimento()">
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-@classeCor">
+            <div class="box" ng-class="classeCorBox">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-heart margin-r-5"></i>#@Model.ID.ToString() - @Model.Pessoa.Nome</h3>
-                    <small class="pull-right">@Model.DataAtendimento.ToString("dd/MM/yyyy")</small>
-                    <input type="hidden" name="idAtendimento" value="@Model.ID" />
+
+
+                    <div class="pull-right btn-group">
+                        <button type="button" class="btn" ng-class="classeCorDrop">{{textoStatusAngular}}</button>
+                        <button type="button" class="btn dropdown-toggle" ng-class="classeCorDrop" data-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-show="textoStatusAngular != 'Em Aberto'"><a href="/jsondata" ng-click="atualizarStatusAtendimento(@Model.ID, false);$event.preventDefault()">Em Aberto</a></li>
+                            <li ng-show="textoStatusAngular != 'Arquivado'"><a href="/jsondata" ng-click="atualizarStatusAtendimento(@Model.ID, true);$event.preventDefault()">Arquivado</a></li>
+                        </ul>
+                    </div>
+
+
+                    <small class="">(@Model.DataAtendimento.ToString("dd/MM/yyyy"))</small>
+                    <input type="hidden" name="idAtendimento" ng-init="atendimento.idAtendimento=@Model.ID;" ng-value="atendimento.idAtendimento" />
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
-                            <span class="pull-right label label-@classeCor hidden-md hidden-lg">@textoStatus</span>
+                            @*<span class="pull-right label label-@classeCor hidden-md hidden-lg">@textoStatus</span>*@
                             <p><strong><i class="fa fa-map-marker margin-r-5"></i>Endereço</strong></p>
                             <span>@Model.Pessoa.Endereco</span>
                         </div>
@@ -43,7 +69,7 @@
                             <span>Telefone Secundário: @Model.Pessoa.TelefoneSecundario </span>
                         </div>
                         <div class="dados_atendimento col-xs-12 col-md-4 col-lg-3">
-                            <span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-lg">@textoStatus</span>
+                            @*<span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-lg">@textoStatus</span>*@
 
                             <p><strong><i class="fa fa-id-card margin-r-5"></i>Documentos</strong></p>
                             <span>CPF: @Model.Pessoa.CPF</span><br />
@@ -51,13 +77,13 @@
                         </div>
                         <div class="dados_atendimento responsavel user-block col-xs-12 col-md-12 col-lg-3">
                             @*style="margin-bottom:15px; margin-top:15px"*@
-                            <span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-md">@textoStatus</span>
+                            @*<span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-md">@textoStatus</span>*@
                             <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
                             <span class="description">Responsável</span>
                             <span class="username">
                                 <a href="#">Diác. André Stephen</a>
                             </span>
-                            <input type="hidden" name="idDiacono" value="1" />
+                            <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
                         </div>
                     </div>
                     <div class="row">
@@ -67,49 +93,33 @@
                         </div>
                     </div>
                 </div> @*text-muted well well-sm no-shadow*@
-                @if (Model.AtualizacoesAtendimentos != null && Model.AtualizacoesAtendimentos.Count() > 0)
-                {
-                    <div class="box-footer box-comments">
-                        @foreach (JD.Portal.Model.AtualizacaoAtendimento atualizacaoAtendimento in Model.AtualizacoesAtendimentos)
-                        {
-                            <div class="box-comment">
-                                <!-- User image -->
-                                <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
-                                <div class="comment-text">
-                                    <span class="username">
-                                        @atualizacaoAtendimento.Diacono.Nome
-                                        <span class="text-muted pull-right">@atualizacaoAtendimento.DataAtualizacao.ToString("dd/MM/yyyy HH:mm")</span>
-                                    </span><!-- /.username -->
-                                    @atualizacaoAtendimento.DescricaoAtualizacao
-                                </div>
-                                <!-- /.comment-text -->
-                            </div>
-                            <!-- /.box-comment -->
-                        }
+                <div ng-show="listaAtualizacoes.length" class="box-footer box-comments">
+                    <div class="box-comment" ng-repeat="atualizacao in listaAtualizacoes">
+                        <!-- User image -->
+                        <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
+                        <div class="comment-text">
+                            <span class="username">
+                                {{atualizacao.nomeDiacono}}
+                                <span class="text-muted pull-right">{{atualizacao.dataAtualizacao}}</span>
+                            </span><!-- /.username -->
+                            {{atualizacao.descricaoAtualizacao}}
+                        </div>
+                        <!-- /.comment-text -->
                     </div>
-                }
-                @if (Model.Status == false)
-                {
-                    <div class="box-footer">
-                        <div>
-                            <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
-                            <!-- .img-push is used to add margin to elements next to floating images -->
-                            <div class="img-push">
-                                <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao atendimento."></textarea>
-                            </div>
+                    <!-- /.box-comment -->
+                </div>
+                <div ng-show="textoStatusAngular != 'Arquivado'" class="box-footer">
+                    <div>
+                        <img class="img-responsive img-circle img-sm" src="~/Content/img/user.jpg" alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                            <textarea class="form-control" rows="3" id="descricaoAtualizacao" name="descricaoAtualizacao" placeholder="Escreva aqui informações adicionais ao atendimento." ng-model="atualizacaoAtendimento.descricao" required></textarea>
                         </div>
                     </div>
-                    <div class="box-footer">
-                        <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
-                        <button type="submit" name="acaoAcompanhamento" value="arquivar" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-saved margin-r-5"></i>Arquivar atendimento</button>
-                    </div>
-                }
-                else
-                {
-                    <div class="box-footer">
-                        <button type="submit" name="acaoAcompanhamento" value="reabrir" class="buttonlink margem-acompanhamento col-xs-12 col-sm-4 col-md-3 col-lg-2 pull-right"><i class="glyphicon glyphicon-open margin-r-5"></i>Reabrir atendimento</button>
-                    </div>
-                }
+                </div>
+                <div ng-show="textoStatusAngular != 'Arquivado'" class="box-footer">
+                    <button type="submit" name="acaoAcompanhamento" value="salvarInformacoes" class="btn btn-primary col-xs-12 col-sm-6 col-md-3 col-lg-2 ">Salvar informações</button>
+                </div>
             </div>
         </div>
         @*<div class="col-xs-12">
@@ -161,3 +171,10 @@
         </div>*@
 
 </form>
+
+
+@section  ViewSpecificJavascript
+{
+    @Scripts.Render("~/Bundles/angular")
+    @Scripts.Render("~/Bundles/controlleratendimentos")
+}

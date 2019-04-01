@@ -56,31 +56,37 @@ namespace JD.Portal.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Acompanhamento(int idAtendimento, string acaoAcompanhamento, int idDiacono, string descricaoAtualizacao)
+        public ActionResult AtualizarInformacaoAtendimento(int idAtendimento, int idDiacono, string descricaoAtualizacao)
         {
             BSAtendimento bsAtendimento = new BSAtendimento();
 
-            if (ModelState.IsValid && !String.IsNullOrWhiteSpace(acaoAcompanhamento))
-            {
-                switch (acaoAcompanhamento)
-                {
-                    case "salvarInformacoes":
-                        bsAtendimento.AtualizarInformacaoAtendimento(idAtendimento, idDiacono, descricaoAtualizacao);
-                        break;
-                    case "arquivar":
-                        bsAtendimento.AtualizarStatusAtendimento(idAtendimento, true);
-                        break;
-                    case "reabrir":
-                        bsAtendimento.AtualizarStatusAtendimento(idAtendimento, false);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            bsAtendimento.AtualizarInformacaoAtendimento(idAtendimento, idDiacono, descricaoAtualizacao);
 
             Atendimento atendimento = bsAtendimento.RecuperarAtendimento(idAtendimento);
-            return View(atendimento);
+
+            var listaAtualizacoes = from a in atendimento.AtualizacoesAtendimentos
+                                    select new
+                                    {
+                                        nomeDiacono = a.Diacono.Nome,
+                                        dataAtualizacao = a.DataAtualizacao.ToString("dd/MM/yyyy HH:mm"),
+                                        descricaoAtualizacao = a.DescricaoAtualizacao
+                                    };
+
+
+            return Json(new { listaAtualizacoes });
         }
+
+        [HttpPost]
+        public ActionResult AtualizarStatusAtendimento(int idAtendimento, bool statusAtendimento)
+        {
+            BSAtendimento bsAtendimento = new BSAtendimento();
+
+            bsAtendimento.AtualizarStatusAtendimento(idAtendimento, statusAtendimento);
+
+            Atendimento atendimento = bsAtendimento.RecuperarAtendimento(idAtendimento);
+            return Json(new { statusAtendimento = statusAtendimento });
+        }
+
 
     }
 }

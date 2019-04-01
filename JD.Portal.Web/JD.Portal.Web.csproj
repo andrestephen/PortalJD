@@ -122,6 +122,7 @@
     <Content Include="Content\css\responsive.dataTables.min.css" />
     <Content Include="Content\css\sistema.css" />
     <Content Include="Content\fonts\ionicons.svg" />
+    <Content Include="Content\js\controllers\atendimentos.js" />
     <Content Include="Content\js\controllers\projetos.js" />
     <Content Include="Content\js\plugins\angular\angular.js" />
     <Content Include="Content\js\plugins\angular\angular.min.js" />

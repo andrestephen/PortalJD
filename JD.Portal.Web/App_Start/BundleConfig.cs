@@ -49,6 +49,9 @@ namespace JD.Portal.Web.App_Start
             bundles.Add(new ScriptBundle("~/Bundles/controllerprojetos")
                 .Include("~/Content/js/controllers/projetos.js"));
 
+            bundles.Add(new ScriptBundle("~/Bundles/controlleratendimentos")
+           .Include("~/Content/js/controllers/atendimentos.js"));
+
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #else
