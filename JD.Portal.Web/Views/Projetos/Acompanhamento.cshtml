@@ -40,7 +40,7 @@
 
 <form name="frmAcompanhamento" ng-app="appProjeto" ng-init="listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerProjeto" ng-submit="atualizarInformacaoProjeto()">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-12 col-lg-9">
             <div class="box" ng-class="classeCorBox">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-thumbs-up margin-r-5"></i>#@Model.ID.ToString() - @Model.Nome</h3>
@@ -64,7 +64,7 @@
                         </ul>
                     </div>
                     <small class=""> (@Model.DataCriacao.ToString("dd/MM/yyyy"))</small>
-                    <input type="hidden" name="idProjeto" ng-init="projeto.idProjeto=@Model.ID;" ng-value="projeto.idProjeto"/>
+                    <input type="hidden" name="idProjeto" ng-init="projeto.idProjeto=@Model.ID;" ng-value="projeto.idProjeto" />
                 </div>
                 <div class="box-body">
                     <div class="row">
@@ -163,6 +163,102 @@
                         <small class="pull-right">Data do Atendimento: 02/10/2018</small>
                     </h2>
                 </div>*@
+        </div>
+
+        <div class="col-xs-12 col-md-12 col-lg-3">
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Responsáveis</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">Arquivos</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <ul class="users-list clearfix">
+                            <li>
+                                <img src="~/Content/img/user.jpg" alt="User Image">
+                                <a class="users-list-name" href="#">Alexander Pierce</a>
+                            </li>
+                            <li>
+                                <img src="~/Content/img/user.jpg" alt="User Image">
+                                <a class="users-list-name" href="#">Norman</a>
+                            </li>
+                            <li>
+                                <img src="~/Content/img/user.jpg" alt="User Image">
+                                <a class="users-list-name" href="#">Jane</a>
+                            </li>
+                            <li>
+                                <img src="~/Content/img/user.jpg" alt="User Image">
+                                <a class="users-list-name" href="#">John</a>
+                            </li>
+                            <li>
+                                <img src="~/Content/img/user.jpg" alt="User Image">
+                                <a class="users-list-name" href="#">Nora</a>
+                            </li>
+                            <li>
+                                <img src="~/Content/img/user.jpg" alt="User Image">
+                                <a class="users-list-name" href="#">Nadia</a>
+                            </li>
+                        </ul>
+                        <!-- /.users-list -->
+                        <div class="text-center">
+                            <a href="javascript:void(0)" class="uppercase">Adicionar responsável</a>
+                        </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_2">
+                        <ul class="products-list product-list-in-box">
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title">
+                                       Arquivo 1
+                                    </a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title">
+                                        Arquivo 2
+                                    </a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title"> Arquivo 3</a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title">
+                                        Arquivo 4
+                                    </a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                        </ul>
+                        <div class="text-center">
+                            <a href="javascript:void(0)" class="uppercase">Adicionar arquivo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- nav-tabs-custom -->
         </div>
 
         @*<div class="row">
