@@ -62,5 +62,23 @@
                     console.log('erro');
                 });
         };
+
+        $scope.listarDiaconos = function () {
+
+            $http.post('/Projetos/ListarDiaconos').then(
+                function (successResponse) {
+                    
+                    $scope.listaDiaconos = successResponse.data.listaDiaconos;
+
+                    console.log($scope.listaDiaconos);
+                 
+                    console.log('sucesso?');
+                },
+                function (errorResponse) {
+                    console.log(errorResponse);
+                    console.log('erro');
+                });
+
+        };
     }]);
 })();

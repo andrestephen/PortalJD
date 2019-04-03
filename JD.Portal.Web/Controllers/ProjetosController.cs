@@ -117,5 +117,23 @@ namespace JD.Portal.Web.Controllers
         //    return Json(new { projeto = projeto }, JsonRequestBehavior.AllowGet);
         //}
 
+
+        [HttpPost]
+        public ActionResult ListarDiaconos()
+        {
+            BSDiacono bsDiacono = new BSDiacono();
+
+            List<Diacono> lstDiaconos = bsDiacono.ListarDiaconos();
+            
+            var listaDiaconos = from d in lstDiaconos
+                                    select new
+                                    {
+                                        dataAtualizacao = d.ID,
+                                        nomeDiacono = d.Nome                                       
+                                    };
+
+
+            return Json(new { listaDiaconos });
+        }
     }
 }

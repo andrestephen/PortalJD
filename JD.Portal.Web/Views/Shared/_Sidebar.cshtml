@@ -22,12 +22,18 @@
                 {
                     atendimentosAtivo = Url.IsLinkActive("NovoAtendimento", "Atendimentos");
                 }
+
+                string projetosAtivo = Url.IsLinkActive("Index", "Projetos") + Url.IsLinkActive("Acompanhamento", "Projetos");
+                if (string.IsNullOrEmpty(projetosAtivo))
+                {
+                    projetosAtivo = Url.IsLinkActive("NovoProjeto", "Projetos");
+                }
             }
             <li class="@atendimentosAtivo">
                 <a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> <span>Atendimentos</span></a>
             </li>
 
-            <li class="@Url.IsLinkActive("Index", "Projetos")">
+            <li class="@projetosAtivo">
                 <a href="@Url.Action("Index", "Projetos")"><i class="fa fa-thumbs-up"></i> <span>Projetos</span></a>
             </li>
 

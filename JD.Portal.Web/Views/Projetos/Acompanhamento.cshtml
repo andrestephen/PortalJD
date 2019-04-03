@@ -1,8 +1,8 @@
 ﻿@using System.Web.Optimization
 @model JD.Portal.Model.Projeto
 @{
-    ViewBag.Title = "Projeto";
-    ViewBag.Description = "Área de acompanhamento e atualização de informações do projeto.";
+    ViewBag.Title = "#" + @Model.ID.ToString() + " - " + @Model.Nome;
+    ViewBag.Description = "(" + @Model.DataCriacao.ToString("dd/MM/yyyy") + ")";
 }
 
 @section breadcrumb
@@ -43,7 +43,7 @@
         <div class="col-xs-12 col-md-12 col-lg-9">
             <div class="box" ng-class="classeCorBox">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-thumbs-up margin-r-5"></i>#@Model.ID.ToString() - @Model.Nome</h3>
+                    <h3 class="box-title">Informações do projeto</h3>
 
                     <div class="pull-right btn-group">
                         <button type="button" class="btn" ng-class="classeCorDrop">{{textoStatusAngular}}</button>
@@ -63,7 +63,6 @@
                             <li ng-show="textoStatusAngular != 'Concluido'"><a href="/jsondata" ng-click="atualizarStatusProjeto(@Model.ID, @statusConcluido);$event.preventDefault()">Concluido</a></li>
                         </ul>
                     </div>
-                    <small class=""> (@Model.DataCriacao.ToString("dd/MM/yyyy"))</small>
                     <input type="hidden" name="idProjeto" ng-init="projeto.idProjeto=@Model.ID;" ng-value="projeto.idProjeto" />
                 </div>
                 <div class="box-body">
@@ -100,16 +99,6 @@
                             }
                         </div>
                         @*// TODO: Ver o que fazer com essa classe dados_atendimento*@
-                        <div class="dados_atendimento responsavel user-block col-xs-12 col-md-12 col-lg-3">
-                            @*style="margin-bottom:15px; margin-top:15px"*@
-                            @*<span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-md">@textoStatus</span>*@
-                            <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
-                            <span class="description">Responsável</span>
-                            <span class="username">
-                                <a href="#">Diác. André Stephen</a>
-                            </span>
-                            <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -174,6 +163,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
+                        <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
                         <ul class="users-list clearfix">
                             <li>
                                 <img src="~/Content/img/user.jpg" alt="User Image">
@@ -202,7 +192,7 @@
                         </ul>
                         <!-- /.users-list -->
                         <div class="text-center">
-                            <a href="javascript:void(0)" class="uppercase">Adicionar responsável</a>
+                            <a href="/jsondata" ng-click="listarDiaconos();$event.preventDefault()" class="uppercase">Adicionar responsável</a>
                         </div>
                     </div>
                     <!-- /.tab-pane -->
