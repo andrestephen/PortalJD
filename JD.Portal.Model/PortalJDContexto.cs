@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace JD.Portal.Model
 {
@@ -23,6 +24,8 @@ namespace JD.Portal.Model
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
             modelBuilder.Entity<Diacono>()
                 .HasMany(d => d.AtualizacoesAtendimento)
                 .WithRequired(a => a.Diacono)
@@ -43,6 +46,18 @@ namespace JD.Portal.Model
                 //    m.MapRightKey("RoleId");
                 //})
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Projeto>()
+               .HasMany(p => p.Diaconos)
+               .WithMany(d => d.Projetos)
+               .Map(pd =>
+               {
+                   pd.ToTable("ProjetosDiaconos");
+                   pd.MapLeftKey("ProjetoId");
+                   pd.MapRightKey("DiaconoId");
+               });
         }
+
+
     }
 }

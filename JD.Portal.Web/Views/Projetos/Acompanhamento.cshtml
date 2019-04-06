@@ -34,11 +34,19 @@
                                 descricaoAtualizacao = a.DescricaoAtualizacao
                             };
 
+    var listaDiaconosResponsaveis = from d in Model.Diaconos
+                                    select new
+                                    {
+                                        id = d.ID,
+                                        nomeDiacono = d.Nome
+                                    };
+
 
     string jsonAtualizacoes = Newtonsoft.Json.JsonConvert.SerializeObject(listaAtualizacoes);
+    string jsonResponsaveis = Newtonsoft.Json.JsonConvert.SerializeObject(listaDiaconosResponsaveis);
 }
 
-<form name="frmAcompanhamento" ng-app="appProjeto" ng-init="listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerProjeto" ng-submit="atualizarInformacaoProjeto()">
+<form name="frmAcompanhamento" ng-app="appProjeto" ng-init="listaDiaconosResponsaveis=@jsonResponsaveis;listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerProjeto" ng-submit="atualizarInformacaoProjeto()">
     <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-9">
             <div class="box" ng-class="classeCorBox">
@@ -164,36 +172,15 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
                         <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
-                        <ul class="users-list clearfix">
+                        <ul class="users-list clearfix" ng-repeat="diacono in listaDiaconosResponsaveis">
                             <li>
                                 <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">Alexander</a>
-                            </li>
-                            <li>
-                                <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">Norman</a>
-                            </li>
-                            <li>
-                                <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">Jane</a>
-                            </li>
-                            <li>
-                                <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">John</a>
-                            </li>
-                            <li>
-                                <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">Nora</a>
-                            </li>
-                            <li>
-                                <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">Nadia</a>
+                                <a class="users-list-name" href="#">{{diacono.nomeDiacono}}r</a>
                             </li>
                         </ul>
                         <!-- /.users-list -->
                         <div class="text-center">
-                            <a href="#" data-toggle="modal" data-target="#modalDiaconos" class="uppercase">Adicionar responsável</a>
-                            @*<a href="/jsondata" ng-click="listarDiaconos();$event.preventDefault()" class="uppercase">Adicionar responsável</a>*@
+                            <a href="#" data-toggle="modal" data-target="#modalDiaconos" class="uppercase">Adicionar/Remover</a>
                         </div>
                     </div>
                     <!-- /.tab-pane -->
@@ -262,179 +249,15 @@
                         <h4 class="modal-title">Adicionar responsáveis</h4>
                     </div>
                     <div class="modal-body rolagem">
-                        <ul class="products-list product-list-in-box">
+                        <ul class="products-list product-list-in-box" ng-repeat="diacono in listaTodosDiaconos">
                             <li class="item">
                                 <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <input type="checkbox" name="chkNovoResponsavel" value="{{diacono.id}}" ng-checked="diacono.responsavel" />
                                     <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
                                 </div>
                                 <div class="novoresponsavel product-info">
                                     <p class="product-title">
-                                        Ricardo Prieto
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        André Stephen Ribeiro dos Anjos
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Allan Keiser
-                                    </p>
-                                    <span class="product-description">
-                                        Presidente
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Pedro Henrique
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Ricardo Prieto
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        André Stephen Ribeiro dos Anjos
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Allan Keiser
-                                    </p>
-                                    <span class="product-description">
-                                        Presidente
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Pedro Henrique
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Ricardo Prieto
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        André Stephen Ribeiro dos Anjos
-                                    </p>
-                                    <span class="product-description">
-                                        Diácono
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Allan Keiser
-                                    </p>
-                                    <span class="product-description">
-                                        Presidente
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
-                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
-                                </div>
-                                <div class="novoresponsavel product-info">
-                                    <p class="product-title">
-                                        Pedro Henrique
+                                        {{diacono.nomeDiacono}}
                                     </p>
                                     <span class="product-description">
                                         Diácono

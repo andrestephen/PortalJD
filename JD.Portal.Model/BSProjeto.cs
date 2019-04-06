@@ -23,7 +23,7 @@ namespace JD.Portal.Model
             using (var db = new PortalJDContexto())
             {
                 lstProjetos = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono")
-                                   select a).ToList();
+                               select a).ToList();
             }
 
             return lstProjetos;
@@ -70,9 +70,9 @@ namespace JD.Portal.Model
 
             using (var db = new PortalJDContexto())
             {
-                projeto = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono").Include("AtualizacoesProjetos").Include("AtualizacoesProjetos.Diacono")
-                               where a.ID == idProjeto
-                               select a).FirstOrDefault();
+                projeto = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono").Include("AtualizacoesProjetos").Include("AtualizacoesProjetos.Diacono").Include("Diaconos")
+                           where a.ID == idProjeto
+                           select a).FirstOrDefault();
             }
 
             return projeto;
@@ -109,6 +109,21 @@ namespace JD.Portal.Model
                 projeto.Status = statusProjeto;
 
                 db.SaveChanges();
+            }
+        }
+
+        public List<Diacono> ListarDiaconosNoProjeto(int idProjeto)
+        {
+            List<Diacono> lstDiaconos = new List<Diacono>();
+
+            using (var db = new PortalJDContexto())
+            {
+                lstDiaconos = (from d in db.Diacono
+                               from p in d.Projetos
+                               where p.ID == idProjeto
+                               select d).ToList();
+
+                return lstDiaconos;
             }
         }
     }

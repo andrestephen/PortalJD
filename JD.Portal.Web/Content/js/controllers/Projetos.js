@@ -2,7 +2,7 @@
     var app = angular.module('appProjeto', []);
 
     app.controller('controllerProjeto', ['$scope', '$http', function ($scope, $http) {
-        //$scope.projeto = {};
+        $scope.listaTodosDiaconos = {};
         //$scope.diacono = {};
         //$scope.classeCorAngular = 'nome-da-classe';
 
@@ -63,14 +63,17 @@
                 });
         };
 
-        $scope.listarDiaconos = function () {
+        $scope.listarTodosDiaconos = function () {
+            var params = {
+                idProjeto: $scope.projeto.idProjeto
+            };
 
-            $http.post('/Projetos/ListarDiaconos').then(
+            $http.get('/Projetos/ListarTodosDiaconos', { params: params }).then(
                 function (successResponse) {
-                    
-                    $scope.listaDiaconos = successResponse.data.listaDiaconos;
+                    console.log('vai chamar')
+                    $scope.listaTodosDiaconos = successResponse.data.listaDiaconos;
 
-                    console.log($scope.listaDiaconos);
+                    console.log($scope.listaTodosDiaconos);
                  
                     console.log('sucesso?');
                 },
@@ -78,7 +81,12 @@
                     console.log(errorResponse);
                     console.log('erro');
                 });
-
         };
+
+        $('#modalDiaconos').on('show.bs.modal', function (e) {
+            console.log('entrou');
+            $scope.listarTodosDiaconos();
+            console.log('passou');
+        })
     }]);
 })();

@@ -30,5 +30,7 @@ namespace JD.Portal.Model
         public virtual Diacono Diacono { get; set; }
 
         public virtual List<AtualizacaoProjeto> AtualizacoesProjetos { get; set; }
+
+        public virtual List<Diacono> Diaconos { get; set; }
     }
 }

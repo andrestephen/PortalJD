@@ -118,22 +118,24 @@ namespace JD.Portal.Web.Controllers
         //}
 
 
-        [HttpPost]
-        public ActionResult ListarDiaconos()
+        public ActionResult ListarTodosDiaconos(int idProjeto)
         {
+            BSProjeto bsProjeto = new BSProjeto();
             BSDiacono bsDiacono = new BSDiacono();
 
-            List<Diacono> lstDiaconos = bsDiacono.ListarDiaconos();
-            
-            var listaDiaconos = from d in lstDiaconos
-                                    select new
-                                    {
-                                        dataAtualizacao = d.ID,
-                                        nomeDiacono = d.Nome                                       
-                                    };
+            List<Diacono> lstDiaconosNoProjeto = bsProjeto.ListarDiaconosNoProjeto(idProjeto);
+            List<Diacono> lstTodosDiaconos = bsDiacono.ListarDiaconos();
+
+            var listaDiaconos = from d in lstTodosDiaconos
+                                select new
+                                {
+                                    id = d.ID,
+                                    nomeDiacono = d.Nome,
+                                    responsavel = lstDiaconosNoProjeto.Where(x => x.ID == d.ID).Count() > 0
+                                };
 
 
-            return Json(new { listaDiaconos });
+            return Json(new { listaDiaconos = listaDiaconos }, JsonRequestBehavior.AllowGet);
         }
     }
 }
