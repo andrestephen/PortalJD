@@ -82,21 +82,21 @@
 
                             <p><strong><i class="fa fa-id-card margin-r-5"></i>Contato</strong></p>
                             @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.NomeContato))
-                        {
-                            <span>@Model.BeneficiarioProjeto.NomeContato</span><br />
-                    }
+                            {
+                                <span>@Model.BeneficiarioProjeto.NomeContato</span><br />
+                            }
                             @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.EmailContato))
-                        {
-                            <span>@Model.BeneficiarioProjeto.EmailContato</span><br />
-                    }
+                            {
+                                <span>@Model.BeneficiarioProjeto.EmailContato</span><br />
+                            }
                             @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.TelefonePrincipal))
-                        {
-                            <span>Telefone Principal: @Model.BeneficiarioProjeto.TelefonePrincipal </span><br />
-                    }
+                            {
+                                <span>Telefone Principal: @Model.BeneficiarioProjeto.TelefonePrincipal </span><br />
+                            }
                             @if (!string.IsNullOrEmpty(Model.BeneficiarioProjeto.TelefoneSecundario))
-                        {
-                            <span>Telefone Secundário: @Model.BeneficiarioProjeto.TelefoneSecundario </span>
-                    }
+                            {
+                                <span>Telefone Secundário: @Model.BeneficiarioProjeto.TelefoneSecundario </span>
+                            }
                         </div>
                         @*// TODO: Ver o que fazer com essa classe dados_atendimento*@
                     </div>
@@ -111,10 +111,10 @@
                 @*COLOCAR AQUI AS ATUALIZAÇÕES NO PROJETO*@
 
                 @*@if (Model.AtualizacoesProjetos != null && Model.AtualizacoesProjetos.Count() > 0)
-                {*@
+                    {*@
                 <div ng-show="listaAtualizacoes.length" class="box-footer box-comments">
                     @*@foreach (JD.Portal.Model.AtualizacaoProjeto atualizacaoProjeto in Model.AtualizacoesProjetos)
-                    {*@
+                        {*@
                     <div class="box-comment" ng-repeat="atualizacao in listaAtualizacoes">
                         <!-- User image -->
                         <img class="img-circle img-sm" src="~/Content/img/user.jpg" alt="User Image">
@@ -147,11 +147,11 @@
                 </div>
             </div>
             @*<div class="col-xs-12">
-                <h2 class="page-header">
-                    <i class="fa fa-heart"></i> André Stephen
-                    <small class="pull-right">Data do Atendimento: 02/10/2018</small>
-                </h2>
-            </div>*@
+                    <h2 class="page-header">
+                        <i class="fa fa-heart"></i> André Stephen
+                        <small class="pull-right">Data do Atendimento: 02/10/2018</small>
+                    </h2>
+                </div>*@
         </div>
 
         <div class="col-xs-12 col-md-12 col-lg-3">
@@ -167,7 +167,7 @@
                         <ul class="users-list clearfix">
                             <li>
                                 <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">Alexander Pierce</a>
+                                <a class="users-list-name" href="#">Alexander</a>
                             </li>
                             <li>
                                 <img src="~/Content/img/user.jpg" alt="User Image">
@@ -261,8 +261,187 @@
                         </button>
                         <h4 class="modal-title">Adicionar responsáveis</h4>
                     </div>
-                    <div class="modal-body">
-                        <p>Corpo da modal aqui...</p>
+                    <div class="modal-body rolagem">
+                        <ul class="products-list product-list-in-box">
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Ricardo Prieto
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        André Stephen Ribeiro dos Anjos
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Allan Keiser
+                                    </p>
+                                    <span class="product-description">
+                                        Presidente
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Pedro Henrique
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Ricardo Prieto
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        André Stephen Ribeiro dos Anjos
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Allan Keiser
+                                    </p>
+                                    <span class="product-description">
+                                        Presidente
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Pedro Henrique
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Ricardo Prieto
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        André Stephen Ribeiro dos Anjos
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Allan Keiser
+                                    </p>
+                                    <span class="product-description">
+                                        Presidente
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        Pedro Henrique
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
