@@ -151,9 +151,9 @@ namespace JD.Portal.Web.Controllers
                                              select d.id).ToList();
 
             bsProjeto.RemoverDiaconosProjeto(idProjeto, idsDiaconosRemover);
-            bsProjeto.AdicionarDiaconosProjeto(idProjeto, idDiaconosAdicionar);
+            bsProjeto.AdicionarDiaconosProjeto(idProjeto, idDiaconosAdicionar);            
 
-            return null;
+            return Json(new { listaDiaconosResponsaveis = listaDiaconosResponsaveis.Where(x => x.responsavel == true).ToList() });
         }
     }
 }

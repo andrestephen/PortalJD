@@ -81,7 +81,7 @@
             $http.post('/Projetos/AtualizarResponsaveisProjeto', params).then(
                 function (successResponse) {
                     $scope.listaDiaconosResponsaveis = successResponse.data.listaDiaconosResponsaveis;
-                    console.log('sucesso?');
+                    $('#modalDiaconos').modal('hide');
                 },
                 function (errorResponse) {
                     console.log(errorResponse);
