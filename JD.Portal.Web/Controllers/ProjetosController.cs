@@ -42,7 +42,7 @@ namespace JD.Portal.Web.Controllers
                     TempData["idRecemAdicionado"] = projeto.ID;
                 }
 
-                return RedirectToAction("Index", "Projetos");
+                return RedirectToAction("Acompanhamento", "Projetos", new { @id = projeto.ID });
             }
             catch (Exception ex)
             {
