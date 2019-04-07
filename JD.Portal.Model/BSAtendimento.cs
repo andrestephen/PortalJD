@@ -62,7 +62,7 @@ namespace JD.Portal.Model
 
             using (var db = new PortalJDContexto())
             {
-                atendimento = (from a in db.Atendimento.Include("Pessoa").Include("Diacono").Include("AtualizacoesAtendimentos").Include("AtualizacoesAtendimentos.Diacono")
+                atendimento = (from a in db.Atendimento.Include("Pessoa").Include("Diacono").Include("AtualizacoesAtendimentos").Include("AtualizacoesAtendimentos.Diacono").Include("Diaconos")
                                where a.ID == idAtendimento
                                select a).FirstOrDefault();
             }
@@ -99,6 +99,58 @@ namespace JD.Portal.Model
 
                 Atendimento atendimento = db.Atendimento.Where(x => x.ID == idAtendimento).First();
                 atendimento.DataAtualizacao = dataAtualizacao;
+
+                db.SaveChanges();
+            }
+        }
+
+
+        public List<Diacono> ListarDiaconosNoAtendimento(int idAtendimento)
+        {
+            List<Diacono> lstDiaconos = new List<Diacono>();
+
+            using (var db = new PortalJDContexto())
+            {
+                lstDiaconos = (from d in db.Diacono
+                               from p in d.Atendimentos
+                               where p.ID == idAtendimento
+                               select d).ToList();
+
+                return lstDiaconos;
+            }
+        }
+
+        public void RemoverDiaconosAtendimento(int idAtendimento, List<int> idsDiaconos)
+        {
+            Atendimento atendimento = new Atendimento();
+
+            using (var db = new PortalJDContexto())
+            {
+                atendimento = db.Atendimento.Where(x => x.ID == idAtendimento).FirstOrDefault();
+                foreach (int idDiacono in idsDiaconos)
+                {
+                    atendimento.Diaconos.RemoveAll(x => x.ID == idDiacono);
+                }
+
+                db.SaveChanges();
+            }
+        }
+
+        public void AdicionarDiaconosAtendimento(int idAtendimento, List<int> idsDiaconos)
+        {
+            Atendimento atendimento = new Atendimento();
+
+            using (var db = new PortalJDContexto())
+            {
+                atendimento = db.Atendimento.Where(x => x.ID == idAtendimento).FirstOrDefault();
+                foreach (int idDiacono in idsDiaconos)
+                {
+                    Diacono diacono = db.Diacono.Where(x => x.ID == idDiacono).First();
+                    if (diacono != null)
+                    {
+                        atendimento.Diaconos.Add(diacono);
+                    }
+                }
 
                 db.SaveChanges();
             }

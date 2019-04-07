@@ -56,6 +56,17 @@ namespace JD.Portal.Model
                    pd.MapLeftKey("ProjetoId");
                    pd.MapRightKey("DiaconoId");
                });
+
+
+            modelBuilder.Entity<Atendimento>()
+               .HasMany(a => a.Diaconos)
+               .WithMany(d => d.Atendimentos)
+               .Map(pd =>
+               {
+                   pd.ToTable("AtendimentosDiaconos");
+                   pd.MapLeftKey("AtendimentoId");
+                   pd.MapRightKey("DiaconoId");
+               });
         }
 
 

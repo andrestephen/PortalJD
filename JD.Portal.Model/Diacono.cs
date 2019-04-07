@@ -24,5 +24,6 @@ namespace JD.Portal.Model
         public virtual List<AtualizacaoProjeto> AtualizacoesProjeto { get; set; }
 
         public virtual List<Projeto> Projetos { get; set; }
+        public virtual List<Atendimento> Atendimentos { get; set; }
     }
 }

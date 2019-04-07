@@ -42,7 +42,7 @@
             <!-- form start -->
             <form role="form" action="@Url.Action("NovoProjeto", "Projetos")" method="post" name="frmNovoProjeto" ng-app="appProjeto" ng-controller="controllerProjeto">
                 <div class="box-body">
-                    <div class="row">
+                    @*<div class="row">
                         <div class="user-block col-xs-12" style="margin-bottom:15px; margin-top:15px">
                             <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
                             <span class="description">Responsável<small> (Clique para trocar)</small></span>
@@ -54,8 +54,9 @@
                                 //TODO: Carregar o diácono logado aqui
                             }
                         </div>
-                    </div>
+                    </div>*@
                     <div class="row">
+                        <input type="hidden" name="DiaconoID" value="1" />
                         <div class="form-group col-md-6">
                             <label for="Pessoa_Nome">Nome do projeto <span>*</span></label>
                             <input type="text" class="form-control" id="Nome" name="Nome" value="@nome" maxlength="100" placeholder="Digite o nome do projeto" ng-model="Nome" ng-init="Nome='@nome'" required>

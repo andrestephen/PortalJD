@@ -10,8 +10,8 @@
 
             $http.post('/Atendimentos/AtualizarStatusAtendimento', params).then(
                 function (successResponse) {
-                    $scope.classeCorDrop = status == true ? 'btn-success' : 'btn-danger';
-                    $scope.classeCorBox = status == true ? 'box-success' : 'box-danger';
+                    $scope.classeCorDrop = status == true ? 'btn-primary' : 'btn-warning';
+                    $scope.classeCorBox = status == true ? 'box-primary' : 'box-warning';
                     $scope.textoStatusAngular = status == true ? 'Arquivado' : 'Em Aberto';
                 },
                 function (errorResponse) {
@@ -41,5 +41,54 @@
                     console.log('erro');
                 });
         }
+
+        $scope.listarTodosDiaconos = function () {
+            var params = {
+                idAtendimento: $scope.atendimento.idAtendimento
+            };
+
+            $http.get('/Atendimentos/ListarTodosDiaconos', { params: params }).then(
+                function (successResponse) {
+                    console.log('vai chamar')
+                    $scope.listaTodosDiaconos = successResponse.data.listaDiaconos;
+
+                    console.log($scope.listaTodosDiaconos);
+
+                    console.log('sucesso?');
+                },
+                function (errorResponse) {
+                    console.log(errorResponse);
+                    console.log('erro');
+                });
+        };
+
+
+        $scope.atualizarResponsaveisAtendimento = function () {
+
+            //console.log('Antes de pegar parametros');
+            var params = {
+                idAtendimento: $scope.atendimento.idAtendimento,
+                listaDiaconosResponsaveis: $scope.listaTodosDiaconos
+            };
+            //console.log('Depois de pegar parametros');
+            //console.log($scope.listaTodosDiaconos);
+
+            $http.post('/Atendimentos/AtualizarResponsaveisAtendimento', params).then(
+                function (successResponse) {
+                    $scope.listaDiaconosResponsaveis = successResponse.data.listaDiaconosResponsaveis;
+                    $('#modalDiaconos').modal('hide');
+                },
+                function (errorResponse) {
+                    console.log(errorResponse);
+                    console.log('erro');
+                });
+        };
+
+
+        $('#modalDiaconos').on('show.bs.modal', function (e) {
+            console.log('entrou');
+            $scope.listarTodosDiaconos();
+            console.log('passou');
+        })
     }]);
 })();

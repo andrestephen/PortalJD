@@ -39,7 +39,7 @@
 <div class="row">
     <div class="hidden-xs col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="ion ion-ios-heart"></i></span>
+            <span class="info-box-icon bg-yellow"><i class="fa fa-comment"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Em aberto</span>
@@ -52,7 +52,7 @@
     <!-- /.col -->
     <div class="hidden-xs col-sm-6 col-md-4 col-lg-3">
         <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-ios-heart"></i></span>
+            <span class="info-box-icon bg-blue"><i class="fa fa-thumbs-up"></i></span>
 
             <div class="info-box-content">
                 <span class="info-box-text">Arquivados</span>
@@ -97,8 +97,8 @@
             <div class="box-header">
                 <h3 class="box-title">Atendimentos registrados</h3>
                 <div class="totalizadores_mobile col-xs-12 hidden-sm hidden-md hidden-lg">
-                    <span class="label label-danger">@ViewBag.atendimentosAbertos.ToString() Em aberto</span>
-                    <span class="label label-success">@ViewBag.atendimentosArquivados.ToString() Arquivados</span>
+                    <span class="label label-warning">@ViewBag.atendimentosAbertos.ToString() Em aberto</span>
+                    <span class="label label-primary">@ViewBag.atendimentosArquivados.ToString() Arquivados</span>
                 </div>
                 <div class="input-group grupo_busca">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -122,7 +122,7 @@
                         @foreach (JD.Portal.Model.Atendimento atendimento in Model)
                         {
                             string status = atendimento.Status == true ? "Arquivado" : "Em Aberto";
-                            string classeStatus = atendimento.Status ? "label-success" : "label-danger";
+                            string classeStatus = atendimento.Status ? "label-primary" : "label-warning";
                             var idRecemAdicionado = TempData["idRecemAdicionado"];
                             string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == atendimento.ID ? "recemAdicionado" : "";
 

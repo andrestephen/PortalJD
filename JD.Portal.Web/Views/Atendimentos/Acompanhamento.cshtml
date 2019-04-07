@@ -1,8 +1,8 @@
 ﻿@using System.Web.Optimization
 @model JD.Portal.Model.Atendimento
 @{
-    ViewBag.Title = "Atendimento";
-    ViewBag.Description = "Área de acompanhamento e atualização de informações do atendimento.";
+    ViewBag.Title = "#" + @Model.ID.ToString() + " - " + @Model.Pessoa.Nome;;
+    ViewBag.Description = "(" + @Model.DataAtendimento.ToString("dd/MM/yyyy") + ")";
 }
 
 @section breadcrumb
@@ -16,7 +16,7 @@
 @{
     string classeCor;
     string textoStatus;
-    classeCor = Model.Status == false ? "danger" : "success";
+    classeCor = Model.Status == false ? "warning" : "primary";
     textoStatus = Model.Status == false ? "Em Aberto" : "Arquivado";
 
     var listaAtualizacoes = from a in Model.AtualizacoesAtendimentos
@@ -27,17 +27,24 @@
                                 descricaoAtualizacao = a.DescricaoAtualizacao
                             };
 
+    var listaDiaconosResponsaveis = from d in Model.Diaconos
+                                    select new
+                                    {
+                                        id = d.ID,
+                                        nomeDiacono = d.Nome
+                                    };
+
 
     string jsonAtualizacoes = Newtonsoft.Json.JsonConvert.SerializeObject(listaAtualizacoes);
+    string jsonResponsaveis = Newtonsoft.Json.JsonConvert.SerializeObject(listaDiaconosResponsaveis);
 }
 
-<form name="frmAcompanhamento" ng-app="appAtendimento" ng-init="listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerAtendimento" ng-submit="atualizarInformacaoAtendimento()">
+<form name="frmAcompanhamento" ng-app="appAtendimento" ng-init="listaDiaconosResponsaveis=@jsonResponsaveis;listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerAtendimento" ng-submit="atualizarInformacaoAtendimento()">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-12 col-lg-9">
             <div class="box" ng-class="classeCorBox">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-heart margin-r-5"></i>#@Model.ID.ToString() - @Model.Pessoa.Nome</h3>
-
+                    <h3 class="box-title">Informações do atendimento</h3>
 
                     <div class="pull-right btn-group">
                         <button type="button" class="btn" ng-class="classeCorDrop">{{textoStatusAngular}}</button>
@@ -50,9 +57,6 @@
                             <li ng-show="textoStatusAngular != 'Arquivado'"><a href="/jsondata" ng-click="atualizarStatusAtendimento(@Model.ID, true);$event.preventDefault()">Arquivado</a></li>
                         </ul>
                     </div>
-
-
-                    <small class="">(@Model.DataAtendimento.ToString("dd/MM/yyyy"))</small>
                     <input type="hidden" name="idAtendimento" ng-init="atendimento.idAtendimento=@Model.ID;" ng-value="atendimento.idAtendimento" />
                 </div>
                 <div class="box-body">
@@ -74,16 +78,6 @@
                             <p><strong><i class="fa fa-id-card margin-r-5"></i>Documentos</strong></p>
                             <span>CPF: @Model.Pessoa.CPF</span><br />
                             <span>RG: @Model.Pessoa.RG</span>
-                        </div>
-                        <div class="dados_atendimento responsavel user-block col-xs-12 col-md-12 col-lg-3">
-                            @*style="margin-bottom:15px; margin-top:15px"*@
-                            @*<span class="pull-right label label-@classeCor hidden-xs hidden-sm hidden-md">@textoStatus</span>*@
-                            <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
-                            <span class="description">Responsável</span>
-                            <span class="username">
-                                <a href="#">Diác. André Stephen</a>
-                            </span>
-                            <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
                         </div>
                     </div>
                     <div class="row">
@@ -122,12 +116,127 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xs-12 col-md-12 col-lg-3">
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Responsáveis</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">Arquivos</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
+                        <ul class="users-list clearfix">
+                            <li ng-repeat="diacono in listaDiaconosResponsaveis">
+                                <img src="~/Content/img/user.jpg" alt="User Image">
+                                <a class="users-list-name" href="#">{{diacono.nomeDiacono}}</a>
+                            </li>
+                        </ul>
+                        <!-- /.users-list -->
+                        <div class="text-center">
+                            <a href="#" data-toggle="modal" data-target="#modalDiaconos" class="uppercase">Adicionar/Remover</a>
+                        </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_2">
+                        <ul class="products-list product-list-in-box">
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title">
+                                        Arquivo 1
+                                    </a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title">
+                                        Arquivo 2
+                                    </a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title"> Arquivo 3</a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                            <li class="item">
+                                <div>
+                                    <a href="javascript:void(0)" class="product-title">
+                                        Arquivo 4
+                                    </a>
+                                    <span class="product-description">
+                                        Descrição do  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4.
+                                    </span>
+                                </div>
+                            </li>
+                            <!-- /.item -->
+                        </ul>
+                        <div class="text-center">
+                            <a href="javascript:void(0)" class="uppercase">Adicionar arquivo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- nav-tabs-custom -->
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalDiaconos" style="display: none;">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        <h4 class="modal-title">Doáconos</h4>
+                    </div>
+                    <div class="modal-body rolagem">
+                        <ul class="products-list product-list-in-box">
+                            <li class="item" ng-repeat="diacono in listaTodosDiaconos">
+                                <div class="product-img">
+                                    <input type="checkbox" name="chkNovoResponsavel" value="{{diacono.id}}" ng-model="diacono.responsavel" />
+                                    <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
+                                </div>
+                                <div class="novoresponsavel product-info">
+                                    <p class="product-title">
+                                        {{diacono.nomeDiacono}}
+                                    </p>
+                                    <span class="product-description">
+                                        Diácono
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" ng-click="atualizarResponsaveisAtendimento()">Salvar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
         @*<div class="col-xs-12">
-                <h2 class="page-header">
-                    <i class="fa fa-heart"></i> André Stephen
-                    <small class="pull-right">Data do Atendimento: 02/10/2018</small>
-                </h2>
-            </div>*@
+            <h2 class="page-header">
+                <i class="fa fa-heart"></i> André Stephen
+                <small class="pull-right">Data do Atendimento: 02/10/2018</small>
+            </h2>
+        </div>*@
     </div>
 
     @*<div class="row">

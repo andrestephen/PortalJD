@@ -83,6 +83,10 @@
     <Compile Include="Migrations\201904061607073_Criação_Responsaveis_Projeto.Designer.cs">
       <DependentUpon>201904061607073_Criação_Responsaveis_Projeto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904071535484_Criação_Responsaveis_Atendimentos.cs" />
+    <Compile Include="Migrations\201904071535484_Criação_Responsaveis_Atendimentos.Designer.cs">
+      <DependentUpon>201904071535484_Criação_Responsaveis_Atendimentos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="PortalJDContexto.cs" />
@@ -114,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904061607073_Criação_Responsaveis_Projeto.resx">
       <DependentUpon>201904061607073_Criação_Responsaveis_Projeto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904071535484_Criação_Responsaveis_Atendimentos.resx">
+      <DependentUpon>201904071535484_Criação_Responsaveis_Atendimentos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

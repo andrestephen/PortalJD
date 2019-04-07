@@ -87,6 +87,43 @@ namespace JD.Portal.Web.Controllers
             return Json(new { statusAtendimento = statusAtendimento });
         }
 
+        public ActionResult ListarTodosDiaconos(int idAtendimento)
+        {
+            BSAtendimento bsAtendimento = new BSAtendimento();
+            BSDiacono bsDiacono = new BSDiacono();
+
+            List<Diacono> lstDiaconosNoAtendimento = bsAtendimento.ListarDiaconosNoAtendimento(idAtendimento);
+            List<Diacono> lstTodosDiaconos = bsDiacono.ListarDiaconos();
+
+            var listaDiaconos = from d in lstTodosDiaconos
+                                select new
+                                {
+                                    id = d.ID,
+                                    nomeDiacono = d.Nome,
+                                    responsavel = lstDiaconosNoAtendimento.Where(x => x.ID == d.ID).Count() > 0
+                                };
+
+
+            return Json(new { listaDiaconos = listaDiaconos }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult AtualizarResponsaveisAtendimento(int idAtendimento, List<Models.vmDiaconoResponsavel> listaDiaconosResponsaveis)
+        {
+            BSAtendimento bsAtendimento = new BSAtendimento();
+            List<int> idsDiaconosRemover = (from d in listaDiaconosResponsaveis
+                                            where d.responsavel == false
+                                            select d.id).ToList();
+
+            List<int> idDiaconosAdicionar = (from d in listaDiaconosResponsaveis
+                                             where d.responsavel == true
+                                             select d.id).ToList();
+
+            bsAtendimento.RemoverDiaconosAtendimento(idAtendimento, idsDiaconosRemover);
+            bsAtendimento.AdicionarDiaconosAtendimento(idAtendimento, idDiaconosAdicionar);
+
+            return Json(new { listaDiaconosResponsaveis = listaDiaconosResponsaveis.Where(x => x.responsavel == true).ToList() });
+        }
 
     }
 }
