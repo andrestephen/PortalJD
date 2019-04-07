@@ -175,7 +175,7 @@
                         <ul class="users-list clearfix" ng-repeat="diacono in listaDiaconosResponsaveis">
                             <li>
                                 <img src="~/Content/img/user.jpg" alt="User Image">
-                                <a class="users-list-name" href="#">{{diacono.nomeDiacono}}r</a>
+                                <a class="users-list-name" href="#">{{diacono.nomeDiacono}}</a>
                             </li>
                         </ul>
                         <!-- /.users-list -->
@@ -252,7 +252,7 @@
                         <ul class="products-list product-list-in-box" ng-repeat="diacono in listaTodosDiaconos">
                             <li class="item">
                                 <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="{{diacono.id}}" ng-checked="diacono.responsavel" />
+                                    <input type="checkbox" name="chkNovoResponsavel" value="{{diacono.id}}" ng-model="diacono.responsavel"/>
                                     <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
                                 </div>
                                 <div class="novoresponsavel product-info">
@@ -268,7 +268,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary">Adicionar</button>
+                        <button type="button" class="btn btn-primary" ng-click="atualizarResponsaveisProjeto()">Salvar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->

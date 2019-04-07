@@ -137,5 +137,23 @@ namespace JD.Portal.Web.Controllers
 
             return Json(new { listaDiaconos = listaDiaconos }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult AtualizarResponsaveisProjeto(int idProjeto, List<Models.vmDiaconoResponsavel> listaDiaconosResponsaveis)
+        {
+            BSProjeto bsProjeto = new BSProjeto();
+            List<int> idsDiaconosRemover = (from d in listaDiaconosResponsaveis
+                                           where d.responsavel == false
+                                           select d.id).ToList();
+
+            List<int> idDiaconosAdicionar = (from d in listaDiaconosResponsaveis
+                                             where d.responsavel == true
+                                             select d.id).ToList();
+
+            bsProjeto.RemoverDiaconosProjeto(idProjeto, idsDiaconosRemover);
+            bsProjeto.AdicionarDiaconosProjeto(idProjeto, idDiaconosAdicionar);
+
+            return null;
+        }
     }
 }

@@ -47,22 +47,6 @@
                 });
         }
 
-
-        //FUNCAO DE TESTE
-        $scope.retornaProjeto = function () {
-            var params = {
-                id: 1
-            };
-
-            $http.get('/Projetos/RetornaProjeto', { params: params }).then(
-                function (successResponse) {
-                    $scope.projeto = successResponse.data.projeto;
-                },
-                function (errorResponse) {
-                    console.log('erro');
-                });
-        };
-
         $scope.listarTodosDiaconos = function () {
             var params = {
                 idProjeto: $scope.projeto.idProjeto
@@ -82,6 +66,29 @@
                     console.log('erro');
                 });
         };
+
+
+        $scope.atualizarResponsaveisProjeto = function () {
+
+            //console.log('Antes de pegar parametros');
+            var params = {
+                idProjeto: $scope.projeto.idProjeto,
+                listaDiaconosResponsaveis: $scope.listaTodosDiaconos
+            };
+            //console.log('Depois de pegar parametros');
+            //console.log($scope.listaTodosDiaconos);
+
+            $http.post('/Projetos/AtualizarResponsaveisProjeto', params).then(
+                function (successResponse) {
+                    $scope.listaDiaconosResponsaveis = successResponse.data.listaDiaconosResponsaveis;
+                    console.log('sucesso?');
+                },
+                function (errorResponse) {
+                    console.log(errorResponse);
+                    console.log('erro');
+                });
+        };
+
 
         $('#modalDiaconos').on('show.bs.modal', function (e) {
             console.log('entrou');

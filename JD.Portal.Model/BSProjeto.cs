@@ -126,5 +126,41 @@ namespace JD.Portal.Model
                 return lstDiaconos;
             }
         }
+
+        public void RemoverDiaconosProjeto(int idProjeto, List<int> idsDiaconos)
+        {
+            Projeto projeto = new Projeto();
+
+            using (var db = new PortalJDContexto())
+            {
+                projeto = db.Projeto.Where(x => x.ID == idProjeto).FirstOrDefault();
+                foreach (int idDiacono in idsDiaconos)
+                {
+                    projeto.Diaconos.RemoveAll(x => x.ID == idDiacono);
+                }
+
+                db.SaveChanges();
+            }
+        }
+
+        public void AdicionarDiaconosProjeto(int idProjeto, List<int> idsDiaconos)
+        {
+            Projeto projeto = new Projeto();
+
+            using (var db = new PortalJDContexto())
+            {
+                projeto = db.Projeto.Where(x => x.ID == idProjeto).FirstOrDefault();
+                foreach (int idDiacono in idsDiaconos)
+                {
+                    Diacono diacono = db.Diacono.Where(x => x.ID == idDiacono).First();
+                    if (diacono != null)
+                    {
+                        projeto.Diaconos.Add(diacono);
+                    }
+                }
+
+                db.SaveChanges();
+            }
+        }
     }
 }

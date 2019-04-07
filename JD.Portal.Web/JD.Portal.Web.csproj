@@ -173,6 +173,7 @@
     <Compile Include="Controllers\ProjetosController.cs" />
     <Compile Include="Controllers\ReunioesController.cs" />
     <Compile Include="Controllers\TesourariaController.cs" />
+    <Compile Include="Models\vmDiaconoResponsavel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -305,7 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JD.Portal.Model\JD.Portal.Model.csproj">
