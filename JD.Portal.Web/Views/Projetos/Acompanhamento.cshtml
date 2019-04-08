@@ -229,6 +229,14 @@
                             </li>
                             <!-- /.item -->
                         </ul>
+                        <div>
+                            <input type="file" multiple="multiple" ngf-select="UploadFiles($files)" />
+                            <hr />
+                            Files:
+                            <ul><li ng-repeat="file in SelectedFiles">{{file.name}}</li></ul>
+                            <div id="dvProgress" class="progress" ng-show="Progress >= 0">
+                            </div>
+                        </div>
                         <div class="text-center">
                             <a href="javascript:void(0)" class="uppercase">Adicionar arquivo</a>
                         </div>
@@ -252,7 +260,7 @@
                         <ul class="products-list product-list-in-box">
                             <li class="item" ng-repeat="diacono in listaTodosDiaconos">
                                 <div class="product-img">
-                                    <input type="checkbox" name="chkNovoResponsavel" value="{{diacono.id}}" ng-model="diacono.responsavel"/>
+                                    <input type="checkbox" name="chkNovoResponsavel" value="{{diacono.id}}" ng-model="diacono.responsavel" />
                                     <img src="~/Content/img/user.jpg" alt="Product Image" class="img-circle novoresponsavel imagem">
                                 </div>
                                 <div class="novoresponsavel product-info">
@@ -282,5 +290,8 @@
 @section  ViewSpecificJavascript
 {
     @Scripts.Render("~/Bundles/angular")
+    @Scripts.Render("~/Bundles/angular-file-upload")
+    @*@Scripts.Render("~/Bundles/controlleranexo")*@
     @Scripts.Render("~/Bundles/controllerprojetos")
+
 }

@@ -1,7 +1,7 @@
 ﻿(function () {
-    var app = angular.module('appProjeto', []);
+    var app = angular.module('appProjeto', ['ngFileUpload']);
 
-    app.controller('controllerProjeto', ['$scope', '$http', function ($scope, $http) {
+    app.controller('controllerProjeto', ['$scope', '$http', 'Upload', '$timeout', function ($scope, $http, Upload, $timeout) {
         $scope.listaTodosDiaconos = {};
         //$scope.diacono = {};
         //$scope.classeCorAngular = 'nome-da-classe';
@@ -87,6 +87,33 @@
                     console.log(errorResponse);
                     console.log('erro');
                 });
+        };
+
+
+        $scope.UploadFiles = function (files) {
+            console.log('entrou');
+            $scope.SelectedFiles = files;
+            if ($scope.SelectedFiles && $scope.SelectedFiles.length) {
+                Upload.upload({
+                    url: '/Projetos/Upload/',
+                    data: {
+                        files: $scope.SelectedFiles
+                    }
+                }).then(function (response) {
+                    $timeout(function () {
+                        $scope.Result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0) {
+                        var errorMsg = response.status + ': ' + response.data;
+                        alert(errorMsg);
+                    }
+                }, function (evt) {
+                    var element = angular.element(document.querySelector('#dvProgress'));
+                    $scope.Progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    element.html('<div style="width: ' + $scope.Progress + '%">' + $scope.Progress + '%</div>');
+                });
+            }
         };
 
 

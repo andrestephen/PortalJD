@@ -45,12 +45,19 @@ namespace JD.Portal.Web.App_Start
             bundles.Add(new ScriptBundle("~/Bundles/angular")
                 .Include("~/Content/js/plugins/angular/angular.min.js"));
 
+            bundles.Add(new ScriptBundle("~/Bundles/angular-file-upload")
+               .Include("~/Content/js/plugins/angular-file-upload/ng-file-upload-shim.min.js")
+               .Include("~/Content/js/plugins/angular-file-upload/ng-file-upload.min.js"));
+
 
             bundles.Add(new ScriptBundle("~/Bundles/controllerprojetos")
                 .Include("~/Content/js/controllers/projetos.js"));
 
             bundles.Add(new ScriptBundle("~/Bundles/controlleratendimentos")
            .Include("~/Content/js/controllers/atendimentos.js"));
+
+            bundles.Add(new ScriptBundle("~/Bundles/controlleranexo")
+           .Include("~/Content/js/controllers/anexo.js"));
 
 #if DEBUG
             BundleTable.EnableOptimizations = false;

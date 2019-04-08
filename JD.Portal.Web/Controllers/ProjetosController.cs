@@ -155,5 +155,23 @@ namespace JD.Portal.Web.Controllers
 
             return Json(new { listaDiaconosResponsaveis = listaDiaconosResponsaveis.Where(x => x.responsavel == true).ToList() });
         }
+
+        [HttpPost]
+        public ContentResult Upload()
+        {
+            //string path = Server.MapPath("~/Uploads/");
+            //if (!Directory.Exists(path))
+            //{
+            //    Directory.CreateDirectory(path);
+            //}
+
+            foreach (string key in Request.Files)
+            {
+                HttpPostedFileBase postedFile = Request.Files[key];
+                //postedFile.SaveAs(path + postedFile.FileName);
+            }
+
+            return Content("Success");
+        }
     }
 }
