@@ -21,6 +21,7 @@ namespace JD.Portal.Model
         public DbSet<AtualizacaoAtendimento> AtualizacaoAtendimento { get; set; }
         public DbSet<Projeto> Projeto { get; set; }
         public DbSet<AtualizacaoProjeto> AtualizacaoProjeto { get; set; }
+        public DbSet<Arquivo> Arquivo { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

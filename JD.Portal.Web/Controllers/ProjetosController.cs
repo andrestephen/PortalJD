@@ -4,9 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JD.Portal.Model;
-using Microsoft.Azure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+
 
 namespace JD.Portal.Web.Controllers
 {
@@ -162,40 +160,20 @@ namespace JD.Portal.Web.Controllers
         [HttpPost]
         public ContentResult Upload()
         {
-            //string path = Server.MapPath("~/Uploads/");
-            //if (!Directory.Exists(path))
-            //{
-            //    Directory.CreateDirectory(path);
-            //}
-
             foreach (string key in Request.Files)
             {
                 HttpPostedFileBase postedFile = Request.Files[key];
-                //postedFile.SaveAs(path + postedFile.FileName);
 
-                CloudBlobContainer container = this.GetCloudBlobContainer();
-               
-                bool sucesso  = container.CreateIfNotExists();
-                string nomeContainer = container.Name;
+                Util.Storage storage = new Util.Storage();
 
-                CloudBlockBlob blob = container.GetBlockBlobReference("myBlob");
-                using (var fileStream = postedFile.InputStream)
-                {
-                    blob.UploadFromStream(fileStream);
-                }
-               
+                string nomeBlob = storage.SalvarBlob(postedFile);
+
+                //Arquivo arquivo = new Arquivo();
             }
 
             return Content("Success");
         }
 
-        private CloudBlobContainer GetCloudBlobContainer()
-        {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                    CloudConfigurationManager.GetSetting("portaljdstorage"));
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer container = blobClient.GetContainerReference("portaljd-blob-container");
-            return container;
-        }
+       
     }
 }

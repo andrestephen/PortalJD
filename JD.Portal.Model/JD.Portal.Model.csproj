@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arquivo.cs" />
     <Compile Include="Atendimento.cs" />
     <Compile Include="AtualizacaoProjeto.cs" />
     <Compile Include="AtualizacaoAtendimento.cs" />
