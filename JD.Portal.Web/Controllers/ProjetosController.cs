@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JD.Portal.Model;
+using Microsoft.Azure;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace JD.Portal.Web.Controllers
 {
@@ -169,9 +172,30 @@ namespace JD.Portal.Web.Controllers
             {
                 HttpPostedFileBase postedFile = Request.Files[key];
                 //postedFile.SaveAs(path + postedFile.FileName);
+
+                CloudBlobContainer container = this.GetCloudBlobContainer();
+               
+                bool sucesso  = container.CreateIfNotExists();
+                string nomeContainer = container.Name;
+
+                CloudBlockBlob blob = container.GetBlockBlobReference("myBlob");
+                using (var fileStream = postedFile.InputStream)
+                {
+                    blob.UploadFromStream(fileStream);
+                }
+               
             }
 
             return Content("Success");
+        }
+
+        private CloudBlobContainer GetCloudBlobContainer()
+        {
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                    CloudConfigurationManager.GetSetting("portaljdstorage"));
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+            CloudBlobContainer container = blobClient.GetContainerReference("portaljd-blob-container");
+            return container;
         }
     }
 }
