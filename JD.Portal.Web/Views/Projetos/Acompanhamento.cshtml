@@ -210,15 +210,25 @@
                             <!-- /.item -->
                         </ul>
                         <div>
-                            <input type="file" multiple="multiple" ngf-select="UploadFiles($files)" />
-                            <hr />
-                            Files:
-                            <ul><li ng-repeat="file in SelectedFiles">{{file.name}}</li></ul>
-                            <div id="dvProgress" class="progress" ng-show="Progress >= 0">
+                            <input id="upload" type="file" multiple="multiple" ngf-select="UploadFiles($files)" />
+                            @*<hr />
+        Files:
+        <ul><li ng-repeat="file in SelectedFiles">{file.name}</li></ul>*@
+
+                            <div class="progress progress-sm active" ng-hide="Progress == 0" ng-init="Progress=0">
+                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{Progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{Progress}}%">
+                                    <span class="sr-only">{{Progress}}% Complete (success)</span>
+                                </div>
                             </div>
+                            @*<div id="dvProgress" class="progress" ng-show="Progress >= 0">
+                            </div>*@
                         </div>
                         <div class="text-center">
-                            <a href="javascript:void(0)" class="uppercase">Adicionar arquivo</a>
+
+                            <a id="upload_link" href="" class="uppercase">
+                                <i class="fa fa-upload margin-r-5" ></i>
+                                <span>Novo arquivo</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -273,5 +283,14 @@
     @Scripts.Render("~/Bundles/angular-file-upload")
     @*@Scripts.Render("~/Bundles/controlleranexo")*@
     @Scripts.Render("~/Bundles/controllerprojetos")
+
+    <script>
+        $(function () {
+            $("#upload_link").on('click', function (e) {
+                e.preventDefault();
+                $("#upload:hidden").trigger('click');
+            });
+        });
+    </script>
 
 }

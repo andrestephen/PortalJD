@@ -81,5 +81,15 @@ input[type=checkbox] {
     margin-left: 90px;
 }
 
+/*------------Upload-------------------------------*/
+
+#upload_link {
+    text-decoration: none;
+}
+
+#upload {
+    display: none
+}
+
 
 

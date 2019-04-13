@@ -15,7 +15,7 @@ namespace JD.Portal.Model.Migrations
                         DataCriacao = c.DateTime(nullable: false),
                         Nome = c.String(nullable: false),
                         TamanhoBytes = c.Int(nullable: false),
-                        Tipo = c.String(nullable: false, maxLength: 50),
+                        Tipo = c.String(nullable: false, maxLength: 250),
                         Atendimento_ID = c.Int(),
                         Projeto_ID = c.Int(),
                     })

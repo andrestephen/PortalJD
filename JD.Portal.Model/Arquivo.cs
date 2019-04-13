@@ -19,7 +19,7 @@ namespace JD.Portal.Model
         [Required(ErrorMessage = "Tamanho do arquivo é obrigatório")]
         public int TamanhoBytes { get; set; }
         [Required(ErrorMessage = "O tipo do arquivo é obrigatório")]
-        [MaxLength(50)]
+        [MaxLength(250)]
         public string Tipo { get; set; }
     }
 }

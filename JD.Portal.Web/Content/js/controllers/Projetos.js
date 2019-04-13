@@ -103,6 +103,7 @@
                 }).then(function (response) {
                     $timeout(function () {
                         $scope.listaArquivos = response.data.listaArquivos;
+                        $scope.Progress = 0;
                     });
                 }, function (response) {
                     if (response.status > 0) {
@@ -110,9 +111,9 @@
                         alert(errorMsg);
                     }
                 }, function (evt) {
-                    var element = angular.element(document.querySelector('#dvProgress'));
+                    //var element = angular.element(document.querySelector('#dvProgress'));
                     $scope.Progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                    element.html('<div style="width: ' + $scope.Progress + '%">' + $scope.Progress + '%</div>');
+                    //element.html('<div style="width: ' + $scope.Progress + '%">' + $scope.Progress + '%</div>');
                 });
             }
         };
