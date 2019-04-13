@@ -70,7 +70,7 @@ namespace JD.Portal.Model
 
             using (var db = new PortalJDContexto())
             {
-                projeto = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono").Include("AtualizacoesProjetos").Include("AtualizacoesProjetos.Diacono").Include("Diaconos")
+                projeto = (from a in db.Projeto.Include("BeneficiarioProjeto").Include("Diacono").Include("AtualizacoesProjetos").Include("AtualizacoesProjetos.Diacono").Include("Diaconos").Include("Arquivos")
                            where a.ID == idProjeto
                            select a).FirstOrDefault();
             }
@@ -162,5 +162,36 @@ namespace JD.Portal.Model
                 db.SaveChanges();
             }
         }
+
+        public void AdicionarArquivoNoProjeto(int idProjeto, Arquivo arquivo)
+        {
+            Projeto projeto = new Projeto();
+
+            using (var db = new PortalJDContexto())
+            {
+                projeto = db.Projeto.Where(x => x.ID == idProjeto).FirstOrDefault();
+                projeto.Arquivos.Add(arquivo);
+
+                db.SaveChanges();
+            }
+        }
+
+        public List<Arquivo> ListarArquivosNoProjeto(int idProjeto)
+        {
+            List<Arquivo> lstArquivos = new List<Arquivo>();
+
+            using (var db = new PortalJDContexto())
+            {
+                Projeto projeto = (from p in db.Projeto.Include("Arquivos")
+                                   where p.ID == idProjeto
+                                   select p).FirstOrDefault();
+
+                lstArquivos = projeto.Arquivos;
+
+                return lstArquivos;
+            }
+        }
+
+
     }
 }

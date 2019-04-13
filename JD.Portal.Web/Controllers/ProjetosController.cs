@@ -158,22 +158,42 @@ namespace JD.Portal.Web.Controllers
         }
 
         [HttpPost]
-        public ContentResult Upload()
+        public ActionResult Upload(int idProjeto)
         {
+            BSProjeto bsProjeto = new BSProjeto();
+
             foreach (string key in Request.Files)
             {
                 HttpPostedFileBase postedFile = Request.Files[key];
 
                 Util.Storage storage = new Util.Storage();
 
-                string nomeBlob = storage.SalvarBlob(postedFile);
+                Arquivo arquivo = new Arquivo();
+                
+                arquivo.TamanhoBytes = postedFile.ContentLength;
+                arquivo.Tipo = postedFile.ContentType;
+                arquivo.DataCriacao = DateTime.Now;
+                arquivo.Nome = storage.SalvarBlob(postedFile);
 
-                //Arquivo arquivo = new Arquivo();
+                bsProjeto.AdicionarArquivoNoProjeto(idProjeto, arquivo);
             }
 
-            return Content("Success");
+            List<Arquivo> lstArquivos = bsProjeto.ListarArquivosNoProjeto(idProjeto);
+
+            var listaRetorno = from a in lstArquivos
+                                select new
+                                {
+                                    nome = a.Nome.Substring(a.Nome.IndexOf('_') + 1),
+                                    tamanho = a.TamanhoBytes.ToString(),
+                                    tipo = a.Tipo,
+                                    url = "https://portaljd.blob.core.windows.net/portaljd-blob-container/" + a.Nome,
+                                    dataCriacao = a.DataCriacao.ToString("dd/MM/yyyy HH:mm")
+                                };
+
+
+            return Json(new { listaArquivos = listaRetorno });//listaDiaconosResponsaveis.Where(x => x.responsavel == true).ToList() });
         }
 
-       
+        //retorno ContentResult ; return Content("Success");
     }
 }

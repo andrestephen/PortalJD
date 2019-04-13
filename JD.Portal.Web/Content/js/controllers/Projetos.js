@@ -91,17 +91,18 @@
 
 
         $scope.UploadFiles = function (files) {
-            console.log('entrou');
+            
             $scope.SelectedFiles = files;
             if ($scope.SelectedFiles && $scope.SelectedFiles.length) {
                 Upload.upload({
                     url: '/Projetos/Upload/',
                     data: {
-                        files: $scope.SelectedFiles
+                        files: $scope.SelectedFiles,
+                        idProjeto: $scope.projeto.idProjeto
                     }
                 }).then(function (response) {
                     $timeout(function () {
-                        $scope.Result = response.data;
+                        $scope.listaArquivos = response.data.listaArquivos;
                     });
                 }, function (response) {
                     if (response.status > 0) {

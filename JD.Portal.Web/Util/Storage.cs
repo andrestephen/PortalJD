@@ -27,6 +27,8 @@ namespace JD.Portal.Web.Util
             string nomeContainer = container.Name;
 
             CloudBlockBlob blob = container.GetBlockBlobReference(Guid.NewGuid().ToString() + "_" + arquivo.FileName.Replace(' ', '_'));
+            blob.Properties.ContentType = arquivo.ContentType;
+
             using (var fileStream = arquivo.InputStream)
             {
                 blob.UploadFromStream(fileStream);
