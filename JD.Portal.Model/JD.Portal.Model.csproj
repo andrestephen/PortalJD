@@ -92,7 +92,12 @@
     <Compile Include="Migrations\201904122208350_Criação_Arquivos.Designer.cs">
       <DependentUpon>201904122208350_Criação_Arquivos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905051448052_Criacao_Senha_Diacono.cs" />
+    <Compile Include="Migrations\201905051448052_Criacao_Senha_Diacono.Designer.cs">
+      <DependentUpon>201905051448052_Criacao_Senha_Diacono.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Perfil.cs" />
     <Compile Include="Pessoa.cs" />
     <Compile Include="PortalJDContexto.cs" />
     <Compile Include="Projeto.cs" />
@@ -129,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904122208350_Criação_Arquivos.resx">
       <DependentUpon>201904122208350_Criação_Arquivos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905051448052_Criacao_Senha_Diacono.resx">
+      <DependentUpon>201905051448052_Criacao_Senha_Diacono.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

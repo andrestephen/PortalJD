@@ -22,6 +22,7 @@ namespace JD.Portal.Model
         public DbSet<Projeto> Projeto { get; set; }
         public DbSet<AtualizacaoProjeto> AtualizacaoProjeto { get; set; }
         public DbSet<Arquivo> Arquivo { get; set; }
+        public DbSet<Perfil> Perfil { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -47,6 +48,16 @@ namespace JD.Portal.Model
                 //    m.MapRightKey("RoleId");
                 //})
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Perfil>()
+              .HasMany(a => a.Diaconos)
+              .WithMany(d => d.Perfis)
+              .Map(pd =>
+              {
+                  pd.ToTable("PerfisDiaconos");
+                  pd.MapLeftKey("PerfilId");
+                  pd.MapRightKey("DiaconoId");
+              });
 
             modelBuilder.Entity<Projeto>()
                .HasMany(p => p.Diaconos)

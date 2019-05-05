@@ -8,6 +8,34 @@ namespace JD.Portal.Model
 {
     public class BSDiacono
     {
+        public bool AutenticarUsuario(string email, string senha)
+        {
+            bool autenticado = false;
+
+            using (var db = new PortalJDContexto())
+            {
+                autenticado = (from d in db.Diacono
+                               where d.Email == email && d.Senha == senha
+                               select d).Count() > 0;
+            }
+
+            return autenticado;
+        }
+
+        public Diacono RecuperarDiaconoPorEmail(string email)
+        {
+            Diacono diacono = new Diacono();
+
+            using (var db = new PortalJDContexto())
+            {
+                diacono = (from d in db.Diacono
+                           where d.Email == email
+                           select d).FirstOrDefault();
+            }
+
+            return diacono;
+        }
+
         public List<Diacono> ListarDiaconos()
         {
             List<Diacono> lstDiaconos = new List<Diacono>();

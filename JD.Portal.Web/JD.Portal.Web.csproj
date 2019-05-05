@@ -201,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Util\Storage.cs" />
+    <Compile Include="Util\ValidacaoLogado.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

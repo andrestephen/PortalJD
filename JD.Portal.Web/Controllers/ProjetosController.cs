@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JD.Portal.Model;
-
+using JD.Portal.Web.Util;
 
 namespace JD.Portal.Web.Controllers
 {
+    [ValidacaoLogado]
     public class ProjetosController : Controller
     {
         // GET: Projetos
