@@ -177,7 +177,7 @@
     <Content Include="Views\Atendimentos\Acompanhamento.cshtml" />
     <Content Include="Views\Projetos\NovoProjeto.cshtml" />
     <Content Include="Views\Projetos\Acompanhamento.cshtml" />
-    <None Include="Properties\PublishProfiles\portaljd-hml - Web Deploy PC_Casa.pubxml" />
+    <None Include="Properties\PublishProfiles\portaljd-hml - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
