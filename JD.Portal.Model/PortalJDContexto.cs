@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace JD.Portal.Model
 {
-    public class PortalJDContexto : DbContext
+    public class PortalJDContexto : IdentityDbContext<AppUser>
     {
         public PortalJDContexto() : base("PortalJDContexto")
         {
@@ -26,6 +27,8 @@ namespace JD.Portal.Model
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             modelBuilder.Entity<Diacono>()
