@@ -79,6 +79,8 @@
   <ItemGroup>
     <Compile Include="AppRole.cs" />
     <Compile Include="AppUser.cs" />
+    <Compile Include="AppRoleManager.cs" />
+    <Compile Include="AppUserManager.cs" />
     <Compile Include="Arquivo.cs" />
     <Compile Include="Atendimento.cs" />
     <Compile Include="AtualizacaoProjeto.cs" />
@@ -132,6 +134,10 @@
     <Compile Include="Migrations\202001230223198_Criação_Estrutura_Identity.Designer.cs">
       <DependentUpon>202001230223198_Criação_Estrutura_Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002070434281_Adicionar_Diacono_No_AppUser.cs" />
+    <Compile Include="Migrations\202002070434281_Adicionar_Diacono_No_AppUser.Designer.cs">
+      <DependentUpon>202002070434281_Adicionar_Diacono_No_AppUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Perfil.cs" />
     <Compile Include="Pessoa.cs" />
@@ -176,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001230223198_Criação_Estrutura_Identity.resx">
       <DependentUpon>202001230223198_Criação_Estrutura_Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002070434281_Adicionar_Diacono_No_AppUser.resx">
+      <DependentUpon>202002070434281_Adicionar_Diacono_No_AppUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
