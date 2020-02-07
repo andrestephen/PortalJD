@@ -22,5 +22,32 @@ namespace JD.Portal.Web.Controllers
 
             return View(diaconos);
         }
+
+        public ActionResult NovoDiacono()
+        {
+            return View(new AppUser());
+        }
+
+        [HttpPost]
+        public ActionResult NovoProjeto(AppUser appUser)
+        {
+            //try
+            //{
+            //    BSDiacono bsProjeto = new BSProjeto();
+            //    bsProjeto.AdicionarProjeto(projeto);
+
+            //    if (projeto.ID > 0)
+            //    {
+            //        TempData["cadastroNovoProjetoSucesso"] = true;
+            //        TempData["idRecemAdicionado"] = projeto.ID;
+            //    }
+
+            //    return RedirectToAction("Acompanhamento", "Projetos", new { @id = projeto.ID });
+            //}
+            //catch (Exception ex)
+            //{
+              return View(new AppUser());
+            //}
+        }
     }
 }

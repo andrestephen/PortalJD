@@ -205,6 +205,7 @@
     <Content Include="Views\Projetos\NovoProjeto.cshtml" />
     <Content Include="Views\Projetos\Acompanhamento.cshtml" />
     <None Include="Properties\PublishProfiles\portaljd-hml - Web Deploy.pubxml" />
+    <Content Include="Views\Diaconos\NovoDiacono.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
