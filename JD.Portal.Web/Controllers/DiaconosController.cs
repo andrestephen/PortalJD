@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using JD.Portal.Model;
 using JD.Portal.Web.Util;
 
 namespace JD.Portal.Web.Controllers
@@ -13,7 +14,13 @@ namespace JD.Portal.Web.Controllers
         // GET: Diaconos
         public ActionResult Index()
         {
-            return View();
+            BSDiacono bsDiacono = new BSDiacono();
+            List<Model.Diacono> diaconos = bsDiacono.ListarDiaconos();
+
+            ViewBag.diaconosAtivos = diaconos.Count(x => x.Ativo == true);
+            ViewBag.diaconosInativos = diaconos.Count(x => x.Ativo == false);
+
+            return View(diaconos);
         }
     }
 }
