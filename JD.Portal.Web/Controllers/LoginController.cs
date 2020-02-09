@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using JD.Portal.Model;
 using JD.Portal.Web.Util;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace JD.Portal.Web.Controllers
 {
@@ -37,25 +35,6 @@ namespace JD.Portal.Web.Controllers
                     TempData["mensagem"] = "E-mail ou senha incorretos";
                     return View();
                 }
-
-                //if (ModelState.IsValid)
-                //{
-                //    var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
-                //    var authManager = HttpContext.GetOwinContext().Authentication;
-
-                //    AppUser user = userManager.Find(login.UserName, login.Password);
-                //    if (user != null)
-                //    {
-                //        var ident = userManager.CreateIdentity(user,
-                //            DefaultAuthenticationTypes.ApplicationCookie);
-                //        AuthManager.SignIn(
-                //            new AuthenticationProperties { IsPersistent = false }, ident);
-                //        return Redirect(login.ReturnUrl ?? Url.Action("Index", "Home"));
-                //    }
-                //}
-                //ModelState.AddModelError("", "Invalid username or password");
-                //return View(login);
-
             }
             catch (Exception ex)
             {

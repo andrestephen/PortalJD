@@ -25,11 +25,11 @@ namespace JD.Portal.Web.Controllers
 
         public ActionResult NovoDiacono()
         {
-            return View(new AppUser());
+            return View(new Diacono());
         }
 
         [HttpPost]
-        public ActionResult NovoProjeto(AppUser appUser)
+        public ActionResult NovoProjeto(Diacono diacono)
         {
             //try
             //{
@@ -46,7 +46,7 @@ namespace JD.Portal.Web.Controllers
             //}
             //catch (Exception ex)
             //{
-              return View(new AppUser());
+              return View(new Diacono());
             //}
         }
     }

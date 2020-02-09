@@ -1,6 +1,6 @@
 ﻿@using System.Web.Optimization
 
-@model JD.Portal.Model.AppUser
+@model JD.Portal.Model.Diacono
 @{
     ViewBag.Title = "Novo Diácono";
     ViewBag.Description = "Área para cadastro de novo Diácono";
@@ -22,9 +22,9 @@
 
 @{
 
-    string nome = Model != null && Model.Diacono != null ? Model.Diacono.Nome : "";
-    string telefone = Model != null && Model.Diacono != null ? Model.Diacono.Telefone : "";
-    string email = Model != null && Model.Diacono != null ? Model.Diacono.Email : "";
+    string nome = Model != null ? Model.Nome : "";
+    string telefone = Model != null ? Model.Telefone : "";
+    string email = Model != null ? Model.Email : "";
     //string nomeBeneficiario = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.Nome : "";
     //string nomeContato = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.NomeContato : ""; ;
 
@@ -67,17 +67,17 @@
 
                         <div class="form-group col-md-4">
                             <div class="form-group">
-                                <label for="Diacono_Nome">Nome<span>*</span></label>
+                                <label for="Nome">Nome<span>*</span></label>
                                 <input type="text" class="form-control" id="Nome" name="Nome" value="@nome" maxlength="100" placeholder="Digite o nome do Diácono" ng-model="Nome" ng-init="Nome='@nome'" required>
                             </div>
                             <div class="form-group">
-                                <label for="Diacono_Telefone">Telefone<span>*</span></label>
-                                <input type="tel" class="form-control" id="Diacono_Telefone" name="Diacono.Telefone" value="@telefone" placeholder="Digite o telefone" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask required>
+                                <label for="Telefone">Telefone<span>*</span></label>
+                                <input type="tel" class="form-control" id="Telefone" name="Telefone" value="@telefone" placeholder="Digite o telefone" data-inputmask="'mask': '(99) 9999-9999[9]'" data-inputmask-clearincomplete="true" data-inputmask-showmaskonhover="false" data-inputmask-greedy="true" data-mask required>
                             </div>
 
                             <div class="form-group ">
-                                <label for="Diacono_Email">Email<span>*</span> (O e-mail será usado para acessar o sistema)</label>
-                                <input type="text" class="form-control" id="Diacono_Email" name="Diacono.Email" value="@email" placeholder="Digite o e-mail" required>
+                                <label for="Email">Email<span>*</span> (O e-mail será usado para acessar o sistema)</label>
+                                <input type="text" class="form-control" id="Email" name="Email" value="@email" placeholder="Digite o e-mail" required>
                             </div>
 
                             <div class="form-group">
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-5">
-                            <label for="Diacono_Nome">Permissões de usuário<span>*</span></label>
+                            <label for="Nome">Permissões de usuário<span>*</span></label>
                             <ul class="products-list product-list-in-box">
                                 <li class="item">
                                     <div class="product-img">
