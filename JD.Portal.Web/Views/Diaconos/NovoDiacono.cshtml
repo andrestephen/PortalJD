@@ -4,6 +4,8 @@
 @{
     ViewBag.Title = "Novo Diácono";
     ViewBag.Description = "Área para cadastro de novo Diácono";
+
+    bool edicao = Model.ID > 0;
 }
 
 @section ViewSpecificStyleSheet
@@ -15,23 +17,88 @@
 {
     <ol class="breadcrumb hidden-xs hidden-sm">
         <li><a href="@Url.Action("Index", "Diaconos")"><i class="fa fa-user"></i> Diáconos</a></li>
-        <li class="active">Novo Diácono</li>
+        @if (edicao)
+        {
+            <li class="active">Edição de Diácono</li>
+        }
+        else
+        {
+            <li class="active">Novo Diácono</li>
+        }
     </ol>
 }
 
 
 @{
 
+    var mensagemErro = TempData["mensagemErro"];
+    var mensagemAlerta = TempData["mensagemAlerta"];
+
     string nome = Model != null ? Model.Nome : "";
     string telefone = Model != null ? Model.Telefone : "";
     string email = Model != null ? Model.Email : "";
-    //string nomeBeneficiario = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.Nome : "";
-    //string nomeContato = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.NomeContato : ""; ;
 
-    //string telefonePrincipal = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.TelefonePrincipal : "";
-    //string telefoneSecundario = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.TelefoneSecundario : "";
-    //string endereco = Model.BeneficiarioProjeto != null ? Model.BeneficiarioProjeto.Endereco : "";
-    //string descricao = Model != null ? Model.Descricao : "";
+    string selecionadoDiacono = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.diacono).Count() > 0)
+    {
+        selecionadoDiacono = "checked = checked";
+    }
+
+    string selecionadoPresidente = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.presidente).Count() > 0)
+    {
+        selecionadoPresidente = "checked = checked";
+    }
+
+    string selecionadoVicePresidente = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.vicepresidente).Count() > 0)
+    {
+        selecionadoVicePresidente = "checked = checked";
+    }
+
+    string selecionadoTesoureiro = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.tesoureiro).Count() > 0)
+    {
+        selecionadoTesoureiro = "checked = checked";
+    }
+
+    string selecionadoPrimeiroSecretario = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.primeirosecretario).Count() > 0)
+    {
+        selecionadoPrimeiroSecretario = "checked = checked";
+    }
+
+    string selecionadoSegundoSecretario = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.segundosecretario).Count() > 0)
+    {
+        selecionadoSegundoSecretario = "checked = checked";
+    }
+
+    string selecionadoPastor = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.pastor).Count() > 0)
+    {
+        selecionadoPastor = "checked = checked";
+    }
+
+    string selecionadoAdministrador = "";
+
+    if (Model.Perfis != null && Model.Perfis.Where(x => x.ID == (int)JD.Portal.Model.BSDiacono.PerfilDiacono.administrador).Count() > 0)
+    {
+        selecionadoAdministrador = "checked = checked";
+    }
+
+    string senhaObrigatoria = "";
+    if (!edicao)
+    {
+        senhaObrigatoria = "required";
+    }
 }
 
 
@@ -44,7 +111,24 @@
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" action="@Url.Action("NovoDiacono", "Diaconos")" method="post" name="frmNovoDiacono" ng-app="appDiacono" ng-controller="controllerDiacono">
+                <input type="hidden" id="ID" name="ID" value="@Model.ID"/>
                 <div class="box-body">
+                    @{
+                        if (mensagemErro != null && !string.IsNullOrEmpty(mensagemErro.ToString()))
+                        {
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                @mensagemErro
+                            </div>
+                        }
+                        if (mensagemAlerta != null && !string.IsNullOrEmpty(mensagemAlerta.ToString()))
+                        {
+                            <div class="alert alert-warning alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                @mensagemAlerta
+                            </div>
+                        }
+                    }
                     @*<div class="row">
                             <div class="user-block col-xs-12" style="margin-bottom:15px; margin-top:15px">
                                 <img class="img-circle img-bordered-sm" src="~/Content/img/user.jpg" alt="User Image">
@@ -59,13 +143,12 @@
                             </div>
                         </div>*@
                     <div class="row">
-                        <div class="form-group col-md-3 fotocadastrodiacono">
-                            <a id="trocarFoto" href="" class="uppercase">
-                                <img src="~/Content/img/user.jpg" alt="User Image" class="img-circle imagem">
-                            </a>
-                        </div>
-
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
+                            <div class="form-group fotocadastrodiacono">
+                                <a id="trocarFoto" href="" class="uppercase">
+                                    <img src="~/Content/img/user.jpg" alt="User Image" class="img-circle imagem">
+                                </a>
+                            </div>
                             <div class="form-group">
                                 <label for="Nome">Nome<span>*</span></label>
                                 <input type="text" class="form-control" id="Nome" name="Nome" value="@nome" maxlength="100" placeholder="Digite o nome do Diácono" ng-model="Nome" ng-init="Nome='@nome'" required>
@@ -81,78 +164,154 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="senha">Senha <span>*</span></label>
-                                <input type="password" class="form-control" id="senha" name="senha" value="" placeholder="Digite a senha de acesso ao sistema" required>
+                                @if (edicao)
+                                {
+                                    <label for="senha">Senha</label>
+                                }
+                                else
+                                {
+                                    <label for="senha">Senha <span>*</span></label>
+                                }
+                                <input type="password" class="form-control" id="senha" name="senha" value="" placeholder="Digite a senha de acesso ao sistema" @senhaObrigatoria>
                             </div>
 
                             <div class="form-group ">
-                                <label for="confirmacao">Confirmação da senha <span>*</span></label>
-                                <input type="password" class="form-control" id="confirmacao" name="confirmacao" value="" placeholder="Digite a confirmação da senha" required>
+                                @if (edicao)
+                                {
+                                    <label for="confirmacao">Confirmação da senha</label>
+                                }
+                                else
+                                {
+                                    <label for="confirmacao">Confirmação da senha <span>*</span></label>
+                                }
+
+                                <input type="password" class="form-control" id="confirmacao" name="confirmacao" value="" placeholder="Digite a confirmação da senha" @senhaObrigatoria>
                             </div>
                         </div>
-                        <div class="form-group col-md-5">
-                            <label for="Nome">Permissões de usuário<span>*</span></label>
+                        <div class="form-group col-md-6">
+                            <label for="Nome">Perfil do usuário<span>*</span></label>
                             <ul class="products-list product-list-in-box">
                                 <li class="item">
                                     <div class="product-img">
-                                        <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.diacono)" @selecionadoDiacono />
                                     </div>
                                     <div class="product-info">
                                         <p class="product-title">
                                             Diácono
                                         </p>
-                                        <span class="product-description">
-                                            Usuário padrão do sistema, com acesso as principais funções.
+                                        <span class="descricao-perfil">
+                                            Usuário padrão do sistema, com acesso às funcionalidades básicas do sistema.
                                         </span>
                                     </div>
                                 </li>
                                 <li class="item">
                                     <div class="product-img">
-                                        <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.presidente)" @selecionadoPresidente />
                                     </div>
                                     <div class="product-info">
                                         <p class="product-title">
-                                            Diácono
+                                            Presidente
                                         </p>
-                                        <span class="product-description">
-                                            Usuário padrão do sistema, com acesso as principais funções.
+                                        <span class="descricao-perfil">
+                                            Usuário que será visualizado como Presidente da Junta Diaconal, com acesso as todas as funcionalidades básicas e administrativas da Junta Diaconal.
                                         </span>
                                     </div>
                                 </li>
                                 <li class="item">
                                     <div class="product-img">
-                                        <input type="checkbox" name="chkNovoResponsavel" value="1" />
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.vicepresidente)" @selecionadoVicePresidente />
                                     </div>
                                     <div class="product-info">
                                         <p class="product-title">
-                                            Diácono
+                                            Vice-Presidente
                                         </p>
-                                        <span class="product-description">
-                                            Usuário padrão do sistema, com acesso as principais funções.
+                                        <span class="descricao-perfil">
+                                            Usuário que será visualizado como Vice-Presidente da Junta Diaconal, com acesso as todas as funcionalidades básicas e administrativas da Junta Diaconal.
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="item">
+                                    <div class="product-img">
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.tesoureiro)" @selecionadoTesoureiro />
+                                    </div>
+                                    <div class="product-info">
+                                        <p class="product-title">
+                                            Tesoureiro
+                                        </p>
+                                        <span class="descricao-perfil">
+                                            Usuário que será visualizado como Tesoureiro da Junta Diaconal, com acesso as todas as funcionalidades básicas e financeiras da Junta Diaconal.
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="item">
+                                    <div class="product-img">
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.primeirosecretario)" @selecionadoPrimeiroSecretario />
+                                    </div>
+                                    <div class="product-info">
+                                        <p class="product-title">
+                                            Primeiro Secretário
+                                        </p>
+                                        <span class="descricao-perfil">
+                                            Usuário que será visualizado como Primeiro Secretário da Junta Diaconal, com acesso as todas as funcionalidades básicas e administrativas da Junta Diaconal.
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="item">
+                                    <div class="product-img">
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.segundosecretario)" @selecionadoSegundoSecretario />
+                                    </div>
+                                    <div class="product-info">
+                                        <p class="product-title">
+                                            Segundo Secretário
+                                        </p>
+                                        <span class="descricao-perfil">
+                                            Usuário que será visualizado como Segundo Secretário da Junta Diaconal, com acesso as todas as funcionalidades básicas e administrativas da Junta Diaconal.
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="item">
+                                    <div class="product-img">
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.pastor)" @selecionadoPastor />
+                                    </div>
+                                    <div class="product-info">
+                                        <p class="product-title">
+                                            Pastor
+                                        </p>
+                                        <span class="descricao-perfil">
+                                            Usuário que será visualizado como Pastor, com premissão para visualizar as informações do Portal JD.
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="item">
+                                    <div class="product-img">
+                                        <input type="checkbox" name="chkPerfil" value="@((int)JD.Portal.Model.BSDiacono.PerfilDiacono.administrador)" @selecionadoAdministrador />
+                                    </div>
+                                    <div class="product-info">
+                                        <p class="product-title">
+                                            Administrador do Sistema
+                                        </p>
+                                        <span class="descricao-perfil">
+                                            Usuário administrator do Portal JD, com acesso a todas as funcionalidades do sistema.
                                         </span>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-
-
-
-
                     </div>
 
 
-                        @*<div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" id="exampleInputFile">
+                    @*<div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="exampleInputFile">
 
-            <p class="help-block">Example block-level help text here.</p>
-        </div>*@
-                        @*<div class="checkbox">
-            <label>
-                <input type="checkbox"> Check me out
-            </label>
-        </div>*@
-                    </div>
+                            <p class="help-block">Example block-level help text here.</p>
+                        </div>*@
+                    @*<div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Check me out
+                            </label>
+                        </div>*@
+                </div>
                 <!-- /.box-body -->
 
                 <div class="box-footer">

@@ -28,26 +28,68 @@ namespace JD.Portal.Web.Controllers
             return View(new Diacono());
         }
 
-        [HttpPost]
-        public ActionResult NovoProjeto(Diacono diacono)
+        public ActionResult EditarDiacono(int ID)
         {
-            //try
-            //{
-            //    BSDiacono bsProjeto = new BSProjeto();
-            //    bsProjeto.AdicionarProjeto(projeto);
+            BSDiacono bsDiacono = new BSDiacono();
+            Diacono diacono = bsDiacono.RecuperarDiacono(ID);
 
-            //    if (projeto.ID > 0)
-            //    {
-            //        TempData["cadastroNovoProjetoSucesso"] = true;
-            //        TempData["idRecemAdicionado"] = projeto.ID;
-            //    }
+            return View("NovoDiacono", diacono);
+        }
 
-            //    return RedirectToAction("Acompanhamento", "Projetos", new { @id = projeto.ID });
-            //}
-            //catch (Exception ex)
-            //{
-              return View(new Diacono());
-            //}
+        [HttpPost]
+        public ActionResult NovoDiacono(Diacono diacono, string confirmacao, List<int> chkPerfil)
+        {
+            try
+            {
+                if (chkPerfil == null || (chkPerfil != null && chkPerfil.Count() == 0))
+                {
+                    TempData["mensagemAlerta"] = "Selecione um ou mais perfis para o novo diácono.";
+                    return View(diacono);
+                }
+
+                diacono.Perfis = new List<Perfil>();
+
+                foreach (int perfil in chkPerfil)
+                {
+                    diacono.Perfis.Add(new Perfil() { ID = perfil });
+                }
+
+                BSDiacono bsDiacono = new BSDiacono();
+
+                if (diacono.ID == 0)
+                {
+                    if (diacono.Senha != confirmacao)
+                    {
+                        TempData["mensagemAlerta"] = "Senha e confirmação de senha estão diferentes. Digite a senha novamente.";
+                        return View(diacono);
+                    }
+
+                    bsDiacono.AdicionarDiacono(diacono);
+
+                    if (diacono.ID > 0)
+                    {
+                        TempData["cadastroNovoDiaconoSucesso"] = true;
+                        TempData["idRecemAdicionado"] = diacono.ID;
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(diacono.Senha) && diacono.Senha != confirmacao)
+                    {
+                        TempData["mensagemAlerta"] = "Senha e confirmação de senha estão diferentes. Digite a senha novamente.";
+                        return View(diacono);
+                    }
+
+                    bsDiacono.EditarDiacono(diacono);
+
+                }
+                return RedirectToAction("Index", "Diaconos", new { @id = diacono.ID });
+            }
+            catch (Exception ex)
+            {
+                TempData["mensagemErro"] = ex.Message;
+                return View(diacono);
+            }
         }
     }
 }
