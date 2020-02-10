@@ -2,10 +2,19 @@
 
 @model JD.Portal.Model.Diacono
 @{
-    ViewBag.Title = "Novo Diácono";
-    ViewBag.Description = "Área para cadastro de novo Diácono";
-
     bool edicao = Model.ID > 0;
+
+    if (edicao)
+    {
+        ViewBag.Title = "Diácono";
+        ViewBag.Description = "Área para visualização e edição dos dados do Diácono";
+    }
+    else
+    {
+        ViewBag.Title = "Novo Diácono";
+        ViewBag.Description = "Área para cadastro de novo Diácono";
+    }
+
 }
 
 @section ViewSpecificStyleSheet
@@ -19,7 +28,7 @@
         <li><a href="@Url.Action("Index", "Diaconos")"><i class="fa fa-user"></i> Diáconos</a></li>
         @if (edicao)
         {
-            <li class="active">Edição de Diácono</li>
+            <li class="active">Diácono</li>
         }
         else
         {
@@ -99,6 +108,20 @@
     {
         senhaObrigatoria = "required";
     }
+
+    string diaconoAtivo = "";
+
+    if (Model != null && Model.Ativo)
+    {
+        diaconoAtivo = "checked = checked";
+    }
+
+    string diaconoInativo = "";
+
+    if (Model != null && !Model.Ativo)
+    {
+        diaconoInativo = "checked = checked";
+    }
 }
 
 
@@ -111,7 +134,7 @@
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" action="@Url.Action("NovoDiacono", "Diaconos")" method="post" name="frmNovoDiacono" ng-app="appDiacono" ng-controller="controllerDiacono">
-                <input type="hidden" id="ID" name="ID" value="@Model.ID"/>
+                <input type="hidden" id="ID" name="ID" value="@Model.ID" />
                 <div class="box-body">
                     @{
                         if (mensagemErro != null && !string.IsNullOrEmpty(mensagemErro.ToString()))
@@ -187,7 +210,23 @@
 
                                 <input type="password" class="form-control" id="confirmacao" name="confirmacao" value="" placeholder="Digite a confirmação da senha" @senhaObrigatoria>
                             </div>
+                            <div class="form-group">
+                                <label for="">Satus do diácono</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="Ativo" id="rbStatusAtivo" value="true" @diaconoAtivo>
+                                        Ativo
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="Ativo" id="rbStatusInativo" value="false" @diaconoInativo>
+                                        Inativo
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="form-group col-md-6">
                             <label for="Nome">Perfil do usuário<span>*</span></label>
                             <ul class="products-list product-list-in-box">

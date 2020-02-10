@@ -143,11 +143,13 @@ namespace JD.Portal.Model
                     diaconoExistente.Senha = this.GerarHash(diacono.Senha);
                 }
 
+
+
                 //Remover os perfis
                 List<int> idsPerfisRemover = new List<int>();
                 foreach (Perfil perfil in diaconoExistente.Perfis)
                 {
-                    if(diacono.Perfis.Where(x => x.ID == perfil.ID).Count() == 0)
+                    if (diacono.Perfis.Where(x => x.ID == perfil.ID).Count() == 0)
                     {
                         idsPerfisRemover.Add(perfil.ID);
                     }
@@ -159,8 +161,10 @@ namespace JD.Portal.Model
                     diaconoExistente.Perfis.Remove(perfilRemover);
                 }
 
+
                 foreach (Perfil perfil in diacono.Perfis)
                 {
+                    this.RemoverAntigaDiretoria(diacono.ID, perfil.ID, db);
                     diaconoExistente.Perfis.Add(db.Perfil.Where(x => x.ID == perfil.ID).First());
                 }
 
@@ -175,6 +179,21 @@ namespace JD.Portal.Model
             return Convert.ToBase64String(inArray);
         }
 
+        private void RemoverAntigaDiretoria(int idDiacono, int idPerfil, PortalJDContexto db)
+        {
+            if (idPerfil == (int)PerfilDiacono.presidente ||
+                        idPerfil == (int)PerfilDiacono.vicepresidente ||
+                        idPerfil == (int)PerfilDiacono.tesoureiro ||
+                        idPerfil == (int)PerfilDiacono.primeirosecretario ||
+                        idPerfil == (int)PerfilDiacono.segundosecretario)
+            {
+                Diacono diaconoComCargoAntigo = (from diacono in db.Diacono
+                                                 where diacono.ID != idDiacono && diacono.Perfis.Any(p => p.ID == idPerfil)
+                                                 select diacono).FirstOrDefault();
 
+                if (diaconoComCargoAntigo != null)
+                    diaconoComCargoAntigo.Perfis.RemoveAll(x => x.ID == idPerfil);
+            }
+        }
     }
 }
