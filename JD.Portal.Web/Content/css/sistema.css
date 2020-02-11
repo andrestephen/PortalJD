@@ -113,3 +113,13 @@ input[type=checkbox] {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.btsair {
+    padding: 15px 15px;
+    border: 0px;
+    /*border-color: transparent;*/
+}
+    .btsair:hover {
+        /*border-color: transparent;*/
+        border: 0px;
+    }

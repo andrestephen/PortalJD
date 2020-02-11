@@ -34,6 +34,7 @@ namespace JD.Portal.Web.Controllers
             try
             {
                 BSAtendimento bsAtendimento = new BSAtendimento();
+                atendimento.DiaconoID = ((Diacono)Session["UsuarioLogado"]).ID;
                 bsAtendimento.AdicionarAtendimento(atendimento);
 
                 if (atendimento.ID > 0)

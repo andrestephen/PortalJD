@@ -14,6 +14,9 @@
 }
 
 @{
+
+    int idDiaconoLogado = ((JD.Portal.Model.Diacono)HttpContext.Current.Session["UsuarioLogado"]).ID;
+
     string textoStatus = Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.novo ? "Novo" :
                                     Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.aprovado ? "Aprovado" :
                                     Model.Status == (int)JD.Portal.Model.BSProjeto.StatusProjeto.nao_aprovado ? "Não aprovado" :
@@ -182,7 +185,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
-                        <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
+                        <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@idDiaconoLogado;" ng-value="diacono.idDiacono" />
                         <ul class="users-list clearfix">
                             <li ng-repeat="diacono in listaDiaconosResponsaveis">
                                 <img src="~/Content/img/user.jpg" alt="User Image">
@@ -212,8 +215,8 @@
                         <div>
                             <input id="upload" type="file" multiple="multiple" ngf-select="UploadFiles($files)" />
                             @*<hr />
-        Files:
-        <ul><li ng-repeat="file in SelectedFiles">{file.name}</li></ul>*@
+                                Files:
+                                <ul><li ng-repeat="file in SelectedFiles">{file.name}</li></ul>*@
 
                             <div class="progress progress-sm active" ng-hide="Progress == 0" ng-init="Progress=0">
                                 <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{Progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{Progress}}%">
@@ -221,12 +224,12 @@
                                 </div>
                             </div>
                             @*<div id="dvProgress" class="progress" ng-show="Progress >= 0">
-                            </div>*@
+                                </div>*@
                         </div>
                         <div class="text-center">
 
                             <a id="upload_link" href="" class="uppercase">
-                                <i class="fa fa-upload margin-r-5" ></i>
+                                <i class="fa fa-upload margin-r-5"></i>
                                 <span>Novo arquivo</span>
                             </a>
                         </div>

@@ -36,6 +36,7 @@ namespace JD.Portal.Web.Controllers
             try
             {
                 BSProjeto bsProjeto = new BSProjeto();
+                projeto.DiaconoID = ((Diacono)Session["UsuarioLogado"]).ID;
                 bsProjeto.AdicionarProjeto(projeto);
 
                 if (projeto.ID > 0)

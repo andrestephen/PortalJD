@@ -14,6 +14,8 @@
 }
 
 @{
+    int idDiaconoLogado = ((JD.Portal.Model.Diacono)HttpContext.Current.Session["UsuarioLogado"]).ID;
+
     string classeCor;
     string textoStatus;
     classeCor = Model.Status == false ? "warning" : "primary";
@@ -136,7 +138,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab_1">
-                        <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@Model.DiaconoID;" ng-value="diacono.idDiacono" />
+                        <input type="hidden" name="idDiacono" ng-init="diacono.idDiacono=@idDiaconoLogado;" ng-value="diacono.idDiacono" />
                         <ul class="users-list clearfix">
                             <li ng-repeat="diacono in listaDiaconosResponsaveis">
                                 <img src="~/Content/img/user.jpg" alt="User Image">
