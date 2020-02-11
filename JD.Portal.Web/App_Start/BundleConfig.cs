@@ -42,6 +42,13 @@ namespace JD.Portal.Web.App_Start
                .Include("~/Content/js/plugins/datatables.net-rs/dataTables.responsive.min.js")
                .Include("~/Content/js/plugins/datatables.net-moment/datetime-moment.js"));
 
+            bundles.Add(new StyleBundle("~/Bundles/chartcss")
+                .Include("~/Content/css/Chart.min.css"));
+
+            bundles.Add(new StyleBundle("~/Bundles/chartjs")
+               .Include("~/Content/js/plugins/chart.js/Chart.min.js"));
+
+
             bundles.Add(new ScriptBundle("~/Bundles/angular")
                 .Include("~/Content/js/plugins/angular/angular.min.js"));
 
