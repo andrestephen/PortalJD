@@ -127,5 +127,42 @@ namespace JD.Portal.Web.Controllers
             return Json(new { listaDiaconosResponsaveis = listaDiaconosResponsaveis.Where(x => x.responsavel == true).ToList() });
         }
 
+        [HttpPost]
+        public ActionResult Upload(int idAtendimento)
+        {
+            BSAtendimento bsAtendimento = new BSAtendimento();
+
+            foreach (string key in Request.Files)
+            {
+                HttpPostedFileBase postedFile = Request.Files[key];
+
+                Util.Storage storage = new Util.Storage();
+
+                Arquivo arquivo = new Arquivo();
+
+                arquivo.TamanhoBytes = postedFile.ContentLength;
+                arquivo.Tipo = postedFile.ContentType;
+                arquivo.DataCriacao = DateTime.Now;
+                arquivo.Nome = storage.SalvarBlob(postedFile);
+
+                bsAtendimento.AdicionarArquivoNoAtendimento(idAtendimento, arquivo);
+            }
+
+            List<Arquivo> lstArquivos = bsAtendimento.ListarArquivosNoAtendimento(idAtendimento);
+
+            var listaRetorno = from a in lstArquivos
+                               select new
+                               {
+                                   nome = a.Nome.Substring(a.Nome.IndexOf('_') + 1),
+                                   tamanho = a.TamanhoBytes.ToString(),
+                                   tipo = a.Tipo,
+                                   url = "https://portaljd.blob.core.windows.net/portaljd-blob-container/" + a.Nome,
+                                   dataCriacao = a.DataCriacao.ToString("dd/MM/yyyy HH:mm")
+                               };
+
+
+            return Json(new { listaArquivos = listaRetorno });//listaDiaconosResponsaveis.Where(x => x.responsavel == true).ToList() });
+        }
+
     }
 }

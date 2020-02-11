@@ -1,7 +1,7 @@
 ﻿@using System.Web.Optimization
 @model JD.Portal.Model.Atendimento
 @{
-    ViewBag.Title = "#" + @Model.ID.ToString() + " - " + @Model.Pessoa.Nome;;
+    ViewBag.Title = "#" + @Model.ID.ToString() + " - " + @Model.Pessoa.Nome; ;
     ViewBag.Description = "(" + @Model.DataAtendimento.ToString("dd/MM/yyyy") + ")";
 }
 
@@ -34,12 +34,22 @@
                                         nomeDiacono = d.Nome
                                     };
 
+    var listaArquivos = from p in Model.Arquivos
+                        select new
+                        {
+                            nome = p.Nome.Substring(p.Nome.IndexOf('_') + 1),
+                            tamanho = p.TamanhoBytes.ToString(),
+                            tipo = p.Tipo,
+                            url = "https://portaljd.blob.core.windows.net/portaljd-blob-container/" + p.Nome,
+                            dataCriacao = p.DataCriacao.ToString("dd/MM/yyyy HH:mm")
+                        };
 
     string jsonAtualizacoes = Newtonsoft.Json.JsonConvert.SerializeObject(listaAtualizacoes);
     string jsonResponsaveis = Newtonsoft.Json.JsonConvert.SerializeObject(listaDiaconosResponsaveis);
+    string jsonArquivos = Newtonsoft.Json.JsonConvert.SerializeObject(listaArquivos);
 }
 
-<form name="frmAcompanhamento" ng-app="appAtendimento" ng-init="listaDiaconosResponsaveis=@jsonResponsaveis;listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerAtendimento" ng-submit="atualizarInformacaoAtendimento()">
+<form name="frmAcompanhamento" ng-app="appAtendimento" ng-init="listaArquivos=@jsonArquivos;listaDiaconosResponsaveis=@jsonResponsaveis;listaAtualizacoes=@jsonAtualizacoes;classeCorBox='box-@classeCor';classeCorDrop='btn-@classeCor';textoStatusAngular='@textoStatus'" ng-controller="controllerAtendimento" ng-submit="atualizarInformacaoAtendimento()">
     <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-9">
             <div class="box" ng-class="classeCorBox">
@@ -141,51 +151,38 @@
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="tab_2">
                         <ul class="products-list product-list-in-box">
-                            <li class="item">
+                            <li class="item" ng-repeat="arquivo in listaArquivos">
                                 <div>
-                                    <a href="javascript:void(0)" class="product-title">
-                                        Arquivo 1
+                                    <a href="{{arquivo.url}}" target="_blank" class="product-title">
+                                        {{arquivo.nome}}
                                     </a>
                                     <span class="product-description">
-                                        Descrição do  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1  Arquivo 1.
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div>
-                                    <a href="javascript:void(0)" class="product-title">
-                                        Arquivo 2
-                                    </a>
-                                    <span class="product-description">
-                                        Descrição do  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2  Arquivo 2.
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div>
-                                    <a href="javascript:void(0)" class="product-title"> Arquivo 3</a>
-                                    <span class="product-description">
-                                        Descrição do  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3  Arquivo 3.
-                                    </span>
-                                </div>
-                            </li>
-                            <!-- /.item -->
-                            <li class="item">
-                                <div>
-                                    <a href="javascript:void(0)" class="product-title">
-                                        Arquivo 4
-                                    </a>
-                                    <span class="product-description">
-                                        Descrição do  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4  Arquivo 4.
+                                        {{arquivo.dataCriacao}} - {{arquivo.tamanho}} bytes
                                     </span>
                                 </div>
                             </li>
                             <!-- /.item -->
                         </ul>
+                        <div>
+                            <input id="upload" type="file" multiple="multiple" ngf-select="UploadFiles($files)" />
+                            @*<hr />
+                                Files:
+                                <ul><li ng-repeat="file in SelectedFiles">{file.name}</li></ul>*@
+
+                            <div class="progress progress-sm active" ng-hide="Progress == 0" ng-init="Progress=0">
+                                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="{{Progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{Progress}}%">
+                                    <span class="sr-only">{{Progress}}% Complete (success)</span>
+                                </div>
+                            </div>
+                            @*<div id="dvProgress" class="progress" ng-show="Progress >= 0">
+                                </div>*@
+                        </div>
                         <div class="text-center">
-                            <a href="javascript:void(0)" class="uppercase">Adicionar arquivo</a>
+
+                            <a id="upload_link" href="" class="uppercase">
+                                <i class="fa fa-upload margin-r-5"></i>
+                                <span>Novo arquivo</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -232,11 +229,11 @@
             <!-- /.modal-dialog -->
         </div>
         @*<div class="col-xs-12">
-            <h2 class="page-header">
-                <i class="fa fa-heart"></i> André Stephen
-                <small class="pull-right">Data do Atendimento: 02/10/2018</small>
-            </h2>
-        </div>*@
+                <h2 class="page-header">
+                    <i class="fa fa-heart"></i> André Stephen
+                    <small class="pull-right">Data do Atendimento: 02/10/2018</small>
+                </h2>
+            </div>*@
     </div>
 
     @*<div class="row">
@@ -285,5 +282,15 @@
 @section  ViewSpecificJavascript
 {
     @Scripts.Render("~/Bundles/angular")
+    @Scripts.Render("~/Bundles/angular-file-upload")
     @Scripts.Render("~/Bundles/controlleratendimentos")
+
+    <script>
+        $(function () {
+            $("#upload_link").on('click', function (e) {
+                e.preventDefault();
+                $("#upload:hidden").trigger('click');
+            });
+        });
+    </script>
 }

@@ -62,7 +62,7 @@ namespace JD.Portal.Model
 
             using (var db = new PortalJDContexto())
             {
-                atendimento = (from a in db.Atendimento.Include("Pessoa").Include("Diacono").Include("AtualizacoesAtendimentos").Include("AtualizacoesAtendimentos.Diacono").Include("Diaconos")
+                atendimento = (from a in db.Atendimento.Include("Pessoa").Include("Diacono").Include("AtualizacoesAtendimentos").Include("AtualizacoesAtendimentos.Diacono").Include("Diaconos").Include("Arquivos")
                                where a.ID == idAtendimento
                                select a).FirstOrDefault();
             }
@@ -153,6 +153,35 @@ namespace JD.Portal.Model
                 }
 
                 db.SaveChanges();
+            }
+        }
+
+        public void AdicionarArquivoNoAtendimento(int idAtendimento, Arquivo arquivo)
+        {
+            Atendimento atendimento = new Atendimento();
+
+            using (var db = new PortalJDContexto())
+            {
+                atendimento = db.Atendimento.Where(x => x.ID == idAtendimento).FirstOrDefault();
+                atendimento.Arquivos.Add(arquivo);
+
+                db.SaveChanges();
+            }
+        }
+
+        public List<Arquivo> ListarArquivosNoAtendimento(int idAtendimento)
+        {
+            List<Arquivo> lstArquivos = new List<Arquivo>();
+
+            using (var db = new PortalJDContexto())
+            {
+                Atendimento atendimento = (from p in db.Atendimento.Include("Arquivos")
+                                           where p.ID == idAtendimento
+                                           select p).FirstOrDefault();
+
+                lstArquivos = atendimento.Arquivos;
+
+                return lstArquivos;
             }
         }
     }

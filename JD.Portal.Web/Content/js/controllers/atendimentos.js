@@ -1,7 +1,7 @@
 ﻿(function () {
-    var app = angular.module('appAtendimento', []);
+    var app = angular.module('appAtendimento', ['ngFileUpload']);
 
-    app.controller('controllerAtendimento', ['$scope', '$http', function ($scope, $http) {
+    app.controller('controllerAtendimento', ['$scope', '$http', 'Upload', '$timeout', function ($scope, $http, Upload, $timeout) {
         $scope.atualizarStatusAtendimento = function (id, status) {
             var params = {
                 idAtendimento: id,
@@ -82,6 +82,34 @@
                     console.log(errorResponse);
                     console.log('erro');
                 });
+        };
+
+        $scope.UploadFiles = function (files) {
+
+            $scope.SelectedFiles = files;
+            if ($scope.SelectedFiles && $scope.SelectedFiles.length) {
+                Upload.upload({
+                    url: '/Atendimentos/Upload/',
+                    data: {
+                        files: $scope.SelectedFiles,
+                        idAtendimento: $scope.atendimento.idAtendimento
+                    }
+                }).then(function (response) {
+                    $timeout(function () {
+                        $scope.listaArquivos = response.data.listaArquivos;
+                        $scope.Progress = 0;
+                    });
+                }, function (response) {
+                    if (response.status > 0) {
+                        var errorMsg = response.status + ': ' + response.data;
+                        alert(errorMsg);
+                    }
+                }, function (evt) {
+                    //var element = angular.element(document.querySelector('#dvProgress'));
+                    $scope.Progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    //element.html('<div style="width: ' + $scope.Progress + '%">' + $scope.Progress + '%</div>');
+                });
+            }
         };
 
 
