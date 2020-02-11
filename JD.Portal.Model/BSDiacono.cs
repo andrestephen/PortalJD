@@ -37,6 +37,8 @@ namespace JD.Portal.Model
             return autenticado;
         }
 
+        
+
         public Diacono RecuperarDiaconoPorEmail(string email)
         {
             Diacono diacono = new Diacono();
@@ -194,6 +196,24 @@ namespace JD.Portal.Model
                 if (diaconoComCargoAntigo != null)
                     diaconoComCargoAntigo.Perfis.RemoveAll(x => x.ID == idPerfil);
             }
+        }
+
+        public List<Diacono> ListarDiretoria()
+        {
+            List<Diacono> lstDiaconos = new List<Diacono>();
+
+            using (var db = new PortalJDContexto())
+            {
+                lstDiaconos = (from diacono in db.Diacono.Include("Perfis")
+                               where diacono.Perfis.Any(p => p.ID == (int)PerfilDiacono.presidente ||
+                                p.ID == (int)PerfilDiacono.vicepresidente ||
+                                p.ID == (int)PerfilDiacono.tesoureiro ||
+                                p.ID == (int)PerfilDiacono.primeirosecretario ||
+                                p.ID == (int)PerfilDiacono.segundosecretario)
+                                select diacono).ToList();
+            }
+
+            return lstDiaconos;
         }
     }
 }

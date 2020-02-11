@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ReunioesController.cs" />
     <Compile Include="Controllers\TesourariaController.cs" />
     <Compile Include="Models\vmDiaconoResponsavel.cs" />
+    <Compile Include="Models\vmHome.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@model JD.Portal.Web.Models.vmHome
 @{
     ViewBag.Title = "Início";
     ViewBag.Description = "Acompanhamento das principais informações de " + @DateTime.Now.Year.ToString();
@@ -164,7 +165,14 @@
             <div class="box-header">
                 <h3 class="box-title">Diretoria</h3>
             </div>
-            <!-- /.box-header -->
+
+            @{
+                JD.Portal.Model.Diacono presidente = Model.DiaconosDiretoria.Where(x => x.Perfis.Any(p => p.ID == 2)).FirstOrDefault();
+                JD.Portal.Model.Diacono vicepresidente = Model.DiaconosDiretoria.Where(x => x.Perfis.Any(p => p.ID == 3)).FirstOrDefault();
+                JD.Portal.Model.Diacono tesoureiro = Model.DiaconosDiretoria.Where(x => x.Perfis.Any(p => p.ID == 4)).FirstOrDefault();
+                JD.Portal.Model.Diacono primeirosecretario = Model.DiaconosDiretoria.Where(x => x.Perfis.Any(p => p.ID == 5)).FirstOrDefault();
+                JD.Portal.Model.Diacono segundosecretario = Model.DiaconosDiretoria.Where(x => x.Perfis.Any(p => p.ID == 6)).FirstOrDefault();
+            }<!-- /.box-header -->
             <div class="box-body">
                 <table class="table table-condensed">
                     <tbody>
@@ -175,28 +183,28 @@
                         </tr>
                         <tr>
                             <td>Presidente</td>
-                            <td>André Stephen</td>
-                            <td>(61) 99999-9999</td>
+                            <td>@(presidente != null ? presidente.Nome : "-")</td>
+                            <td>@(presidente != null ? presidente.Telefone : "-")</td>
                         </tr>
                         <tr>
                             <td>Vice-Presidente</td>
-                            <td>André Stephen</td>
-                            <td>(61) 99999-9999</td>
+                            <td>@(vicepresidente != null ? vicepresidente.Nome : "-")</td>
+                            <td>@(vicepresidente != null ? vicepresidente.Telefone : "-")</td>
                         </tr>
                         <tr>
                             <td>Tesoureiro</td>
-                            <td>André Stephen</td>
-                            <td>(61) 99999-9999</td>
+                            <td>@(tesoureiro != null ? tesoureiro.Nome : "-")</td>
+                            <td>@(tesoureiro != null ? tesoureiro.Telefone : "-")</td>
                         </tr>
                         <tr>
                             <td>1º Secretário</td>
-                            <td>André Stephen</td>
-                            <td>(61) 99999-9999</td>
+                            <td>@(primeirosecretario != null ? primeirosecretario.Nome : "-")</td>
+                            <td>@(primeirosecretario != null ? primeirosecretario.Telefone : "-")</td>
                         </tr>
                         <tr>
                             <td>2º Secretário</td>
-                            <td>André Stephen</td>
-                            <td>(61) 99999-9999</td>
+                            <td>@(segundosecretario != null ? segundosecretario.Nome : "-")</td>
+                            <td>@(segundosecretario != null ? segundosecretario.Telefone : "-")</td>
                         </tr>
                     </tbody>
                 </table>
@@ -205,6 +213,11 @@
         </div>
     </div>
 </div>
+@{
+
+   
+
+}
 
 @section  ViewSpecificJavascript
 {
@@ -216,10 +229,10 @@
         var myChart = new Chart(ctxProjetos, {
             type: 'pie',
             data: {
-                labels: ['12 Novos', '19 Aprovados', '3 Não aprovados', '5 Concluidos'],
+                labels: ['@Model.Projetos.Where(x => x.Status == 1).Count() Novos', '@Model.Projetos.Where(x => x.Status == 2).Count() Aprovados', '@Model.Projetos.Where(x => x.Status == 3).Count() Não aprovados', '@Model.Projetos.Where(x => x.Status == 3).Count() Concluidos'],
                 datasets: [{
                     label: '# of Tomatoes',
-                    data: [12, 19, 3, 5],
+                    data: [@Model.Projetos.Where(x => x.Status == 1).Count(), @Model.Projetos.Where(x => x.Status == 2).Count(), @Model.Projetos.Where(x => x.Status == 3).Count(), @Model.Projetos.Where(x => x.Status == 4).Count()],
                     backgroundColor: [
                         '#f39c12',
                         '#00a65a',
@@ -250,10 +263,10 @@
         var myChart = new Chart(ctxAtendimentos, {
             type: 'pie',
             data: {
-                labels: ['12 Novos', '19 Aprovados'],
+                labels: ['@Model.Atendimentos.Where(x => x.Status == true).Count() Em aberto', '@Model.Atendimentos.Where(x => x.Status == false).Count() Arquivados'],
                 datasets: [{
                     label: '# of Tomatoes',
-                    data: [12, 19],
+                    data: [@Model.Atendimentos.Where(x => x.Status == true).Count(), @Model.Atendimentos.Where(x => x.Status == false).Count()],
                     backgroundColor: [
                         '#f39c12',
                         '#00a65a'
