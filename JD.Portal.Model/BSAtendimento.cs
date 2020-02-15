@@ -169,6 +169,17 @@ namespace JD.Portal.Model
             }
         }
 
+        public void ExcluirArquivo(int idArquivo)
+        {
+            using (var db = new PortalJDContexto())
+            {
+                Arquivo arquivo = db.Arquivo.Where(x => x.ID == idArquivo).FirstOrDefault();
+                db.Arquivo.Remove(arquivo);
+
+                db.SaveChanges();
+            }
+        }
+
         public List<Arquivo> ListarArquivosNoAtendimento(int idAtendimento)
         {
             List<Arquivo> lstArquivos = new List<Arquivo>();

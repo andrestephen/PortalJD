@@ -91,8 +91,11 @@ input[type=checkbox] {
     display: none
 }
 
-/*--------------Cadastro do usuário---------------*/
+a.lixeira_anexo {
+    float: right;
+}
 
+/*--------------Cadastro do usuário---------------*/
 .fotocadastrodiacono {
     text-align: center;
 }

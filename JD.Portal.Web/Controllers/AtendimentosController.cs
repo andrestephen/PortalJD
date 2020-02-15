@@ -154,6 +154,7 @@ namespace JD.Portal.Web.Controllers
             var listaRetorno = from a in lstArquivos
                                select new
                                {
+                                   id = a.ID,
                                    nome = a.Nome.Substring(a.Nome.IndexOf('_') + 1),
                                    tamanho = a.TamanhoBytes.ToString(),
                                    tipo = a.Tipo,
@@ -165,5 +166,27 @@ namespace JD.Portal.Web.Controllers
             return Json(new { listaArquivos = listaRetorno });//listaDiaconosResponsaveis.Where(x => x.responsavel == true).ToList() });
         }
 
+        public ActionResult ExcluirArquivo(int idArquivo, int idAtendimento)
+        {
+            BSAtendimento bsAtendimento = new BSAtendimento();
+
+            bsAtendimento.ExcluirArquivo(idArquivo);
+
+            List<Arquivo> lstArquivos = bsAtendimento.ListarArquivosNoAtendimento(idAtendimento);
+
+            var listaRetorno = from a in lstArquivos
+                               select new
+                               {
+                                   id = a.ID,
+                                   nome = a.Nome.Substring(a.Nome.IndexOf('_') + 1),
+                                   tamanho = a.TamanhoBytes.ToString(),
+                                   tipo = a.Tipo,
+                                   url = "https://portaljd.blob.core.windows.net/portaljd-blob-container/" + a.Nome,
+                                   dataCriacao = a.DataCriacao.ToString("dd/MM/yyyy HH:mm")
+                               };
+
+
+            return Json(new { listaArquivos = listaRetorno });
+        }
     }
 }

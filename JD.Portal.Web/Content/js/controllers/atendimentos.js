@@ -117,6 +117,24 @@
             console.log('entrou');
             $scope.listarTodosDiaconos();
             console.log('passou');
-        })
+        });
+
+        $scope.excluirArquivo = function (id) {
+
+            var params = {
+                idArquivo: id,
+                idAtendimento: $scope.atendimento.idAtendimento
+            };
+            console.log('Anexo: ' + params.idArquivo);
+            console.log('Atendimento: ' + params.idAtendimento);
+            $http.post('/Atendimentos/ExcluirArquivo', params).then(
+                function (successResponse) {
+                    $scope.listaArquivos = successResponse.data.listaArquivos;
+                },
+                function (errorResponse) {
+                    console.log(errorResponse);
+                    console.log('erro');
+                });
+        };
     }]);
 })();

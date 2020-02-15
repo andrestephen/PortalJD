@@ -39,6 +39,7 @@
     var listaArquivos = from p in Model.Arquivos
                         select new
                         {
+                            id = p.ID,
                             nome = p.Nome.Substring(p.Nome.IndexOf('_') + 1),
                             tamanho = p.TamanhoBytes.ToString(),
                             tipo = p.Tipo,
@@ -158,9 +159,13 @@
                                     <a href="{{arquivo.url}}" target="_blank" class="product-title">
                                         {{arquivo.nome}}
                                     </a>
+                                    <a href="/jsondata" ng-click="excluirArquivo(arquivo.id);$event.preventDefault()" class="lixeira_anexo">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
                                     <span class="product-description">
                                         {{arquivo.dataCriacao}} - {{arquivo.tamanho}} bytes
                                     </span>
+
                                 </div>
                             </li>
                             <!-- /.item -->

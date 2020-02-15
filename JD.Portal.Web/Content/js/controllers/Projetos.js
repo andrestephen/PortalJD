@@ -123,6 +123,24 @@
             console.log('entrou');
             $scope.listarTodosDiaconos();
             console.log('passou');
-        })
+        });
+
+        $scope.excluirArquivo = function (id) {
+
+            var params = {
+                idArquivo: id,
+                idProjeto: $scope.projeto.idProjeto
+            };
+            console.log('Anexo: ' + params.idArquivo);
+            console.log('Projeto: ' + params.idProjeto);
+            $http.post('/Projetos/ExcluirArquivo', params).then(
+                function (successResponse) {
+                    $scope.listaArquivos = successResponse.data.listaArquivos;
+                },
+                function (errorResponse) {
+                    console.log(errorResponse);
+                    console.log('erro');
+                });
+        };
     }]);
 })();
