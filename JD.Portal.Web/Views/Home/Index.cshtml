@@ -80,7 +80,7 @@
     <div class="col-md-4">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Projetos</h3>
+                <h3 class="box-title">Projetos (@Model.Projetos.Count().ToString())</h3>
             </div>
             <div class="box-body">
                 <canvas id="graficoProjetos" style="height: 300px; width: 500px;" height="300" width="500"></canvas>
@@ -90,10 +90,20 @@
     <div class="col-md-4">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Atendimentos</h3>
+                <h3 class="box-title">Atendimentos  (@Model.Atendimentos.Count().ToString())</h3>
             </div>
             <div class="box-body">
                 <canvas id="graficoAtendimentos" style="height: 300px; width: 500px;" height="300" width="500"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Visitas  (@Model.Visitas.Count().ToString())</h3>
+            </div>
+            <div class="box-body">
+                <canvas id="graficoVisitas" style="height: 300px; width: 500px;" height="300" width="500"></canvas>
             </div>
         </div>
     </div>
@@ -215,7 +225,7 @@
 </div>
 @{
 
-   
+
 
 }
 
@@ -229,7 +239,7 @@
         var myChart = new Chart(ctxProjetos, {
             type: 'pie',
             data: {
-                labels: ['@Model.Projetos.Where(x => x.Status == 1).Count() Novos', '@Model.Projetos.Where(x => x.Status == 2).Count() Aprovados', '@Model.Projetos.Where(x => x.Status == 3).Count() Não aprovados', '@Model.Projetos.Where(x => x.Status == 3).Count() Concluidos'],
+                labels: ['@Model.Projetos.Where(x => x.Status == 1).Count() Novos', '@Model.Projetos.Where(x => x.Status == 2).Count() Aprovados', '@Model.Projetos.Where(x => x.Status == 3).Count() Não aprovados', '@Model.Projetos.Where(x => x.Status == 4).Count() Concluidos'],
                 datasets: [{
                     label: '# of Tomatoes',
                     data: [@Model.Projetos.Where(x => x.Status == 1).Count(), @Model.Projetos.Where(x => x.Status == 2).Count(), @Model.Projetos.Where(x => x.Status == 3).Count(), @Model.Projetos.Where(x => x.Status == 4).Count()],
@@ -290,7 +300,40 @@
         });
 
 
-
+        var ctxVisitas = document.getElementById("graficoVisitas");
+        var myChart = new Chart(ctxVisitas, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar'],
+                datasets: [{
+                    label: 'Quantidade de visitas por mês',
+                    data: [@Model.Visitas.Where(x => x.DataVisita.Month == 1).Count(), @Model.Visitas.Where(x => x.DataVisita.Month == 2).Count(), @Model.Visitas.Where(x => x.DataVisita.Month == 3).Count()],
+                    backgroundColor: '#3c8dbc',
+                    //borderColor: [
+                    //    'rgba(255, 206, 86, 1)',
+                    //    'rgba(75, 192, 192, 1)',
+                    //    'rgba(255,99,132,1)',
+                    //    'rgba(54, 162, 235, 1)'
+                    //],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                //cutoutPercentage: 50,
+                responsive: true,
+                legend: {
+                    position: 'bottom'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            stepSize: 1
+                        }
+                    }]
+                }
+            }
+        });
 
         $(function () {
             /* ChartJS

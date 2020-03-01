@@ -66,6 +66,20 @@ namespace JD.Portal.Model
             return lstDiaconos;
         }
 
+        public List<Diacono> ListarDiaconosAtivos()
+        {
+            List<Diacono> lstDiaconos = new List<Diacono>();
+
+            using (var db = new PortalJDContexto())
+            {
+                lstDiaconos = (from diacono in db.Diacono
+                               where diacono.Ativo == true && diacono.Perfis.Any(p => p.ID != (int)PerfilDiacono.pastor)
+                               select diacono).ToList();
+            }
+
+            return lstDiaconos;
+        }
+
         public Diacono RecuperarDiacono(int idDiacono)
         {
             Diacono diacono = new Diacono();

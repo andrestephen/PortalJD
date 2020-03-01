@@ -20,11 +20,15 @@ namespace JD.Portal.Web.Controllers
             BSDiacono bsDiacono= new BSDiacono();
             List<Diacono> diaconos = bsDiacono.ListarDiretoria();
 
+            BSVisita bsVisita = new BSVisita();
+            List<Visita> visitas = bsVisita.ListarVisitas();
+
             Models.vmHome viewmodelhome = new Models.vmHome();
 
             viewmodelhome.Atendimentos = atendimentos;
             viewmodelhome.DiaconosDiretoria = diaconos;
             viewmodelhome.Projetos = projetos;
+            viewmodelhome.Visitas = visitas;
 
             return View(viewmodelhome);
         }

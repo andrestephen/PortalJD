@@ -15,53 +15,57 @@
             </div>
         </div>
         @* BEGIN Menu *@
-        <ul class="sidebar-menu" data-widget="tree">
-            <li class="@Url.IsLinkActive("Index", "Home")">
-                <a href="@Url.Action("Index", "Home")"><i class="fa fa-pie-chart"></i> <span>Início</span></a>
-            </li>
-            <li class="header">Serviços</li>
-            @{
-                string atendimentosAtivo = Url.IsLinkActive("Index", "Atendimentos") + Url.IsLinkActive("Acompanhamento", "Atendimentos");
-                if (string.IsNullOrEmpty(atendimentosAtivo))
-                {
-                    atendimentosAtivo = Url.IsLinkActive("NovoAtendimento", "Atendimentos");
-                }
-
-                string projetosAtivo = Url.IsLinkActive("Index", "Projetos") + Url.IsLinkActive("Acompanhamento", "Projetos");
-                if (string.IsNullOrEmpty(projetosAtivo))
-                {
-                    projetosAtivo = Url.IsLinkActive("NovoProjeto", "Projetos");
-                }
+    <ul class="sidebar-menu" data-widget="tree">
+        <li class="@Url.IsLinkActive("Index", "Home")">
+            <a href="@Url.Action("Index", "Home")"><i class="fa fa-pie-chart"></i> <span>Início</span></a>
+        </li>
+        <li class="header">Serviços</li>
+        @{
+            string atendimentosAtivo = Url.IsLinkActive("Index", "Atendimentos") + Url.IsLinkActive("Acompanhamento", "Atendimentos");
+            if (string.IsNullOrEmpty(atendimentosAtivo))
+            {
+                atendimentosAtivo = Url.IsLinkActive("NovoAtendimento", "Atendimentos");
             }
-            <li class="@atendimentosAtivo">
-                <a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> <span>Atendimentos</span></a>
-            </li>
 
-            <li class="@projetosAtivo">
-                <a href="@Url.Action("Index", "Projetos")"><i class="fa fa-thumbs-up"></i> <span>Projetos</span></a>
-            </li>
+            string projetosAtivo = Url.IsLinkActive("Index", "Projetos") + Url.IsLinkActive("Acompanhamento", "Projetos");
+            if (string.IsNullOrEmpty(projetosAtivo))
+            {
+                projetosAtivo = Url.IsLinkActive("NovoProjeto", "Projetos");
+            }
+        }
+        <li class="@atendimentosAtivo">
+            <a href="@Url.Action("Index", "Atendimentos")"><i class="fa fa-heart"></i> <span>Atendimentos</span></a>
+        </li>
 
-            @*<li class="@Url.IsLinkActive("Index", "CestasBasicas")">
-                <a href="@Url.Action("Index", "CestasBasicas")"><i class="fa fa-cutlery"></i> <span>Cestas Básicas</span></a>
-            </li>*@
-            
-            <li class="header">Administração da JD</li>
-            @*<li class="@Url.IsLinkActive("Index", "Escala")">
-                <a href="@Url.Action("Index", "Escala")"><i class="fa fa-calendar"></i> <span>Escala</span></a>
-            </li>
-            <li class="@Url.IsLinkActive("Index", "Reunioes")">
-                <a href="@Url.Action("Index", "Reunioes")"><i class="fa fa-users"></i> <span>Reuniões</span></a>
-            </li>
-            <li class="@Url.IsLinkActive("Index", "Tesouraria")">
-                <a href="@Url.Action("Index", "Tesouraria")"><i class="fa fa-dollar"></i> <span>Tesouraria</span></a>
-            </li>
-            <li class="@Url.IsLinkActive("Index", "Documentos")">
-                <a href="@Url.Action("Index", "Documentos")"><i class="fa fa-book"></i> <span>Documentos</span></a>
-            </li>*@
-            <li class="@Url.IsLinkActive("Index", "Diaconos")">
-                <a href="@Url.Action("Index", "Diaconos")"><i class="fa fa-user"></i> <span>Diáconos</span></a>
-            </li>
-        </ul>
+        <li class="@projetosAtivo">
+            <a href="@Url.Action("Index", "Projetos")"><i class="fa fa-thumbs-up"></i> <span>Projetos</span></a>
+        </li>
+
+        <li class="@Url.IsLinkActive("Index", "Visitas")">
+            <a href="@Url.Action("Index", "Visitas")"><i class="fa fa-medkit"></i> <span>Visitas</span></a>
+        </li>
+
+        @*<li class="@Url.IsLinkActive("Index", "CestasBasicas")">
+            <a href="@Url.Action("Index", "CestasBasicas")"><i class="fa fa-cutlery"></i> <span>Cestas Básicas</span></a>
+        </li>*@
+
+        <li class="header">Administração da JD</li>
+        @*<li class="@Url.IsLinkActive("Index", "Escala")">
+            <a href="@Url.Action("Index", "Escala")"><i class="fa fa-calendar"></i> <span>Escala</span></a>
+        </li>
+        <li class="@Url.IsLinkActive("Index", "Reunioes")">
+            <a href="@Url.Action("Index", "Reunioes")"><i class="fa fa-users"></i> <span>Reuniões</span></a>
+        </li>
+        <li class="@Url.IsLinkActive("Index", "Tesouraria")">
+            <a href="@Url.Action("Index", "Tesouraria")"><i class="fa fa-dollar"></i> <span>Tesouraria</span></a>
+        </li>
+        <li class="@Url.IsLinkActive("Index", "Documentos")">
+            <a href="@Url.Action("Index", "Documentos")"><i class="fa fa-book"></i> <span>Documentos</span></a>
+        </li>*@
+        <li class="@Url.IsLinkActive("Index", "Diaconos")">
+            <a href="@Url.Action("Index", "Diaconos")"><i class="fa fa-user"></i> <span>Diáconos</span></a>
+        </li>
+    </ul>
         @* END Menu *@
     </section>
 </aside>

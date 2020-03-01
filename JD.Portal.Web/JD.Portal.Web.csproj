@@ -135,6 +135,7 @@
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\js\controllers\atendimentos.js" />
     <Content Include="Content\js\controllers\projetos.js" />
+    <Content Include="Content\js\plugins\img-crop\ng-img-crop.js" />
     <Content Include="Content\js\plugins\angular\angular.js" />
     <Content Include="Content\js\plugins\angular\angular.min.js" />
     <Content Include="Content\js\plugins\chart.js\Chart.bundle.js" />
@@ -183,8 +184,12 @@
     <Content Include="Views\Atendimentos\Acompanhamento.cshtml" />
     <Content Include="Views\Projetos\NovoProjeto.cshtml" />
     <Content Include="Views\Projetos\Acompanhamento.cshtml" />
-    <None Include="Properties\PublishProfiles\portaljd-hml - Web Deploy.pubxml" />
     <Content Include="Views\Diaconos\NovoDiacono.cshtml" />
+    <None Include="Properties\PublishProfiles\portaljd-prod - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\portaljd-prod - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\portaljd-prod - Web Deploy.pubxml" />
+    <Content Include="Views\Visitas\Index.cshtml" />
+    <Content Include="Views\Visitas\NovaVisita.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -195,6 +200,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AtendimentosController.cs" />
     <Compile Include="Controllers\CestasBasicasController.cs" />
+    <Compile Include="Controllers\VisitasController.cs" />
     <Compile Include="Controllers\DiaconosController.cs" />
     <Compile Include="Controllers\DocumentosController.cs" />
     <Compile Include="Controllers\EscalaController.cs" />

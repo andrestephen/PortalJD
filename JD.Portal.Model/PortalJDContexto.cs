@@ -23,6 +23,7 @@ namespace JD.Portal.Model
         public DbSet<AtualizacaoProjeto> AtualizacaoProjeto { get; set; }
         public DbSet<Arquivo> Arquivo { get; set; }
         public DbSet<Perfil> Perfil { get; set; }
+        public DbSet<Visita> Visita { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -78,6 +79,16 @@ namespace JD.Portal.Model
                {
                    pd.ToTable("AtendimentosDiaconos");
                    pd.MapLeftKey("AtendimentoId");
+                   pd.MapRightKey("DiaconoId");
+               });
+
+            modelBuilder.Entity<Visita>()
+               .HasMany(a => a.Diaconos)
+               .WithMany(d => d.Visitas)
+               .Map(pd =>
+               {
+                   pd.ToTable("VisitasDiaconos");
+                   pd.MapLeftKey("VisitaId");
                    pd.MapRightKey("DiaconoId");
                });
         }

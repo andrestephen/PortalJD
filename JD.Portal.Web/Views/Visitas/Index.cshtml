@@ -1,0 +1,193 @@
+﻿
+@using System.Web.Optimization
+@model List<JD.Portal.Model.Visita>
+
+@{
+    ViewBag.Title = "Visitas";
+    ViewBag.Description = "Área de gestão das visitas realizadas pela Junta Diaconal à enfermos e idosos da IPN";
+}
+@section ViewSpecificStyleSheet
+{
+    @Styles.Render("~/Bundles/datatablecss")
+}
+
+@section mensagem
+{
+
+    @{
+        @*var cadastroNovoProjetoSucesso = TempData["cadastroNovoProjetoSucesso"];
+            if (cadastroNovoProjetoSucesso != null && (bool)cadastroNovoProjetoSucesso == true)
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Sucesso!</h4>
+                    Novo projeto cadastrado com sucesso.
+                </div>
+            }*@
+    }
+
+}
+
+@section breadcrumb
+{
+    <ol class="breadcrumb hidden-xs hidden-sm">
+        <li class="active"><i class="fa fa-medkit"></i> Visitas</li>
+    </ol>
+}
+
+<!-- Main content -->
+@*<div class="row">
+
+    <div class="hidden-xs col-sm-6 col-md-3 col-lg-3">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Diáconos ativos</span>
+                <span class="info-box-number">@ViewBag.diaconosAtivos.ToString()</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="hidden-xs col-sm-6 col-md-3 col-lg-3">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Diáconos inativos</span>
+                <span class="info-box-number">@ViewBag.diaconosInativos.ToString()</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+</div>*@
+<div class="row">
+    <div class="hidden-xs col-sm-12 col-md-12 col-lg-3">
+        <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="fa fa-medkit"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Visitas realizadas</span>
+                <span class="info-box-number">@Model.Count().ToString()</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <div class="col-xs-12">
+        <!-- /.box -->
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Visitas registradas</h3>
+                @*<div class="totalizadores_mobile col-xs-12 hidden-sm hidden-md hidden-lg">
+                        <span class="label label-success">@ViewBag.diaconosAtivos.ToString() Diáconos ativos</span>
+                        <span class="label label-danger">@ViewBag.diaconosInativos.ToString() Diáconos desativados</span>
+                    </div>*@
+                <div class="input-group grupo_busca">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input id="txt_busca" type="text" class="form-control" placeholder="Procurar">
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-condensed" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Nº</th>
+                            <th>Nome do visitado</th>
+                            <th>Data da visita</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (JD.Portal.Model.Visita visita in Model)
+                        {
+                            var idRecemAdicionado = TempData["idRecemAdicionado"];
+                            string classeRecemAdicionada = idRecemAdicionado != null && (int)idRecemAdicionado == visita.ID ? "recemAdicionado" : "";
+
+                            <tr class="@classeRecemAdicionada">
+                                <td>@visita.ID.ToString()</td>
+                                <td>
+                                    <a href="@Url.Action("EditarVisita", "Visitas", new { id = visita.ID })">@visita.NomeVisitado</a>
+                                </td>
+                                <td>@visita.DataVisita.ToString("dd/MM/yyyy")</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <a href="@Url.Action("NovaVisita", "Visitas")" class="btn btn-primary btn-block">Cadastrar nova Visita</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+<!-- /.content -->
+
+@section  ViewSpecificJavascript
+{
+    @Scripts.Render("~/Bundles/datatablejs")
+
+    <script>
+        $(function () {
+            $.fn.dataTable.moment('DD/MM/YYYY HH:mm');//De acordo com a sintaxe do moment, essas letras devem ser em maiusculo mesmo.
+
+            var tabela = $('#example1').DataTable({
+                responsive: {
+                    details: {
+                        //display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                        type: 'column',
+                        target: -1
+                    }
+                },
+                columnDefs: [{
+                    className: 'control',
+                    orderable: false,
+                    targets: -1
+                },
+                { responsivePriority: 1, targets: 1 },
+                { responsivePriority: 2, targets: 2 },
+                { responsivePriority: 3, targets: 0 }],
+                order: [2, 'desc'],
+                'lengthChange': false,
+                "language": {
+                    "zeroRecords": "Nenhum registro encontrado",
+                    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registros", //"Mostrando _PAGE_ de _PAGES_",
+                    "infoEmpty": "Mostrando 0 de 0",
+                    "infoFiltered": "",
+                    "search": "Procurar",
+                    "paginate": {
+                        "first": "Primeira",
+                        "last": "Última",
+                        "next": "Próxima",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            $('#txt_busca').on('keyup keypress change', function () {
+                tabela.search(this.value).draw();
+            });
+            //$('#example2').DataTable({
+            //  'paging'      : true,
+            //  'lengthChange': false,
+            //  'searching'   : false,
+            //  'ordering'    : true,
+            //  'info'        : true,
+            //  'autoWidth'   : false
+            //})
+        });
+    </script>
+
+}

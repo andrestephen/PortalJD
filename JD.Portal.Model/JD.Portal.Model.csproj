@@ -51,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arquivo.cs" />
+    <Compile Include="BSVisita.cs" />
+    <Compile Include="Migrations\202002291917196_Criação_Visitas.cs" />
+    <Compile Include="Migrations\202002291917196_Criação_Visitas.Designer.cs">
+      <DependentUpon>202002291917196_Criação_Visitas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visita.cs" />
     <Compile Include="Atendimento.cs" />
     <Compile Include="AtualizacaoProjeto.cs" />
     <Compile Include="AtualizacaoAtendimento.cs" />
@@ -99,14 +105,6 @@
     <Compile Include="Migrations\201905051448052_Criacao_Senha_Diacono.Designer.cs">
       <DependentUpon>201905051448052_Criacao_Senha_Diacono.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202001230223198_Criação_Estrutura_Identity.cs" />
-    <Compile Include="Migrations\202001230223198_Criação_Estrutura_Identity.Designer.cs">
-      <DependentUpon>202001230223198_Criação_Estrutura_Identity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202002070434281_Adicionar_Diacono_No_AppUser.cs" />
-    <Compile Include="Migrations\202002070434281_Adicionar_Diacono_No_AppUser.Designer.cs">
-      <DependentUpon>202002070434281_Adicionar_Diacono_No_AppUser.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Perfil.cs" />
     <Compile Include="Pessoa.cs" />
@@ -149,11 +147,8 @@
     <EmbeddedResource Include="Migrations\201905051448052_Criacao_Senha_Diacono.resx">
       <DependentUpon>201905051448052_Criacao_Senha_Diacono.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001230223198_Criação_Estrutura_Identity.resx">
-      <DependentUpon>202001230223198_Criação_Estrutura_Identity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202002070434281_Adicionar_Diacono_No_AppUser.resx">
-      <DependentUpon>202002070434281_Adicionar_Diacono_No_AppUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202002291917196_Criação_Visitas.resx">
+      <DependentUpon>202002291917196_Criação_Visitas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

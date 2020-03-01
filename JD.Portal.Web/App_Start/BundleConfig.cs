@@ -56,6 +56,8 @@ namespace JD.Portal.Web.App_Start
                .Include("~/Content/js/plugins/angular-file-upload/ng-file-upload-shim.min.js")
                .Include("~/Content/js/plugins/angular-file-upload/ng-file-upload.min.js"));
 
+            bundles.Add(new ScriptBundle("~/Bundles/img-crop")
+              .Include("~/Content/js/plugins/img-crop/ng-img-crop.js"));
 
             bundles.Add(new ScriptBundle("~/Bundles/controllerprojetos")
                 .Include("~/Content/js/controllers/projetos.js"));

@@ -7,13 +7,13 @@ namespace JD.Portal.Model.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Adicionar_Diacono_No_AppUser : IMigrationMetadata
+    public sealed partial class Criação_Visitas : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Adicionar_Diacono_No_AppUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Criação_Visitas));
         
         string IMigrationMetadata.Id
         {
-            get { return "202002070434281_Adicionar_Diacono_No_AppUser"; }
+            get { return "202002291917196_Criação_Visitas"; }
         }
         
         string IMigrationMetadata.Source
