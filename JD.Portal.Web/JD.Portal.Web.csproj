@@ -135,7 +135,6 @@
     <Content Include="Content\fonts\ionicons.svg" />
     <Content Include="Content\js\controllers\atendimentos.js" />
     <Content Include="Content\js\controllers\projetos.js" />
-    <Content Include="Content\js\plugins\img-crop\ng-img-crop.js" />
     <Content Include="Content\js\plugins\angular\angular.js" />
     <Content Include="Content\js\plugins\angular\angular.min.js" />
     <Content Include="Content\js\plugins\chart.js\Chart.bundle.js" />
